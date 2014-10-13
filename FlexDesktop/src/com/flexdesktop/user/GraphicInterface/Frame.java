@@ -428,7 +428,7 @@ public class Frame extends javax.swing.JFrame {
             sC.setAccionActual(0);
             
             sC.setNumeroDePaginas(numeroPaginas);
-            sC.setNumeroDePaginas(2);
+       
             
             sC.setColumName(columsNames);
             sC.initPaginacion();
