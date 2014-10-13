@@ -501,19 +501,37 @@ public class showCustomers extends javax.swing.JDialog {
 
     private void jLabelVerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelVerMouseClicked
 
-        String ced = jTable_Generica.getValueAt(
+//        String ced = jTable_Generica.getValueAt(
+//                jTable_Generica.getSelectedRow(), 0).toString();
+//
+//        String name = jTable_Generica.getValueAt(
+//                jTable_Generica.getSelectedRow(), 1).toString();
+//        String lastName = jTable_Generica.getValueAt(
+//                jTable_Generica.getSelectedRow(), 2).toString();
+//
+//        getInformation getInfoPanel = new getInformation(null, true);
+//        getInfoPanel.setInfoClt(ced, name, lastName, "CIF", "");
+//        getInfoPanel.setActionIcon(0);
+//        getInfoPanel.setInVisibleDeleteIcon();
+//        getInfoPanel.showDialog("VerClt");
+        String CIFSelected = jTable_Generica.getValueAt(
                 jTable_Generica.getSelectedRow(), 0).toString();
+        setRowSelect();
 
-        String name = jTable_Generica.getValueAt(
-                jTable_Generica.getSelectedRow(), 1).toString();
-        String lastName = jTable_Generica.getValueAt(
-                jTable_Generica.getSelectedRow(), 2).toString();
+        if (CIFSelected != "") {
+            dispose();
 
-        getInformation getInfoPanel = new getInformation(null, true);
-        getInfoPanel.setInfoClt(ced, name, lastName, "CIF", "");
-        getInfoPanel.setActionIcon(0);
-        getInfoPanel.setInVisibleDeleteIcon();
-        getInfoPanel.showDialog("VerClt");
+            getInformation getInfoPanel = new getInformation(null, true);
+            if (accionActual == VerListadoClientesFisicos) {
+                getInfoPanel.setRowSelected(getRowSelect());
+                getInfoPanel.verCostumerFisico(getInfoPanel);
+                getInfoPanel.SetTittle("Consultar Cliente");
+                getInfoPanel.setInVisibleDeleteIcon();
+                getInfoPanel.showDialog("VerClt");
+
+            }
+        }
+
     }//GEN-LAST:event_jLabelVerMouseClicked
 
     private void TextField_BuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_BuscadorActionPerformed

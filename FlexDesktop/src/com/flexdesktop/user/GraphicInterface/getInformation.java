@@ -27,14 +27,28 @@ import javax.swing.Timer;
 public class getInformation extends javax.swing.JDialog {
 
     /**
+     * @return the rowSelected
+     */
+    public static ArrayList<String> getRowSelected() {
+        return rowSelected;
+    }
+
+    /**
+     * @param aRowSelected the rowSelected to set
+     */
+    public static void setRowSelected(ArrayList<String> aRowSelected) {
+        rowSelected = aRowSelected;
+    }
+
+    /**
      * Creates new form EditRoutes
      *
      * @param parent
      * @param modal
      */
     private final Point point = new Point(0, 0);
-    DefaultListModel listDirecciones;
-    DefaultListModel listTelefono;
+    static DefaultListModel listDirecciones;
+    static DefaultListModel listTelefono;
     private String[] direccion = {"Direcciones"};
     private String[] phone = {"Phone"};
     static getInformation dialog;
@@ -64,7 +78,7 @@ public class getInformation extends javax.swing.JDialog {
 
     }
     private String string64 = "";
-    private ArrayList<String> rowSelected;
+    private static ArrayList<String> rowSelected;
 
     public getInformation(java.awt.Frame parent, boolean modal) {
 
@@ -963,14 +977,12 @@ public class getInformation extends javax.swing.JDialog {
         }
         if (accion == RegisterCostumerJuridico) {
 
-              
             try {
 
                 String newCIF = restfulConnection.postRESTful("http://localhost:52003/api/cbclient/"
                         + "crearClienteJuridico?nombre="
                         + nombre + "&cedula=" + cedula + "&telefono=" + telefono
                         + "&direccion=" + direccion, "");
-                
 
                 //Se le quita la basura el CIF retornado
                 newCIF = newCIF.substring(1, newCIF.length() - 2);
@@ -1166,7 +1178,7 @@ public class getInformation extends javax.swing.JDialog {
         ArrayList<ArrayList<String>> result = null;
 
         if (accion == VerCostumerJuridico) {
-            
+
             String[] colums = {"CIF", "Cédula", "Nombre",
                 "Teléfono", "DirreciónPrincipal"};
             sC.setColumName(colums);
@@ -1230,7 +1242,7 @@ public class getInformation extends javax.swing.JDialog {
         sC.showDialog();
 
         String CIFSelected = sC.getIdSelect();
-        rowSelected = sC.getRowSelect();
+        setRowSelected(sC.getRowSelect());
         setCIF(CIFSelected);
         if (CIFSelected != "") {
             dispose();
@@ -1505,11 +1517,10 @@ public class getInformation extends javax.swing.JDialog {
             if (accion != RegisterCostumerJuridico) {
                 System.out.println("entro en otro");
                 jLabelShowImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/rostro.jpg")));
-            }
-            else{
+            } else {
                 System.out.println("entro el edifivio");
-            jLabelShowImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/company.jpg")));
-            
+                jLabelShowImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/company.jpg")));
+
             }
         }
 
@@ -1545,14 +1556,13 @@ public class getInformation extends javax.swing.JDialog {
 
         }
         if (accion == VerCostumerJuridico) {
-           
 
             jLabelApellido.setVisible(false);
             getInfoPanel.SetTittle("Consultar Cliente");
             getInfoPanel.setInVisibleDeleteIcon();
 //
-            getInfoPanel.setInfoClt(rowSelected.get(1), rowSelected.get(2),
-                    "", rowSelected.get(0), "");
+            getInfoPanel.setInfoClt(getRowSelected().get(1), getRowSelected().get(2),
+                    "", getRowSelected().get(0), "");
             getInfoPanel.showDialog("VerClt");
         }
         if (accion == BORRARCLIENTEFISICO) {
@@ -1572,7 +1582,7 @@ public class getInformation extends javax.swing.JDialog {
 
             ArrayList<ArrayList<String>> dirs = restfulConnection.getRESTful("http://localhost:52003/api/"
                     + "cbclient/getDireccionesClienteFisico?CIF="
-                    + rowSelected.get(0), columnas_tabla);
+                    + getRowSelected().get(0), columnas_tabla);
 
             columnas_tabla = new ArrayList<>();
             columnas_tabla.add("telefono");
@@ -1580,7 +1590,7 @@ public class getInformation extends javax.swing.JDialog {
             ArrayList<ArrayList<String>> tel = restfulConnection.getRESTful(""
                     + "http://localhost:52003/api/cbclient/getTelefonosClient"
                     + "eFisico?CIF="
-                    + rowSelected.get(0), columnas_tabla);
+                    + getRowSelected().get(0), columnas_tabla);
 
             List<Object[]> dir = new ArrayList<Object[]>();
             for (int i = 0; i < dirs.size(); i++) {
@@ -1599,8 +1609,8 @@ public class getInformation extends javax.swing.JDialog {
                     dir, true));
             getInfoPanel.jListPhone.setModel(listTelefono);
 
-            getInfoPanel.setEditableInfoCostumer(rowSelected.get(2),
-                    rowSelected.get(3), rowSelected.get(1));
+            getInfoPanel.setEditableInfoCostumer(getRowSelected().get(2),
+                    getRowSelected().get(3), getRowSelected().get(1));
             getInfoPanel.showDialog("RegisterClt");
         }
         if (accion == Beneficiario) {
@@ -1728,18 +1738,18 @@ public class getInformation extends javax.swing.JDialog {
                         + "&dato=" + datoPorBuscar, columnas_tabla);
     }
 
-    private void verCostumerFisico(getInformation getInfoPanel) {
+    public static void verCostumerFisico(getInformation getInfoPanel) {
         getInfoPanel.SetTittle("Consultar Cliente");
         getInfoPanel.setInVisibleDeleteIcon();
-        getInfoPanel.setInfoClt(rowSelected.get(1), rowSelected.get(2),
-                rowSelected.get(3), rowSelected.get(0), "");
+        getInfoPanel.setInfoClt(getRowSelected().get(1), getRowSelected().get(2),
+                getRowSelected().get(3), getRowSelected().get(0), "");
 
         ArrayList<String> columnas_tabla = new ArrayList<>();
         columnas_tabla.add("direccion");
 
         ArrayList<ArrayList<String>> dirs = restfulConnection.getRESTful("http://localhost:52003/api/"
                 + "cbclient/getDireccionesClienteFisico?CIF="
-                + rowSelected.get(0), columnas_tabla);
+                + getRowSelected().get(0), columnas_tabla);
 
         columnas_tabla = new ArrayList<>();
         columnas_tabla.add("telefono");
@@ -1747,7 +1757,7 @@ public class getInformation extends javax.swing.JDialog {
         ArrayList<ArrayList<String>> tel = restfulConnection.getRESTful(""
                 + "http://localhost:52003/api/cbclient/getTelefonosClient"
                 + "eFisico?CIF="
-                + rowSelected.get(0), columnas_tabla);
+                + getRowSelected().get(0), columnas_tabla);
 
         for (int i = 0; i < dirs.size(); i++) {
 
@@ -1766,7 +1776,7 @@ public class getInformation extends javax.swing.JDialog {
         columnas_tabla = new ArrayList<>();
         columnas_tabla.add("string64Image");
         ArrayList<ArrayList<String>> result = restfulConnection.getRESTful("http://localhost:52003/api/cbimage/getImage?CIF="
-                + rowSelected.get(0), columnas_tabla);
+                + getRowSelected().get(0), columnas_tabla);
 
         java.awt.Image imagen = generateImage(result.get(0).get(0));
         getInfoPanel.jLabelShowImage.setIcon(new ImageIcon(imagen));
