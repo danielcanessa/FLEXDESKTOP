@@ -492,16 +492,44 @@ public class Frame extends javax.swing.JFrame {
             getInfoPanel.showDialog("ConsultarClt");
             getInfoPanel.SetTittle("Indicar Cliente");
         } else if (selection == OPCION2) {
-            System.out.println("Cierres Realizados");
-            showCustomers sC = new showCustomers(null, true);
 
-            //To do
-            //Obtener los clientes para esa cedulaSeleccionada
-            Object cliente[][] = {{"1", "2011/25/04"}, {"2", "2014/05/08"}};
+            showCustomers sC = new showCustomers(null, true);
+            ArrayList<String> columnas_tabla = new ArrayList<>();
+            columnas_tabla.add("idCierre");
+            columnas_tabla.add("FechaFinal");
+
+            ArrayList<ArrayList<String>> result = restfulConnection.
+                    getRESTful("http://localhost:52003/api/cbcierres/"
+                            + "consultarCierresBancarios", columnas_tabla);
+
             String[] colums = {"Número de cierre", "Fecha"};
             sC.setColumName(colums);
-            sC.setData(cliente);
+
+            Object[][] cierres = getInformation.convertToObject(result);
+
+            sC.setClientes(cierres);
+            if (cierres != null) {
+                int numeroPaginas = cierres.length / 19;
+
+                int modulo = cierres.length % 19;
+
+                if (modulo != 0) {
+                    numeroPaginas += 1;
+                }
+
+                sC.setNumeroDePaginas(numeroPaginas);
+            }
+
+            //**Borra cuando sirva el rest******************/////
+            Object cliente[][] = {{"1", "2011/25/04"}, {"2", "2014/05/08"}};
+            sC.setClientes(cliente);
+            sC.setNumeroDePaginas(1);
+
+            //*************************************************
+            sC.setAccionActual(4);
+            sC.upDateCostumers();
             sC.ocultarBotones("VerCierres");
+            sC.initPaginacion();
             sC.showDialog();
 
         } else if (selection == OPCION3) {
