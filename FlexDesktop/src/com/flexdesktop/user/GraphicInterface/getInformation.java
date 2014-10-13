@@ -1738,7 +1738,7 @@ public class getInformation extends javax.swing.JDialog {
                         + "&dato=" + datoPorBuscar, columnas_tabla);
     }
 
-    public static void verCostumerFisico(getInformation getInfoPanel) {
+    public void verCostumerFisico(getInformation getInfoPanel) {
         getInfoPanel.SetTittle("Consultar Cliente");
         getInfoPanel.setInVisibleDeleteIcon();
         getInfoPanel.setInfoClt(getRowSelected().get(1), getRowSelected().get(2),
@@ -1778,8 +1778,13 @@ public class getInformation extends javax.swing.JDialog {
         ArrayList<ArrayList<String>> result = restfulConnection.getRESTful("http://localhost:52003/api/cbimage/getImage?CIF="
                 + getRowSelected().get(0), columnas_tabla);
 
-        java.awt.Image imagen = generateImage(result.get(0).get(0));
-        getInfoPanel.jLabelShowImage.setIcon(new ImageIcon(imagen));
+        if (result.size() != 0) {
+            java.awt.Image imagen = generateImage(result.get(0).get(0));
+            getInfoPanel.jLabelShowImage.setIcon(new ImageIcon(imagen));
+        } else {
+//            getInfoPanel.jLabelShowImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/"
+//                    + "com/flexdesktop/user/Images/rostro.jpg")));
+        }
 
     }
 
