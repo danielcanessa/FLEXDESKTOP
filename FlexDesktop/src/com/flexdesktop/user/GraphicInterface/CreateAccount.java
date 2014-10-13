@@ -5,6 +5,7 @@
  */
 package com.flexdesktop.user.GraphicInterface;
 
+import com.flexdesktop.connections.restfulConnection;
 import com.flexdesktop.user.Error.InfError;
 
 import java.awt.Point;
@@ -703,7 +704,17 @@ jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         if (validateUI()) {
-            System.out.println("good");
+            String CIF = jFormattedTextFieldEnterName.getText();
+            int moneda = 0;
+            if (jComboBox1.selectWithKeyChar('$')) {
+                moneda = 1;
+            }
+
+            restfulConnection.postRESTful("http://localhost:52003/api/cbcuenta"
+                    + "/crearCuentaDebito?CIF=" + CIF + "&descripcion="
+                    + jFormattedTextFieldEnterCedula.getText() + "&moneda="
+                    + moneda,
+                    "");
             dispose();
 
         } else {
