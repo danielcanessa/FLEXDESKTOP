@@ -764,6 +764,32 @@ public class showCustomers extends javax.swing.JDialog {
             setData(convertToObject(result));
 
         }
+        if (accionActual == VerListadoClientesJuridicos) {
+            ArrayList<ArrayList<String>> result = null;
+            ArrayList<String> columnas_tabla = new ArrayList<>();
+
+            String[] colums = {"CIF", "Cédula", "Nombre",
+                "Teléfono", "DirreciónPrincipal"};
+            setColumName(colums);
+
+            columnas_tabla.add("CIF");
+            columnas_tabla.add("cedula");
+            columnas_tabla.add("nombre");
+            columnas_tabla.add("direccion");
+            columnas_tabla.add("telefono");
+
+            int inicio = (19 * (paginalActual - 1));
+            if (inicio != 0) {
+                inicio -= 1;
+            }
+
+            result = restfulConnection.
+                    getRESTful("http://localhost:52003/"
+                            + "api/cbclient/getClientesJuridicosPorPaginacion?"
+                            + "cantidad=18&inicio=" + inicio, columnas_tabla);
+            setData(convertToObject(result));
+
+        }
 
         this.jTable_Generica.setModel(new tableModelGeneric(ColumName, data));
         //Crea el ordenador para la tabla generica
@@ -1047,9 +1073,12 @@ public class showCustomers extends javax.swing.JDialog {
     }
 
     private void setRowSelect() {
-        for (int i = 0; i < jTable_Generica.getColumnCount(); i++) {
-            rowSelect.add(jTable_Generica.getValueAt(
-                    jTable_Generica.getSelectedRow(), i).toString());
+        if (jTable_Generica.getValueAt(
+                jTable_Generica.getSelectedRow(), 0).toString().replace(" ", "") != "") {
+            for (int i = 0; i < jTable_Generica.getColumnCount(); i++) {
+                rowSelect.add(jTable_Generica.getValueAt(
+                        jTable_Generica.getSelectedRow(), i).toString());
+            }
         }
 
     }

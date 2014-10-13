@@ -42,7 +42,7 @@ public class getInformation extends javax.swing.JDialog {
     static private getInformation self;
     private int accion = 0;
     private final int BORRARCLIENTEFISICO = 1;
-    private final int BORRARCLIENTEURIDICO = 2;
+    private final int BORRARCLIENTEJURIDICO = 2;
     private final int VerCustomerFisico = 0;
 
     private final int ACTUALIZARCLIENTEFISICO = 3;
@@ -1166,7 +1166,7 @@ public class getInformation extends javax.swing.JDialog {
         ArrayList<ArrayList<String>> result = null;
 
         if (accion == VerCostumerJuridico) {
-
+            
             String[] colums = {"CIF", "Cédula", "Nombre",
                 "Teléfono", "DirreciónPrincipal"};
             sC.setColumName(colums);
@@ -1191,7 +1191,7 @@ public class getInformation extends javax.swing.JDialog {
             result = consultarClienteFisico();
 
         }
-        if (accion == BORRARCLIENTEURIDICO) {
+        if (accion == BORRARCLIENTEJURIDICO) {
 
         }
         if (accion == ACTUALIZARCLIENTEFISICO) {
@@ -1545,12 +1545,12 @@ public class getInformation extends javax.swing.JDialog {
 
         }
         if (accion == VerCostumerJuridico) {
+           
 
-            jLabelApellid.setVisible(false);
             jLabelApellido.setVisible(false);
             getInfoPanel.SetTittle("Consultar Cliente");
             getInfoPanel.setInVisibleDeleteIcon();
-
+//
             getInfoPanel.setInfoClt(rowSelected.get(1), rowSelected.get(2),
                     "", rowSelected.get(0), "");
             getInfoPanel.showDialog("VerClt");
