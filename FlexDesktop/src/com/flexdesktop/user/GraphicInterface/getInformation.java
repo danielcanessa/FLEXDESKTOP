@@ -1177,7 +1177,7 @@ public class getInformation extends javax.swing.JDialog {
             result = consultarClienteFisico();
 
         }
-        System.out.println(accion);
+       
         cliente = convertToObject(result);
 
         sC.setClientes(cliente);
@@ -1593,7 +1593,7 @@ public class getInformation extends javax.swing.JDialog {
 
     }
 
-    private Object[][] convertToObject(ArrayList<ArrayList<String>> result) {
+    static Object[][]  convertToObject(ArrayList<ArrayList<String>> result) {
         Object[][] data = new Object[result.size()][result.get(0).size()];
         int count = 0;
         for (ArrayList<String> outJson1 : result) {

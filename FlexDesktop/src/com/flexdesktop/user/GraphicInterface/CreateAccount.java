@@ -41,6 +41,7 @@ public class CreateAccount extends javax.swing.JDialog {
     private final int BORRAR = 1;
     private final int Ver = 0;
     private final int Actualizar = 2;
+    private int idProposito;
 
     public CreateAccount(java.awt.Frame parent, boolean modal) {
 
@@ -129,7 +130,6 @@ public class CreateAccount extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabelDescrip1 = new javax.swing.JLabel();
-        jComboBoxProposito = new javax.swing.JComboBox();
         jLabel10 = new javax.swing.JLabel();
         jFormattedTextFieldPeriodicidad = new javax.swing.JFormattedTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -145,6 +145,8 @@ public class CreateAccount extends javax.swing.JDialog {
         jButton4 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         dateChooserComboFin = new datechooser.beans.DateChooserCombo();
+        jFormattedTextFieldProposito = new javax.swing.JFormattedTextField();
+        jLabelBuscaridCliente3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(418, 578));
@@ -423,10 +425,6 @@ public class CreateAccount extends javax.swing.JDialog {
         jLabelDescrip1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelDescrip1.setText("Fecha Ahorro:");
 
-        jComboBoxProposito.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBoxProposito.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "CargarPropositos" }));
-        jComboBoxProposito.setMinimumSize(new java.awt.Dimension(133, 30));
-
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Periodicidad:");
 
@@ -565,93 +563,107 @@ public class CreateAccount extends javax.swing.JDialog {
 dateChooserComboFin.setFieldFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 14));
 dateChooserComboFin.setMinDate(dateChooserComboInit.getSelectedDate());
 
-javax.swing.GroupLayout jPanelCrearCuentaObjetivoLayout = new javax.swing.GroupLayout(jPanelCrearCuentaObjetivo);
-jPanelCrearCuentaObjetivo.setLayout(jPanelCrearCuentaObjetivoLayout);
-jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
-    jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-    .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
-        .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
-                        .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBoxProposito, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
-                                .addComponent(jFormattedTextFieldCIFAhorroObjetivo, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabelBuscaridCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
-                        .addComponent(jLabel16)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))))
-            .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabelDescrip1))
-                    .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jFormattedTextFieldPeriodicidad, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))
+jFormattedTextFieldProposito.setEditable(false);
+
+jLabelBuscaridCliente3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+jLabelBuscaridCliente3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/Images/Buttons/searchLttBlckBtt.png"))); // NOI18N
+jLabelBuscaridCliente3.addMouseListener(new java.awt.event.MouseAdapter() {
+    public void mouseClicked(java.awt.event.MouseEvent evt) {
+        jLabelBuscaridCliente3MouseClicked(evt);
+    }
+    });
+
+    javax.swing.GroupLayout jPanelCrearCuentaObjetivoLayout = new javax.swing.GroupLayout(jPanelCrearCuentaObjetivo);
+    jPanelCrearCuentaObjetivo.setLayout(jPanelCrearCuentaObjetivoLayout);
+    jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
+        jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
+            .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
+                    .addGap(14, 14, 14)
                     .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
-                            .addComponent(jLabel11)
-                            .addGap(112, 112, 112))
                         .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
-                            .addComponent(dateChooserComboInit, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(57, 57, 57)))
+                            .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel9))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jFormattedTextFieldCIFAhorroObjetivo, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                                .addComponent(jFormattedTextFieldProposito))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabelBuscaridCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabelBuscaridCliente3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
+                            .addComponent(jLabel16)
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(dateChooserComboFin, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel12))))
-            .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
+                            .addGap(16, 16, 16)
+                            .addComponent(jLabelDescrip1))
+                        .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jLabel10)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jFormattedTextFieldPeriodicidad, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
                         .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jFormattedTextFieldMontoAhorro, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
-                            .addComponent(jTextFieldCuentaDebito))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-        .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addGap(112, 112, 112))
+                            .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
+                                .addComponent(dateChooserComboInit, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(57, 57, 57)))
+                        .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(dateChooserComboFin, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12))))
+                .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
+                            .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jFormattedTextFieldMontoAhorro, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                                .addComponent(jTextFieldCuentaDebito))
+                            .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+            .addContainerGap())
     );
     jPanelCrearCuentaObjetivoLayout.setVerticalGroup(
         jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
             .addContainerGap()
-            .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16))
-                .addComponent(jButton6))
-            .addGap(27, 27, 27)
-            .addComponent(jLabel5)
-            .addGap(51, 51, 51)
-            .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jFormattedTextFieldCIFAhorroObjetivo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jLabelBuscaridCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGap(26, 26, 26)
-            .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jComboBoxProposito, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGap(27, 27, 27)
+            .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
+                    .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel16))
+                        .addComponent(jButton6))
+                    .addGap(27, 27, 27)
+                    .addComponent(jLabel5)
+                    .addGap(51, 51, 51)
+                    .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jFormattedTextFieldCIFAhorroObjetivo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelBuscaridCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(28, 28, 28)
+                    .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                        .addComponent(jFormattedTextFieldProposito)))
+                .addComponent(jLabelBuscaridCliente3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(28, 28, 28)
             .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jFormattedTextFieldPeriodicidad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -819,10 +831,9 @@ jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             String fechaIni = format.format(
                     dateChooserComboInit.getSelectedDate().getTime());
-            System.out.println("Fecha Inicial : " + fechaIni);
+
             String fechaFin = format.format(
                     dateChooserComboFin.getSelectedDate().getTime());
-            System.out.println("Fecha Inicial : " + fechaFin);
 
 //            restfulConnection.postRESTful("http://localhost:52003/api/cbcuenta"
 //                    + "/crearCuentaAhorro?CIF=" + CIF + "&idProposito="
@@ -870,6 +881,47 @@ jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
         }
     }//GEN-LAST:event_jPanelCrearCuentaObjetivoMousePressed
 
+    private void jLabelBuscaridCliente3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBuscaridCliente3MouseClicked
+        Object propositos[][];
+        showCustomers sC = new showCustomers(null, true);
+        sC.setAccionActual(2);
+        sC.ocultarBotones("VerListado");
+
+        ArrayList<ArrayList<String>> result = null;
+
+        String[] colums = {"Numero Proposito", "Proposito", "Tasa Interes"};
+        sC.setColumName(colums);
+
+        result = cargarPropositos();
+
+        propositos = getInformation.convertToObject(result);
+
+        sC.setClientes(propositos);
+
+        int numeroPaginas = propositos.length / 19;
+
+        int modulo = propositos.length % 19;
+
+        if (modulo != 0) {
+            numeroPaginas += 1;
+        }
+
+        sC.setNumeroDePaginas(numeroPaginas);
+        sC.upDateCostumers();
+
+        sC.initPaginacion();
+        sC.showDialog();
+
+        String CIFSelected = sC.getIdSelect();
+        ArrayList<String> rowSelected = sC.getRowSelect();
+//        setCIF(CIFSelected);
+        if (!"".equals(CIFSelected)) {
+            idProposito = Math.abs(Integer.parseInt(CIFSelected));
+            jFormattedTextFieldProposito.setText(rowSelected.get(1));
+//            executeAction();
+        }
+    }//GEN-LAST:event_jLabelBuscaridCliente3MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private datechooser.beans.DateChooserCombo dateChooserComboFin;
@@ -884,12 +936,12 @@ jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
     private javax.swing.JButton jButton8;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBoxProposito;
     private javax.swing.JFormattedTextField jFormattedTextFieldCIFAhorroObjetivo;
     private javax.swing.JFormattedTextField jFormattedTextFieldEnterCedula;
     private javax.swing.JFormattedTextField jFormattedTextFieldEnterName;
     private javax.swing.JFormattedTextField jFormattedTextFieldMontoAhorro;
     private javax.swing.JFormattedTextField jFormattedTextFieldPeriodicidad;
+    private javax.swing.JFormattedTextField jFormattedTextFieldProposito;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -908,6 +960,7 @@ jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelBuscaridCliente;
     private javax.swing.JLabel jLabelBuscaridCliente2;
+    private javax.swing.JLabel jLabelBuscaridCliente3;
     private javax.swing.JLabel jLabelDescrip;
     private javax.swing.JLabel jLabelDescrip1;
     private javax.swing.JPanel jPanelCearCuentaAhorroVista;
@@ -969,6 +1022,7 @@ jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
                 add(jPanelCrearCuentaObjetivo);
                 jPanelCrearCuentaObjetivo.setVisible(true);
                 jPanelCrearCuentaObjetivo.setLocation(0, 0);
+
         }
 
     }
@@ -1066,8 +1120,26 @@ jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
                 replace(" ", ""))) {
             return false;
         }
+        if ("".equals(jFormattedTextFieldProposito.getText().
+                replace(" ", ""))) {
+            return false;
+        }
 
         return true;
+
+    }
+
+    private ArrayList<ArrayList<String>> cargarPropositos() {
+        ArrayList<String> columnas_tabla = new ArrayList<>();
+        columnas_tabla.add("CIF");
+        columnas_tabla.add("Proposito");
+        columnas_tabla.add("TasaInteres");
+        try {
+            return restfulConnection.getRESTful("http://localhost:52003/api/cbcuenta/getObtenerPropositos", columnas_tabla);
+        } catch (Exception e) {
+            System.out.println("No se pudo cargar propositos");
+        }
+        return null;
 
     }
 

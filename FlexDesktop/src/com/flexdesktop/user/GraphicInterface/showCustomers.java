@@ -79,6 +79,7 @@ public class showCustomers extends javax.swing.JDialog {
     private final int VerListadoClientesFisicos = 0;
     private final int VerListadoClientesJuridicos = 1;
     private final int VerListadoClientesPorConcepto = 2;
+    private final int VerPropositos = 3;
     private ArrayList<String> rowSelect;
 
     public showCustomers(java.awt.Frame parent, boolean modal) {
@@ -723,6 +724,10 @@ public class showCustomers extends javax.swing.JDialog {
 //        data = AdminBD.getData();
 //        String[] columnNames = AdminBD.getColumnNames();
         if (accionActual == VerListadoClientesPorConcepto) {
+
+            setNewData();
+        }
+        if (accionActual == VerPropositos) {
 
             setNewData();
         }
