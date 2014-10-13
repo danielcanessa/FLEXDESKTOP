@@ -185,7 +185,6 @@ public class CreateAccount extends javax.swing.JDialog {
             }
         });
 
-        jFormattedTextFieldEnterName.setEditable(false);
         jFormattedTextFieldEnterName.setCaretColor(new java.awt.Color(204, 204, 204));
         jFormattedTextFieldEnterName.setDisabledTextColor(new java.awt.Color(204, 204, 204));
         jFormattedTextFieldEnterName.addActionListener(new java.awt.event.ActionListener() {
@@ -195,7 +194,7 @@ public class CreateAccount extends javax.swing.JDialog {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("IdCliente:");
+        jLabel1.setText("CIF Cliente:");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Moneda:");
@@ -295,41 +294,43 @@ public class CreateAccount extends javax.swing.JDialog {
                 .addGroup(jPanelCearCuentaAhorroVistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelCearCuentaAhorroVistaLayout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addGroup(jPanelCearCuentaAhorroVistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelCearCuentaAhorroVistaLayout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelCearCuentaAhorroVistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanelCearCuentaAhorroVistaLayout.createSequentialGroup()
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jFormattedTextFieldEnterName, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanelCearCuentaAhorroVistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelCearCuentaAhorroVistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelCearCuentaAhorroVistaLayout.createSequentialGroup()
+                                    .addGap(45, 45, 45)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanelCearCuentaAhorroVistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanelCearCuentaAhorroVistaLayout.createSequentialGroup()
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jFormattedTextFieldEnterName, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabelBuscaridCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanelCearCuentaAhorroVistaLayout.createSequentialGroup()
+                                        .addGroup(jPanelCearCuentaAhorroVistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel3))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanelCearCuentaAhorroVistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jComboBox2, 0, 1, Short.MAX_VALUE)
+                                            .addComponent(jComboBox1, 0, 68, Short.MAX_VALUE)))
+                                    .addComponent(jLabelDescrip)
+                                    .addComponent(jFormattedTextFieldEnterCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelCearCuentaAhorroVistaLayout.createSequentialGroup()
+                                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabelBuscaridCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanelCearCuentaAhorroVistaLayout.createSequentialGroup()
-                                    .addGroup(jPanelCearCuentaAhorroVistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jLabel3))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(jPanelCearCuentaAhorroVistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jComboBox2, 0, 1, Short.MAX_VALUE)
-                                        .addComponent(jComboBox1, 0, 68, Short.MAX_VALUE)))
-                                .addComponent(jLabelDescrip)
-                                .addComponent(jFormattedTextFieldEnterCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelCearCuentaAhorroVistaLayout.createSequentialGroup()
-                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanelCearCuentaAhorroVistaLayout.createSequentialGroup()
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 287, Short.MAX_VALUE)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanelCearCuentaAhorroVistaLayout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addComponent(jLabel15)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
-                .addGroup(jPanelCearCuentaAhorroVistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanelCearCuentaAhorroVistaLayout.setVerticalGroup(
@@ -373,7 +374,9 @@ public class CreateAccount extends javax.swing.JDialog {
                             .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelCearCuentaAhorroVistaLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -700,17 +703,12 @@ jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         if (validateUI()) {
-//            for (int i = 0; i < table.getRowCount(); i++) {// Se crean las rutas por hoja en excel
-//                boolean isSelected = (boolean) table.getValueAt(i, 1);
-//                if (isSelected) {
-//                    String Tabla = table.getValueAt(i, 0).toString();
-//                    data.add(Tabla);
-//                }
-//            }
+            System.out.println("good");
             dispose();
 
         } else {
-            InfError.showMessage(this, "Debe seleccionar al menos una tabla");
+            InfError.showMessage(this, " Atención: Faltan Algunos Campos "
+                    + "Por Rellenar");
         }
 
 
@@ -755,11 +753,11 @@ jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
         getInfoPanel.setActionIcon(8);
         getInfoPanel.SetTittle("Consultar Beneficiario");
         getInfoPanel.showDialog("CreateBneficiario");
-        String ced = getInfoPanel.getCIF();
-        String[] benefi = {ced};
+        String CIF = getInfoPanel.getCIF();
+        String[] benefi = {CIF};
 
         beneciarios.add(benefi);
-        if (!"".equals(ced)) {
+        if (!"".equals(CIF)) {
             this.jTable_Dirreciones.setModel(new tableModelAddres(columName,
                     beneciarios, true));
         }
@@ -894,12 +892,15 @@ jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
 
     private boolean validateUI() {
 
-//        for (int i = 0; i < table.getRowCount() - 1; i++) {
-//            boolean parseBoolean = Boolean.parseBoolean(table.getValueAt(i, 1).toString());
-//            if (parseBoolean) {
-//                return true;
-//            }
-//        }
+        if ("".equals(jFormattedTextFieldEnterName.getText().
+                replace(" ", ""))) {
+
+            return false;
+        }
+        if (beneciarios.isEmpty()) {
+
+            return false;
+        }
         return true;
     }
 

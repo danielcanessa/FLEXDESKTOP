@@ -51,6 +51,8 @@ public class getInformation extends javax.swing.JDialog {
     private final int RegisterCostumerFisico = 10;
     private final int RegisterCostumerJuridico = 11;
     private final int VerCostumerJuridico = 12;
+    
+    private final int CREARCUENTAAHORROALAVISTA = 8 ;
     private String CIF = "";
     Object cliente[][];
 
@@ -63,6 +65,7 @@ public class getInformation extends javax.swing.JDialog {
     }
     private String string64 = "";
     private ArrayList<String> rowSelected;
+    
 
     public getInformation(java.awt.Frame parent, boolean modal) {
 
@@ -1166,7 +1169,15 @@ public class getInformation extends javax.swing.JDialog {
             result = consultarClienteFisico();
 
         }
+        if (accion == CREARCUENTAAHORROALAVISTA) {
+            String[] colums = {"CIF", "Cédula", "Nombre", "Apellido",
+                "Teléfono", "DirreciónPrincipal"};
+            sC.setColumName(colums);
 
+            result = consultarClienteFisico();
+
+        }
+        System.out.println(accion);
         cliente = convertToObject(result);
 
         sC.setClientes(cliente);
@@ -1219,7 +1230,7 @@ public class getInformation extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabelBorrarCltMouseExited
 
     private void jLabelCreateBeneficiarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCreateBeneficiarioMouseClicked
-//      jLabelCreateClt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/addBtt.png")));
+
 
     }//GEN-LAST:event_jLabelCreateBeneficiarioMouseClicked
 

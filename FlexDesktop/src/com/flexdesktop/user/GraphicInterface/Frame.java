@@ -21,6 +21,8 @@ public class Frame extends javax.swing.JFrame {
     private static final int OPCION4 = 4;
     private static final int OPCION5 = 5;
     private static final int OPCION6 = 6;
+    private final int ABRIRCUENTAAHORROALAVISTA = 1;
+    private final int ABRIRCUENTAPOROBJETIVO = 3;
 
     /**
      * Creates new form Frame
@@ -413,9 +415,7 @@ public class Frame extends javax.swing.JFrame {
             ArrayList<ArrayList<String>> cCF = restfulConnection.
                     getRESTful("http://localhost:52003/api/cbclient/cantidadClientesFisicos",
                             columnas_tabla);
-            
-            
-           
+
             int numeroPaginas = 0;
             numeroPaginas = Integer.parseInt(cCF.get(0).get(0)) / 19;
 
@@ -426,10 +426,9 @@ public class Frame extends javax.swing.JFrame {
             }
 
             sC.setAccionActual(0);
-            
+
             sC.setNumeroDePaginas(numeroPaginas);
-       
-            
+
             sC.setColumName(columsNames);
             sC.initPaginacion();
             sC.upDateCostumers();
@@ -456,13 +455,11 @@ public class Frame extends javax.swing.JFrame {
     private void jLabelSelectRowCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSelectRowCuentaMouseClicked
         int selection = jTable2.getSelectedRow();
         CreateAccount CreateNewAccount = new CreateAccount(null, true);
-        if (selection == 1) {//Abrir cuenta ahorro a la vista
-//casi listo
+        if (selection == ABRIRCUENTAAHORROALAVISTA) {
             CreateNewAccount.showDialog("CuentaAhorro");
 
         }
-        if (selection == 3) {//Abrir cuenta por objetivo
-//casi listo
+        if (selection == ABRIRCUENTAPOROBJETIVO) {
             CreateNewAccount.showDialog("CuentaPorObjetivo");
         }
     }//GEN-LAST:event_jLabelSelectRowCuentaMouseClicked
