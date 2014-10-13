@@ -484,19 +484,20 @@ public class showCustomers extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabelBorrarMouseClicked
 
     private void jLabelModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelModificarMouseClicked
-        //datos de prueba
-//        String name = "name";
-//        String lastName = "latsName";
-//        String ced = "ced";
-//        List<Object[]> dir = new ArrayList<Object[]>();
-//        Object dire[] = {"Por ahi"};
-//        Object dire2[] = {"CuatroFilosDeCuchilloMocho"};
-//        dir.add(dire);
-//        dir.add(dire2);
-//        ////--------------------------------------
-//        getInformation getInfoPanel = new getInformation(null, true);
-//        getInfoPanel.setEditableInfoCostumer(name, lastName, ced, dir);
-//        getInfoPanel.showDialog("RegisterClt");
+
+        String CIFSelected = jTable_Generica.getValueAt(
+                jTable_Generica.getSelectedRow(), 0).toString();
+        setRowSelect();
+        getInformation getInfoPanel = new getInformation(null, true);
+        getInfoPanel.setRowSelected(rowSelect);
+        if (!"".equals(CIFSelected)) {
+            dispose();
+            if (accionActual == VerListadoClientesFisicos) {
+                getInfoPanel.setActionIcon(3);
+       }
+            getInfoPanel.executeAction();
+        }
+        
     }//GEN-LAST:event_jLabelModificarMouseClicked
 
     private void jLabelVerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelVerMouseClicked
@@ -519,7 +520,7 @@ public class showCustomers extends javax.swing.JDialog {
             }
             if (accionActual == VerListadoClientesJuridicos) {
                 getInfoPanel.setRowSelected(getRowSelect());
-               
+
                 getInfoPanel.verCostumerJuridico(getInfoPanel);
                 getInfoPanel.SetTittle("Consultar Cliente");
                 getInfoPanel.setInVisibleDeleteIcon();

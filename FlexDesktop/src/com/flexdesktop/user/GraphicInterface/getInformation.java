@@ -36,7 +36,7 @@ public class getInformation extends javax.swing.JDialog {
     /**
      * @param aRowSelected the rowSelected to set
      */
-    public static void setRowSelected(ArrayList<String> aRowSelected) {
+    public  void setRowSelected(ArrayList<String> aRowSelected) {
         rowSelected = aRowSelected;
     }
 
@@ -1545,7 +1545,7 @@ public class getInformation extends javax.swing.JDialog {
         jLabel8.setText(tittle);
     }
 
-    private void executeAction() {
+    public void executeAction() {
 
         getInformation getInfoPanel = new getInformation(null, true);
         if (accion == VerCustomerFisico) {
