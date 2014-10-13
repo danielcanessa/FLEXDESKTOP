@@ -12,6 +12,7 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -124,26 +125,26 @@ public class CreateAccount extends javax.swing.JDialog {
         jPanelCrearCuentaObjetivo = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jFormattedTextFieldEnterName1 = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldCIFAhorroObjetivo = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabelDescrip1 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox();
+        jComboBoxProposito = new javax.swing.JComboBox();
         jLabel10 = new javax.swing.JLabel();
         jFormattedTextFieldPeriodicidad = new javax.swing.JFormattedTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
+        dateChooserComboInit = new datechooser.beans.DateChooserCombo();
         jLabel13 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldMontoAhorro = new javax.swing.JFormattedTextField();
         jLabel14 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldCuentaDebito = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabelBuscaridCliente2 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        dateChooserCombo2 = new datechooser.beans.DateChooserCombo();
+        dateChooserComboFin = new datechooser.beans.DateChooserCombo();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(418, 578));
@@ -405,17 +406,16 @@ public class CreateAccount extends javax.swing.JDialog {
         jLabel8.setForeground(new java.awt.Color(102, 102, 102));
         jLabel8.setText("Crear Cuenta");
 
-        jFormattedTextFieldEnterName1.setEditable(false);
-        jFormattedTextFieldEnterName1.setCaretColor(new java.awt.Color(204, 204, 204));
-        jFormattedTextFieldEnterName1.setDisabledTextColor(new java.awt.Color(204, 204, 204));
-        jFormattedTextFieldEnterName1.addActionListener(new java.awt.event.ActionListener() {
+        jFormattedTextFieldCIFAhorroObjetivo.setCaretColor(new java.awt.Color(204, 204, 204));
+        jFormattedTextFieldCIFAhorroObjetivo.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        jFormattedTextFieldCIFAhorroObjetivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextFieldEnterName1ActionPerformed(evt);
+                jFormattedTextFieldCIFAhorroObjetivoActionPerformed(evt);
             }
         });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setText("IdCliente:");
+        jLabel6.setText("CIF Cliente:");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Proposito:");
@@ -423,9 +423,9 @@ public class CreateAccount extends javax.swing.JDialog {
         jLabelDescrip1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelDescrip1.setText("Fecha Ahorro:");
 
-        jComboBox3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "CargarPropositos" }));
-        jComboBox3.setMinimumSize(new java.awt.Dimension(133, 30));
+        jComboBoxProposito.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jComboBoxProposito.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "CargarPropositos" }));
+        jComboBoxProposito.setMinimumSize(new java.awt.Dimension(133, 30));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Periodicidad:");
@@ -438,7 +438,7 @@ public class CreateAccount extends javax.swing.JDialog {
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Hasta:");
 
-        dateChooserCombo1.setCurrentView(new datechooser.view.appearance.AppearancesList("Grey",
+        dateChooserComboInit.setCurrentView(new datechooser.view.appearance.AppearancesList("Grey",
             new datechooser.view.appearance.ViewAppearance("custom",
                 new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11),
                     new java.awt.Color(0, 0, 0),
@@ -479,12 +479,13 @@ public class CreateAccount extends javax.swing.JDialog {
                 (datechooser.view.BackRenderer)null,
                 false,
                 true)));
-    dateChooserCombo1.setFieldFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 14));
+    dateChooserComboInit.setFieldFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 14));
+    dateChooserComboInit.setMaxDate(dateChooserComboFin.getSelectedDate());
 
     jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     jLabel13.setText("Monto Ahorro:");
 
-    jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+    jFormattedTextFieldMontoAhorro.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
     jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     jLabel14.setText("Cuenta Debito: ");
@@ -520,7 +521,7 @@ public class CreateAccount extends javax.swing.JDialog {
         }
     });
 
-    dateChooserCombo2.setCurrentView(new datechooser.view.appearance.AppearancesList("Grey",
+    dateChooserComboFin.setCurrentView(new datechooser.view.appearance.AppearancesList("Grey",
         new datechooser.view.appearance.ViewAppearance("custom",
             new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11),
                 new java.awt.Color(0, 0, 0),
@@ -561,7 +562,8 @@ public class CreateAccount extends javax.swing.JDialog {
             (datechooser.view.BackRenderer)null,
             false,
             true)));
-dateChooserCombo2.setFieldFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 14));
+dateChooserComboFin.setFieldFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 14));
+dateChooserComboFin.setMinDate(dateChooserComboInit.getSelectedDate());
 
 javax.swing.GroupLayout jPanelCrearCuentaObjetivoLayout = new javax.swing.GroupLayout(jPanelCrearCuentaObjetivo);
 jPanelCrearCuentaObjetivo.setLayout(jPanelCrearCuentaObjetivoLayout);
@@ -578,9 +580,9 @@ jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
                             .addComponent(jLabel9))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBoxProposito, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
-                                .addComponent(jFormattedTextFieldEnterName1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jFormattedTextFieldCIFAhorroObjetivo, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabelBuscaridCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
@@ -605,10 +607,10 @@ jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
                             .addComponent(jLabel11)
                             .addGap(112, 112, 112))
                         .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
-                            .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dateChooserComboInit, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(57, 57, 57)))
                     .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(dateChooserCombo2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dateChooserComboFin, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel12))))
             .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
                 .addContainerGap()
@@ -620,8 +622,8 @@ jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
                             .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
-                            .addComponent(jTextField1))
+                            .addComponent(jFormattedTextFieldMontoAhorro, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                            .addComponent(jTextFieldCuentaDebito))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -643,12 +645,12 @@ jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
             .addGap(51, 51, 51)
             .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jFormattedTextFieldEnterName1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jFormattedTextFieldCIFAhorroObjetivo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jLabelBuscaridCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGap(26, 26, 26)
             .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jComboBoxProposito, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGap(27, 27, 27)
             .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -662,16 +664,16 @@ jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
                         .addComponent(jLabel11)
                         .addComponent(jLabel12))
                     .addGap(28, 28, 28)
-                    .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addComponent(dateChooserCombo2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dateChooserComboInit, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(dateChooserComboFin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGap(94, 94, 94)
             .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jFormattedTextFieldMontoAhorro, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGap(26, 26, 26)
             .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jTextFieldCuentaDebito, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
             .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -806,7 +808,40 @@ jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
     }//GEN-LAST:event_jLabelBuscaridClienteMouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        dispose();
+
+        if (validateUI2()) {
+            String CIF = jFormattedTextFieldCIFAhorroObjetivo.getText();
+//            int moneda = 0;
+//            if (jComboBox1.selectWithKeyChar('$')) {
+//                moneda = 1;
+//            }
+
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            String fechaIni = format.format(
+                    dateChooserComboInit.getSelectedDate().getTime());
+            System.out.println("Fecha Inicial : " + fechaIni);
+            String fechaFin = format.format(
+                    dateChooserComboFin.getSelectedDate().getTime());
+            System.out.println("Fecha Inicial : " + fechaFin);
+
+//            restfulConnection.postRESTful("http://localhost:52003/api/cbcuenta"
+//                    + "/crearCuentaAhorro?CIF=" + CIF + "&idProposito="
+//                    + jComboBoxProposito.getSelectedItem().toString()
+//                    + "&Periodicidad=" + jFormattedTextFieldPeriodicidad.getText()
+//                    + "&FechaInicio="+fechaIni+"&FechaFinal="+fechaFin+
+//                    "&TiempoAhorro="+0+"&MontoAhorroPeriodico="+
+//                    jFormattedTextFieldMontoAhorro.getText()+
+//                    "&NumeroCuentaOrigen="+jTextFieldCuentaDebito.getText()+
+//                    "&Moneda="+1+"& dominioPeriodicidad = & MontoAhorroDeseado",
+//                    "");
+            dispose();
+
+        } else {
+            InfError.showMessage(this, " Atención: Faltan Algunos Campos "
+                    + "Por Rellenar");
+        }
+
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -817,9 +852,9 @@ jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
         dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jFormattedTextFieldEnterName1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldEnterName1ActionPerformed
+    private void jFormattedTextFieldCIFAhorroObjetivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldCIFAhorroObjetivoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextFieldEnterName1ActionPerformed
+    }//GEN-LAST:event_jFormattedTextFieldCIFAhorroObjetivoActionPerformed
 
     private void jPanelCrearCuentaObjetivoMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelCrearCuentaObjetivoMouseDragged
         if (!evt.isMetaDown()) {
@@ -837,8 +872,8 @@ jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private datechooser.beans.DateChooserCombo dateChooserCombo1;
-    private datechooser.beans.DateChooserCombo dateChooserCombo2;
+    private datechooser.beans.DateChooserCombo dateChooserComboFin;
+    private datechooser.beans.DateChooserCombo dateChooserComboInit;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
@@ -849,11 +884,11 @@ jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
     private javax.swing.JButton jButton8;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JComboBox jComboBoxProposito;
+    private javax.swing.JFormattedTextField jFormattedTextFieldCIFAhorroObjetivo;
     private javax.swing.JFormattedTextField jFormattedTextFieldEnterCedula;
     private javax.swing.JFormattedTextField jFormattedTextFieldEnterName;
-    private javax.swing.JFormattedTextField jFormattedTextFieldEnterName1;
+    private javax.swing.JFormattedTextField jFormattedTextFieldMontoAhorro;
     private javax.swing.JFormattedTextField jFormattedTextFieldPeriodicidad;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -879,7 +914,7 @@ jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
     private javax.swing.JPanel jPanelCrearCuentaObjetivo;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable_Dirreciones;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextFieldCuentaDebito;
     // End of variables declaration//GEN-END:variables
 
     private void configureTableLook() {
@@ -1011,6 +1046,28 @@ jPanelCrearCuentaObjetivoLayout.setHorizontalGroup(
     void setActionIcon(int action) {
 
         accion = action;
+
+    }
+
+    private boolean validateUI2() {
+        if ("".equals(jFormattedTextFieldCIFAhorroObjetivo.getText().
+                replace(" ", ""))) {
+            return false;
+        }
+        if ("".equals(jFormattedTextFieldPeriodicidad.getText().
+                replace(" ", ""))) {
+            return false;
+        }
+        if ("".equals(jFormattedTextFieldMontoAhorro.getText().
+                replace(" ", ""))) {
+            return false;
+        }
+        if ("".equals(jTextFieldCuentaDebito.getText().
+                replace(" ", ""))) {
+            return false;
+        }
+
+        return true;
 
     }
 
