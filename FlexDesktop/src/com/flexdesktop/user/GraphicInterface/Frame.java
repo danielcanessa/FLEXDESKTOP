@@ -435,7 +435,7 @@ public class Frame extends javax.swing.JFrame {
             sC.showDialog();
 
         } else if (selection == OPCION3) {
-            System.out.println("entre en oppsin 3");
+            
             getInformation getInfoPanel = new getInformation(null, true);
             getInfoPanel.setActionIcon(1);
             //borrar cliente
@@ -553,8 +553,37 @@ public class Frame extends javax.swing.JFrame {
             getInfoPanel.SetTittle("Consultar Cliente");
 
         } else if (selection == OPCION2) {
+
+            
             showCustomers sC = new showCustomers(null, true);
             sC.ocultarBotones("VerListadoAcciones");
+            String[] columsNames = {"CIF", "Cédula", "Nombre",
+                "Teléfono", "DirecciónPrincipal"};
+
+            ArrayList<String> columnas_tabla = new ArrayList<>();
+            columnas_tabla.add("cantClientes");
+
+            ArrayList<ArrayList<String>> cCF = restfulConnection.
+                    getRESTful("http://localhost:52003/api/cbclient/"
+                            + "cantidadClientesJuridico",
+                            columnas_tabla);
+
+            int numeroPaginas = 0;
+            numeroPaginas = Integer.parseInt(cCF.get(0).get(0)) / 19;
+
+            int modulo = Integer.parseInt(cCF.get(0).get(0)) % 19;
+
+            if (modulo != 0) {
+                numeroPaginas += 1;
+            }
+
+            sC.setAccionActual(1);
+
+            sC.setNumeroDePaginas(numeroPaginas);
+
+            sC.setColumName(columsNames);
+            sC.initPaginacion();
+            sC.upDateCostumers();
             sC.showDialog();
 
         } else if (selection == OPCION3) {
