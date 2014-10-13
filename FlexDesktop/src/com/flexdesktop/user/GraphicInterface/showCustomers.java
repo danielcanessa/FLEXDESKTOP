@@ -745,7 +745,6 @@ public class showCustomers extends javax.swing.JDialog {
             if (inicio != 0) {
                 inicio -= 1;
             }
-            System.out.println("Nicio: " + inicio);
 
             result = restfulConnection.
                     getRESTful("http://localhost:52003/"

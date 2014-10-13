@@ -415,7 +415,7 @@ public class Frame extends javax.swing.JFrame {
                             columnas_tabla);
             
             
-            System.out.println(cCF.get(0).get(0));
+           
             int numeroPaginas = 0;
             numeroPaginas = Integer.parseInt(cCF.get(0).get(0)) / 19;
 

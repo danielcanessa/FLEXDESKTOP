@@ -924,6 +924,14 @@ public class getInformation extends javax.swing.JDialog {
                             + newCIF + "&direccion=" + dir.get(i).toString(), "");
 
                 }
+                
+                //Insertar los telefonos del cliente
+                for (int i = 1; i < listTelefono.size(); i++) {
+
+                    restfulConnection.postRESTful("http://localhost:52003/api/cbclient/agregarTelefonoCliente?CIF="
+                            + newCIF + "&telefono=" + listTelefono.get(i).toString(), "");
+
+                }
 
                 dispose();
 
@@ -1492,15 +1500,28 @@ public class getInformation extends javax.swing.JDialog {
             ArrayList<ArrayList<String>> dirs = restfulConnection.getRESTful("http://localhost:52003/api/"
                     + "cbclient/getDireccionesClienteFisico?CIF="
                     + rowSelected.get(0), columnas_tabla);
+            
+            columnas_tabla = new ArrayList<>();
+            columnas_tabla.add("telefono");
+            
+            ArrayList<ArrayList<String>> tel = restfulConnection.getRESTful(""
+                    + "http://localhost:52003/api/cbclient/getTelefonosClient"
+                    + "eFisico?CIF="
+                    + rowSelected.get(0), columnas_tabla);
 
             for (int i = 0; i < dirs.size(); i++) {
 
                 listDirecciones.addElement(dirs.get(i).get(0));
 
             }
+            for (int i = 0; i < tel.size(); i++) {
+                
+                listTelefono.addElement(tel.get(i).get(0));
+
+            }
 
             getInfoPanel.jListShowAddres.setModel(listDirecciones);
-//            jListShowPhone.setModel(listTelefono);
+           getInfoPanel.jListShowPhone.setModel(listTelefono);
 
             columnas_tabla = new ArrayList<>();
             columnas_tabla.add("string64Image");
