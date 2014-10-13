@@ -597,7 +597,7 @@ public class Frame extends javax.swing.JFrame {
 
             getInformation getInfoPanel = new getInformation(null, true);
             getInfoPanel.SetTittle("Actualizar Cliente");
-            getInfoPanel.setActionIcon(2);
+            getInfoPanel.setActionIcon(4);
             getInfoPanel.showDialog("ConsultarClt");
 
         }

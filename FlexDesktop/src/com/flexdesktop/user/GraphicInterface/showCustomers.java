@@ -494,10 +494,10 @@ public class showCustomers extends javax.swing.JDialog {
             dispose();
             if (accionActual == VerListadoClientesFisicos) {
                 getInfoPanel.setActionIcon(3);
-       }
+            }
             getInfoPanel.executeAction();
         }
-        
+
     }//GEN-LAST:event_jLabelModificarMouseClicked
 
     private void jLabelVerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelVerMouseClicked

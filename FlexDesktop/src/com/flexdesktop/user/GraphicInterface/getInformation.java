@@ -36,7 +36,7 @@ public class getInformation extends javax.swing.JDialog {
     /**
      * @param aRowSelected the rowSelected to set
      */
-    public  void setRowSelected(ArrayList<String> aRowSelected) {
+    public void setRowSelected(ArrayList<String> aRowSelected) {
         rowSelected = aRowSelected;
     }
 
@@ -60,6 +60,7 @@ public class getInformation extends javax.swing.JDialog {
     private final int VerCustomerFisico = 0;
 
     private final int ACTUALIZARCLIENTEFISICO = 3;
+    private final int ACTUALIZARCLIENTEJURIDICO = 4;
     private final int Beneficiario = 7;
     private final int getIdCliente = 8;
     private final int RegisterCostumerFisico = 10;
@@ -1214,6 +1215,14 @@ public class getInformation extends javax.swing.JDialog {
             result = consultarClienteFisico();
 
         }
+        if (accion == ACTUALIZARCLIENTEJURIDICO) {
+            String[] colums = {"CIF", "Cédula", "Nombre",
+                "Teléfono", "DirreciónPrincipal"};
+            sC.setColumName(colums);
+
+            result = consultarClienteJuridico();
+
+        }
         if (accion == CREARCUENTAAHORROALAVISTA) {
             String[] colums = {"CIF", "Cédula", "Nombre", "Apellido",
                 "Teléfono", "DirreciónPrincipal"};
@@ -1613,6 +1622,47 @@ public class getInformation extends javax.swing.JDialog {
                     getRowSelected().get(3), getRowSelected().get(1));
             getInfoPanel.showDialog("RegisterClt");
         }
+        if (accion == ACTUALIZARCLIENTEJURIDICO) {
+            
+            getInfoPanel.SetTittle("Actualizar Cliente");
+            setInVisibleDeleteIcon();
+
+            ArrayList<String> columnas_tabla = new ArrayList<>();
+            columnas_tabla.add("direccion");
+//
+            ArrayList<ArrayList<String>> dirs = restfulConnection.getRESTful("http://localhost:52003/api/"
+                    + "cbclient/getDireccionesClienteJuridico?CIF="
+                    + getRowSelected().get(0), columnas_tabla);
+//
+            columnas_tabla = new ArrayList<>();
+            columnas_tabla.add("telefono");
+//
+            ArrayList<ArrayList<String>> tel = restfulConnection.getRESTful(""
+                    + "http://localhost:52003/api/cbclient/getTelefonosCliente"
+                + "Juridico?CIF="
+                    + getRowSelected().get(0), columnas_tabla);
+//
+            List<Object[]> dir = new ArrayList<Object[]>();
+            for (int i = 0; i < dirs.size(); i++) {
+                Object dire[] = {dirs.get(i).get(0)};
+                dir.add(dire);
+
+            }
+
+            for (int i = 0; i < tel.size(); i++) {
+                listTelefono = new DefaultListModel();
+                listTelefono.addElement(tel.get(i).get(0));
+
+            }
+//
+            getInfoPanel.jTable_Dirreciones.setModel(new tableModelAddres(direccion,
+                    dir, true));
+            getInfoPanel.jListPhone.setModel(listTelefono);
+
+            getInfoPanel.setEditableInfoCostumer(getRowSelected().get(2),
+                    "", getRowSelected().get(1));
+            getInfoPanel.showDialog("RegisterClt");
+        }
         if (accion == Beneficiario) {
             //establer id obtenido
             System.out.println("Obtner bediciario");
@@ -1825,10 +1875,8 @@ public class getInformation extends javax.swing.JDialog {
         getInfoPanel.jListShowAddres.setModel(listDirecciones);
         getInfoPanel.jListShowPhone.setModel(listTelefono);
 
-        
-            getInfoPanel.jLabelShowImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/"
-                    + "com/flexdesktop/user/Images/company.jpg")));
-
+        getInfoPanel.jLabelShowImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/"
+                + "com/flexdesktop/user/Images/company.jpg")));
 
     }
 
