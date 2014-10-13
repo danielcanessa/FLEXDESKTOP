@@ -51,8 +51,8 @@ public class getInformation extends javax.swing.JDialog {
     private final int RegisterCostumerFisico = 10;
     private final int RegisterCostumerJuridico = 11;
     private final int VerCostumerJuridico = 12;
-    
-    private final int CREARCUENTAAHORROALAVISTA = 8 ;
+
+    private final int CREARCUENTAAHORROALAVISTA = 8;
     private String CIF = "";
     Object cliente[][];
 
@@ -65,7 +65,6 @@ public class getInformation extends javax.swing.JDialog {
     }
     private String string64 = "";
     private ArrayList<String> rowSelected;
-    
 
     public getInformation(java.awt.Frame parent, boolean modal) {
 
@@ -153,7 +152,7 @@ public class getInformation extends javax.swing.JDialog {
         jLabelShowImage = new javax.swing.JLabel();
         jLabelBorrarClt = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        jLabelApellid = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabelCIF = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -464,8 +463,8 @@ public class getInformation extends javax.swing.JDialog {
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel10.setText("Nombre:");
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel12.setText("Apellido:");
+        jLabelApellid.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabelApellid.setText("Apellido:");
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel15.setText("CIF:");
@@ -534,7 +533,7 @@ public class getInformation extends javax.swing.JDialog {
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(jLabelCedula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, VerCltLayout.createSequentialGroup()
-                                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabelApellid, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                             .addComponent(jLabelApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, VerCltLayout.createSequentialGroup()
@@ -560,7 +559,7 @@ public class getInformation extends javax.swing.JDialog {
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jLabelApellid, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                     .addComponent(jLabelApellido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(28, 28, 28)
                 .addGroup(VerCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -964,23 +963,57 @@ public class getInformation extends javax.swing.JDialog {
         }
         if (accion == RegisterCostumerJuridico) {
 
-            System.out.println("registrarClientesJuridico");
-
+              
             try {
 
-                String CIF = restfulConnection.postRESTful("http://localhost:52003/api/cbclient/"
+                String newCIF = restfulConnection.postRESTful("http://localhost:52003/api/cbclient/"
                         + "crearClienteJuridico?nombre="
                         + nombre + "&cedula=" + cedula + "&telefono=" + telefono
                         + "&direccion=" + direccion, "");
+                
+
+                //Se le quita la basura el CIF retornado
+                newCIF = newCIF.substring(1, newCIF.length() - 2);
+
+                //Insertar las demas direcciones del cliente
+                ArrayList<String> dir = getAddres();
+                for (int i = 1; i < dir.size(); i++) {
+
+                    restfulConnection.postRESTful("http://localhost:52003/api/cbclient/agregarDireccionCliente?CIF="
+                            + newCIF + "&direccion=" + dir.get(i).toString(), "");
+
+                }
+
+                //Insertar los telefonos del cliente
+                for (int i = 1; i < listTelefono.size(); i++) {
+
+                    restfulConnection.postRESTful("http://localhost:52003/api/cbclient/agregarTelefonoCliente?CIF="
+                            + newCIF + "&telefono=" + listTelefono.get(i).toString(), "");
+
+                }
 
                 dispose();
 
-                //mmostra la nueva informacion del cliente
-                getInformation getInfoPanel = getInformation.getDialog();
-                getInfoPanel.SetTittle("Consultar Cliente");
-                getInfoPanel.setInVisibleDeleteIcon();
-                getInfoPanel.setInfoClt(cedula, nombre, "", CIF, getPath());
-                getInfoPanel.showDialog("VerClt");
+                //Mostra la nueva informacion del cliente
+                getInformation getInfoPanel2 = new getInformation(null, true);
+
+                //***********Mostrar las dirreciones y telefonos
+                ArrayList<String> direcciones = getAddres();
+                for (int i = 0; i < direcciones.size(); i++) {
+                    listDirecciones.addElement(direcciones.get(i));
+                    getInfoPanel2.jListShowAddres.setModel(listDirecciones);
+
+                }
+                getInfoPanel2.jListShowPhone.setModel(listTelefono);
+                getInfoPanel2.setActionIcon(11);
+
+                getInfoPanel2.SetTittle("Consultar Cliente");
+                getInfoPanel2.setInVisibleDeleteIcon();
+                getInfoPanel2.jLabelApellido.setVisible(false);
+                getInfoPanel2.jLabelApellid.setVisible(false);
+                getInfoPanel2.setInfoClt(cedula, nombre, "", newCIF, "");
+                getInfoPanel2.showDialog("VerClt");
+
             } catch (Exception e) {
                 System.out.println("debe ingresar los datos Correctamente");
             }
@@ -1177,7 +1210,7 @@ public class getInformation extends javax.swing.JDialog {
             result = consultarClienteFisico();
 
         }
-       
+
         cliente = convertToObject(result);
 
         sC.setClientes(cliente);
@@ -1301,7 +1334,6 @@ public class getInformation extends javax.swing.JDialog {
     private javax.swing.JFormattedTextField jFormattedTextFieldEnterName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -1313,6 +1345,7 @@ public class getInformation extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelApellid;
     private javax.swing.JLabel jLabelApellido;
     private javax.swing.JLabel jLabelBorrarClt;
     private javax.swing.JLabel jLabelBusquedaPor;
@@ -1469,7 +1502,15 @@ public class getInformation extends javax.swing.JDialog {
                     com.flexdesktop.user.GraphicInterface.Image.
                     generateImage(str64)));
         } else {
-            jLabelShowImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/rostro.jpg")));
+            if (accion != RegisterCostumerJuridico) {
+                System.out.println("entro en otro");
+                jLabelShowImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/rostro.jpg")));
+            }
+            else{
+                System.out.println("entro el edifivio");
+            jLabelShowImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/company.jpg")));
+            
+            }
         }
 
     }
@@ -1505,7 +1546,7 @@ public class getInformation extends javax.swing.JDialog {
         }
         if (accion == VerCostumerJuridico) {
 
-            jLabel12.setVisible(false);
+            jLabelApellid.setVisible(false);
             jLabelApellido.setVisible(false);
             getInfoPanel.SetTittle("Consultar Cliente");
             getInfoPanel.setInVisibleDeleteIcon();
@@ -1557,8 +1598,6 @@ public class getInformation extends javax.swing.JDialog {
             getInfoPanel.jTable_Dirreciones.setModel(new tableModelAddres(direccion,
                     dir, true));
             getInfoPanel.jListPhone.setModel(listTelefono);
-            
-            
 
             getInfoPanel.setEditableInfoCostumer(rowSelected.get(2),
                     rowSelected.get(3), rowSelected.get(1));
@@ -1593,9 +1632,9 @@ public class getInformation extends javax.swing.JDialog {
 
     }
 
-    static Object[][]  convertToObject(ArrayList<ArrayList<String>> result) {
-        if(result.size()==0){
-           Object[][] a = {{"", ""}};
+    static Object[][] convertToObject(ArrayList<ArrayList<String>> result) {
+        if (result.size() == 0) {
+            Object[][] a = {{"", ""}};
             return a;
         }
         Object[][] data = new Object[result.size()][result.get(0).size()];

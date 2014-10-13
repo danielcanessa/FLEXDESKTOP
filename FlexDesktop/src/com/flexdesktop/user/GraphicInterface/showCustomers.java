@@ -53,25 +53,25 @@ public class showCustomers extends javax.swing.JDialog {
     {"245784", "Melvin", "Guitierrez"}, {"503890620", "Jason", "Salazar"},
     {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"}};
     private Object[][] clientes = {{}};
-    Object paginaAnterior[][] = {{"503890620", "Jason", "Salazar"},
-    {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"},
-    {"245784", "Melvin", "Guitierrez"}, {"503890620", "Jason", "Salazar"},
-    {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"},
-    {"245784", "Melvin", "Guitierrez"}, {"503890620", "Jason", "Salazar"},
-    {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"},
-    {"245784", "Melvin", "Guitierrez"}, {"503890620", "Jason", "Salazar"},
-    {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"},
-    {"245784", "Melvin", "Guitierrez"}, {"503890620", "Jason", "Salazar"},
-    {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"}};
-    Object pagina2[][] = {{"78749495", "Jose", "Perez"},
-    {"3564874", "Juan", "Villegas"}, {"45454", "Andres", "Umana"},
-    {"44445757", "Jose", "Lemus"}, {"503890620", "Pepe", "Redriguez"},
-    {"3564874", "Sofia", "Vergara"}, {"2548745", "Andreina", "De los Angeles"},
-    {"245784", "Saddam", "Husseim"}, {"4545454", "Pedro", "Prado"},
-    {"3564874", "Laura", "Chinchilla"}, {"2548745", "Carlos", "Tylor"},
-    {"42457857", "Obama", "Barak"}, {"503890620", "Osama", "Bin-Laden"},
-    {"7857575", "Leonor", "Aguilar"}, {"7587857544", "Edwar", "Umana"},
-    {"7575757", "Luis", "Guillermo"}};
+//    Object paginaAnterior[][] = {{"503890620", "Jason", "Salazar"},
+//    {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"},
+//    {"245784", "Melvin", "Guitierrez"}, {"503890620", "Jason", "Salazar"},
+//    {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"},
+//    {"245784", "Melvin", "Guitierrez"}, {"503890620", "Jason", "Salazar"},
+//    {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"},
+//    {"245784", "Melvin", "Guitierrez"}, {"503890620", "Jason", "Salazar"},
+//    {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"},
+//    {"245784", "Melvin", "Guitierrez"}, {"503890620", "Jason", "Salazar"},
+//    {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"}};
+//    Object pagina2[][] = {{"78749495", "Jose", "Perez"},
+//    {"3564874", "Juan", "Villegas"}, {"45454", "Andres", "Umana"},
+//    {"44445757", "Jose", "Lemus"}, {"503890620", "Pepe", "Redriguez"},
+//    {"3564874", "Sofia", "Vergara"}, {"2548745", "Andreina", "De los Angeles"},
+//    {"245784", "Saddam", "Husseim"}, {"4545454", "Pedro", "Prado"},
+//    {"3564874", "Laura", "Chinchilla"}, {"2548745", "Carlos", "Tylor"},
+//    {"42457857", "Obama", "Barak"}, {"503890620", "Osama", "Bin-Laden"},
+//    {"7857575", "Leonor", "Aguilar"}, {"7587857544", "Edwar", "Umana"},
+//    {"7575757", "Luis", "Guillermo"}};
     private int numeroDePaginas = 0;
     private int paginalActual = 1;
     private String idSelect = "";

@@ -305,8 +305,8 @@ public class Frame extends javax.swing.JFrame {
         jTable4.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"   Transaciones Clientes Jurídica"},
-                {"   Transaciones Clientes Físico"},
+                {"   Transaciones Clientes Jurídicos"},
+                {"   Transaciones Clientes Físicos"},
                 {"   Cierres Realizados"},
                 {"   Lista De Clientes Por Campos"},
                 {"   Lista De Cuentas Por Campos"},
