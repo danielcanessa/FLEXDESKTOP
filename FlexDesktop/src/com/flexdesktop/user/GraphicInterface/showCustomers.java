@@ -5,6 +5,7 @@
  */
 package com.flexdesktop.user.GraphicInterface;
 
+import com.flexdesktop.connections.restfulConnection;
 import com.flexdesktop.user.Error.InfError;
 
 import java.awt.Point;
@@ -75,9 +76,9 @@ public class showCustomers extends javax.swing.JDialog {
     private int paginalActual = 1;
     private String idSelect = "";
     private int accionActual = 0;
-    private int VerListadoClientesFisicos = 0;
-    private int VerListadoClientesJuridicos = 1;
-    private int VerListadoClientesPorConcepto = 2;
+    private final int VerListadoClientesFisicos = 0;
+    private final int VerListadoClientesJuridicos = 1;
+    private final int VerListadoClientesPorConcepto = 2;
     private ArrayList<String> rowSelect;
 
     public showCustomers(java.awt.Frame parent, boolean modal) {
@@ -584,9 +585,8 @@ public class showCustomers extends javax.swing.JDialog {
             //******
             //Mostrar graficamente la pagina siguiente****************
             String paginaAnterior = LbAct.getText();//Cosultar la siguiente pag
-            
+
             //   data = pagina2;
-        
             upDateCostumers();
 
             // System.out.println("El anterior es: " + paginaAnterior);
@@ -625,9 +625,8 @@ public class showCustomers extends javax.swing.JDialog {
 //        System.out.println("El actual es: " + paginaAnterior);
         //******************************************************
 
-        
         upDateCostumers();
-        
+
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabelPag1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelPag1MouseClicked
@@ -724,8 +723,37 @@ public class showCustomers extends javax.swing.JDialog {
 //        data = AdminBD.getData();
 //        String[] columnNames = AdminBD.getColumnNames();
         if (accionActual == VerListadoClientesPorConcepto) {
-           
+
             setNewData();
+        }
+        if (accionActual == VerListadoClientesFisicos) {
+            ArrayList<ArrayList<String>> result = null;
+            ArrayList<String> columnas_tabla = new ArrayList<>();
+
+            String[] colums = {"CIF", "Cédula", "Nombre", "Apellido",
+                "Teléfono", "DirreciónPrincipal"};
+            setColumName(colums);
+
+            columnas_tabla.add("CIF");
+            columnas_tabla.add("cedula");
+            columnas_tabla.add("nombre");
+            columnas_tabla.add("apellido");
+            columnas_tabla.add("direccion");
+            columnas_tabla.add("telefono");
+
+            int inicio = (19 * (paginalActual - 1));
+            if (inicio != 0) {
+                inicio -= 1;
+            }
+            System.out.println("Nicio: " + inicio);
+
+            result = restfulConnection.
+                    getRESTful("http://localhost:52003/"
+                            + "api/cbclient/getClientesFisicosPorPaginacion?"
+                            + "cantidad=18&inicio=" + inicio, columnas_tabla);
+
+            setData(convertToObject(result));
+
         }
 
         this.jTable_Generica.setModel(new tableModelGeneric(ColumName, data));
@@ -1055,27 +1083,24 @@ public class showCustomers extends javax.swing.JDialog {
         this.clientes = clientes;
     }
 
-    
-
     private void setNewData() {
 
         ArrayList<ArrayList<String>> tmp = new ArrayList<ArrayList<String>>();
         int inicio = (19 * (paginalActual - 1));
         if (inicio < clientes.length) {
-            
-            for (int i = inicio; (i < clientes.length & tmp.size() <= 17); i++,inicio++) {
-                
+
+            for (int i = inicio; (i < clientes.length & tmp.size() <= 17); i++, inicio++) {
+
                 ArrayList<String> tmp2 = new ArrayList<String>();
                 for (int j = 0; j < clientes[0].length; j++) {
                     try {
                         tmp2.add((String) clientes[i][j]);
                     } catch (Exception e) {
-                         tmp2.add("Vacio");
+                        tmp2.add("Vacio");
                     }
-                    
-                   
+
                 }
-               
+
                 tmp.add(tmp2);
 
             }
@@ -1102,7 +1127,6 @@ public class showCustomers extends javax.swing.JDialog {
         for (ArrayList<String> outJson1 : result) {
             for (int j = 0; j < outJson1.size(); j++) {
                 data[count][j] = outJson1.get(j);
-               
 
             }
             count += 1;

@@ -401,27 +401,38 @@ public class Frame extends javax.swing.JFrame {
             getInfoPanel.SetTittle("Consultar Cliente");
 
         } else if (selection == OPCION2) {
-            
+
             showCustomers sC = new showCustomers(null, true);
             sC.ocultarBotones("VerListadoAcciones");
             String[] columsNames = {"CIF", "Cédula", "Nombre", "Apellido",
                 "Teléfono", "DirecciónPrincipal"};
-            
-            
-             ArrayList<String> columnas_tabla = new ArrayList<>();
+
+            ArrayList<String> columnas_tabla = new ArrayList<>();
             columnas_tabla.add("cantClientes");
-           
+
             ArrayList<ArrayList<String>> cCF = restfulConnection.
                     getRESTful("http://localhost:52003/api/cbclient/cantidadClientesFisicos",
                             columnas_tabla);
-            System.out.println("este: "+cCF.get(0).get(0)+"esti");
             
             
+            System.out.println(cCF.get(0).get(0));
+            int numeroPaginas = 0;
+            numeroPaginas = Integer.parseInt(cCF.get(0).get(0)) / 19;
+
+            int modulo = Integer.parseInt(cCF.get(0).get(0)) % 19;
+
+            if (modulo != 0) {
+                numeroPaginas += 1;
+            }
+
             sC.setAccionActual(0);
-            sC.setPaginalActual(1);
-            sC.setNumeroDePaginas(1);
+            
+            sC.setNumeroDePaginas(numeroPaginas);
+            sC.setNumeroDePaginas(2);
+            
             sC.setColumName(columsNames);
-           
+            sC.initPaginacion();
+            sC.upDateCostumers();
             sC.showDialog();
 
         } else if (selection == OPCION3) {

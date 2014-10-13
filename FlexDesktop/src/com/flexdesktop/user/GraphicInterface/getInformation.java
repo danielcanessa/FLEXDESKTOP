@@ -1165,7 +1165,7 @@ public class getInformation extends javax.swing.JDialog {
         cliente = convertToObject(result);
 
         sC.setClientes(cliente);
-        System.out.println(cliente.length);
+       
         int numeroPaginas = cliente.length / 19;
 
         int modulo = cliente.length % 19;
