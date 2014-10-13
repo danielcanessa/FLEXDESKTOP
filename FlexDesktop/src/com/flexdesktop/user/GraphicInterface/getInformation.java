@@ -1775,16 +1775,60 @@ public class getInformation extends javax.swing.JDialog {
 
         columnas_tabla = new ArrayList<>();
         columnas_tabla.add("string64Image");
-        ArrayList<ArrayList<String>> result = restfulConnection.getRESTful("http://localhost:52003/api/cbimage/getImage?CIF="
-                + getRowSelected().get(0), columnas_tabla);
+        ArrayList<ArrayList<String>> result = restfulConnection.
+                getRESTful("http://localhost:52003/api/cbimage/getImage?CIF="
+                        + getRowSelected().get(0), columnas_tabla);
 
         if (result.size() != 0) {
             java.awt.Image imagen = generateImage(result.get(0).get(0));
             getInfoPanel.jLabelShowImage.setIcon(new ImageIcon(imagen));
-        } else {
+        }
+//        else {
 //            getInfoPanel.jLabelShowImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/"
 //                    + "com/flexdesktop/user/Images/rostro.jpg")));
+//        }
+
+    }
+
+    void verCostumerJuridico(getInformation getInfoPanel) {
+        getInfoPanel.SetTittle("Consultar Cliente");
+        getInfoPanel.setInVisibleDeleteIcon();
+        getInfoPanel.setInfoClt(getRowSelected().get(1), getRowSelected().get(2),
+                getRowSelected().get(3), getRowSelected().get(0), "");
+
+        ArrayList<String> columnas_tabla = new ArrayList<>();
+        columnas_tabla.add("direccion");
+
+        ArrayList<ArrayList<String>> dirs = restfulConnection.getRESTful("http://localhost:52003/api/"
+                + "cbclient/getDireccionesClienteJuridico?CIF="
+                + getRowSelected().get(0), columnas_tabla);
+
+        columnas_tabla = new ArrayList<>();
+        columnas_tabla.add("telefono");
+
+        ArrayList<ArrayList<String>> tel = restfulConnection.getRESTful(""
+                + "http://localhost:52003/api/cbclient/getTelefonosCliente"
+                + "Juridico?CIF="
+                + getRowSelected().get(0), columnas_tabla);
+
+        for (int i = 0; i < dirs.size(); i++) {
+
+            listDirecciones.addElement(dirs.get(i).get(0));
+
         }
+        for (int i = 0; i < tel.size(); i++) {
+
+            listTelefono.addElement(tel.get(i).get(0));
+
+        }
+
+        getInfoPanel.jListShowAddres.setModel(listDirecciones);
+        getInfoPanel.jListShowPhone.setModel(listTelefono);
+
+        
+            getInfoPanel.jLabelShowImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/"
+                    + "com/flexdesktop/user/Images/company.jpg")));
+
 
     }
 

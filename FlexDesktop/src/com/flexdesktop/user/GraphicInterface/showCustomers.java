@@ -501,19 +501,6 @@ public class showCustomers extends javax.swing.JDialog {
 
     private void jLabelVerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelVerMouseClicked
 
-//        String ced = jTable_Generica.getValueAt(
-//                jTable_Generica.getSelectedRow(), 0).toString();
-//
-//        String name = jTable_Generica.getValueAt(
-//                jTable_Generica.getSelectedRow(), 1).toString();
-//        String lastName = jTable_Generica.getValueAt(
-//                jTable_Generica.getSelectedRow(), 2).toString();
-//
-//        getInformation getInfoPanel = new getInformation(null, true);
-//        getInfoPanel.setInfoClt(ced, name, lastName, "CIF", "");
-//        getInfoPanel.setActionIcon(0);
-//        getInfoPanel.setInVisibleDeleteIcon();
-//        getInfoPanel.showDialog("VerClt");
         String CIFSelected = jTable_Generica.getValueAt(
                 jTable_Generica.getSelectedRow(), 0).toString();
         setRowSelect();
@@ -525,6 +512,15 @@ public class showCustomers extends javax.swing.JDialog {
             if (accionActual == VerListadoClientesFisicos) {
                 getInfoPanel.setRowSelected(getRowSelect());
                 getInfoPanel.verCostumerFisico(getInfoPanel);
+                getInfoPanel.SetTittle("Consultar Cliente");
+                getInfoPanel.setInVisibleDeleteIcon();
+                getInfoPanel.showDialog("VerClt");
+
+            }
+            if (accionActual == VerListadoClientesJuridicos) {
+                getInfoPanel.setRowSelected(getRowSelect());
+               
+                getInfoPanel.verCostumerJuridico(getInfoPanel);
                 getInfoPanel.SetTittle("Consultar Cliente");
                 getInfoPanel.setInVisibleDeleteIcon();
                 getInfoPanel.showDialog("VerClt");
