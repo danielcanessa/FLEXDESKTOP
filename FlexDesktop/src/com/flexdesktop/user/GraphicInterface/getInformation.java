@@ -1114,7 +1114,7 @@ public class getInformation extends javax.swing.JDialog {
     private void jLabelCreateCltMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCreateCltMouseClicked
 
         showCustomers sC = new showCustomers(null, true);
-
+        sC.setAccionActual(2);
         sC.ocultarBotones("VerListado");
 
         ArrayList<ArrayList<String>> result = null;
@@ -1139,6 +1139,7 @@ public class getInformation extends javax.swing.JDialog {
                     + "cbclient/getClienteJuridicoPorConcepto?concepto="
                     + concepto + "&dato=" + datoPorBuscar, columnas_tabla);
 
+//            numberPages = obtenerNumeroDePaginas("Juridico");
         }
         if (accion == VerCustomerFisico) {
 
@@ -1157,10 +1158,26 @@ public class getInformation extends javax.swing.JDialog {
                     getRESTful("http://localhost:52003/api/cbclient/getCliente"
                             + "FisicoPorConcepto?concepto=" + concepto
                             + "&dato=" + datoPorBuscar, columnas_tabla);
+
+//            numberPages = obtenerNumeroDePaginas("Fisicos");
         }
 
         cliente = convertToObject(result);
-        sC.setData(cliente);
+
+        sC.setClientes(cliente);
+        System.out.println(cliente.length);
+        int numeroPaginas = cliente.length / 19;
+
+        int modulo = cliente.length % 19;
+
+        if (modulo != 0) {
+            numeroPaginas += 1;
+        }
+        
+        sC.setNumeroDePaginas(numeroPaginas);
+        sC.upDateCostumers();
+
+        sC.initPaginacion();
         sC.showDialog();
 
         String CIFSelected = sC.getIdSelect();
@@ -1477,7 +1494,7 @@ public class getInformation extends javax.swing.JDialog {
                     + rowSelected.get(0), columnas_tabla);
 
             for (int i = 0; i < dirs.size(); i++) {
-                
+
                 listDirecciones.addElement(dirs.get(i).get(0));
 
             }
@@ -1565,7 +1582,7 @@ public class getInformation extends javax.swing.JDialog {
         for (ArrayList<String> outJson1 : result) {
             for (int j = 0; j < outJson1.size(); j++) {
                 data[count][j] = outJson1.get(j);
-                System.out.println(outJson1.get(j));
+               
 
             }
             count += 1;
@@ -1597,6 +1614,26 @@ public class getInformation extends javax.swing.JDialog {
         }
         return "";
 
+    }
+
+    private int obtenerNumeroDePaginas(String tipoCliente) {
+        try {
+            ArrayList<String> columnas_tabla = new ArrayList<>();
+
+            columnas_tabla.add("cantClientes");
+
+            ArrayList<ArrayList<String>> result = restfulConnection.
+                    getRESTful("http://localhost:52003/api/cbclient/cantidadClientes" + tipoCliente, columnas_tabla);
+
+            if (Integer.parseInt(result.get(0).get(0)) > 0) {
+                return Integer.parseInt(result.get(0).get(0));
+            }
+
+        } catch (Exception e) {
+            System.out.println("no se puedo obtener numero de paginas");
+        }
+
+        return 0;
     }
 
 }

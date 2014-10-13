@@ -71,7 +71,7 @@ public  class restfulConnection {
                 }
                 outJson.add(aux);
             }
-            soutMatrix(outJson);
+           // soutMatrix(outJson);
         } catch (Exception ex) {
             Logger.getLogger(com.flexdesktop.connections.restfulConnection.class.getName()).log(Level.SEVERE, null, ex);
         }

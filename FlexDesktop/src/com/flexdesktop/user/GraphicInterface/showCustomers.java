@@ -39,10 +39,9 @@ public class showCustomers extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    private String[] ColumName  = {"Cedula", "Nombre", "Apellido"};
+    private String[] ColumName = {"Cedula", "Nombre", "Apellido"};
 
-
-    Object data2[][] = {{"503890620", "Jason", "Salazar"},
+    Object[][] data = {{"503890620", "Jason", "Salazar"},
     {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"},
     {"245784", "Melvin", "Guitierrez"}, {"503890620", "Jason", "Salazar"},
     {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"},
@@ -52,6 +51,7 @@ public class showCustomers extends javax.swing.JDialog {
     {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"},
     {"245784", "Melvin", "Guitierrez"}, {"503890620", "Jason", "Salazar"},
     {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"}};
+    private Object[][] clientes = {{}};
     Object paginaAnterior[][] = {{"503890620", "Jason", "Salazar"},
     {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"},
     {"245784", "Melvin", "Guitierrez"}, {"503890620", "Jason", "Salazar"},
@@ -74,9 +74,10 @@ public class showCustomers extends javax.swing.JDialog {
     private int numeroDePaginas = 0;
     private int paginalActual = 1;
     private String idSelect = "";
-    private int accionActual=0;
-    private int VerListadoClientesFisicos=0;
-    private int VerListadoClientesJuridicos=1;
+    private int accionActual = 0;
+    private int VerListadoClientesFisicos = 0;
+    private int VerListadoClientesJuridicos = 1;
+    private int VerListadoClientesPorConcepto = 2;
     private ArrayList<String> rowSelect;
 
     public showCustomers(java.awt.Frame parent, boolean modal) {
@@ -86,13 +87,11 @@ public class showCustomers extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(parent);
 
-        upDateCostumers();
-
+        // upDateCostumers();
         //****************
-        //setNumeroDePaginas(25);
-        initPaginacion();
+//        setNumeroDePaginas();
+//        initPaginacion();
         //*****************
-        
         calculoPaginacion();
 
     }
@@ -585,7 +584,9 @@ public class showCustomers extends javax.swing.JDialog {
             //******
             //Mostrar graficamente la pagina siguiente****************
             String paginaAnterior = LbAct.getText();//Cosultar la siguiente pag
-            data2 = pagina2;
+            
+            //   data = pagina2;
+        
             upDateCostumers();
 
             // System.out.println("El anterior es: " + paginaAnterior);
@@ -624,10 +625,9 @@ public class showCustomers extends javax.swing.JDialog {
 //        System.out.println("El actual es: " + paginaAnterior);
         //******************************************************
 
-        //**ConsultarResfult
-        data2 = paginaAnterior;
+        
         upDateCostumers();
-        //////*****
+        
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabelPag1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelPag1MouseClicked
@@ -719,11 +719,16 @@ public class showCustomers extends javax.swing.JDialog {
     }
 
     public void upDateCostumers() {
+
 //        AdminBD.consultarClientes();
 //        data = AdminBD.getData();
 //        String[] columnNames = AdminBD.getColumnNames();
+        if (accionActual == VerListadoClientesPorConcepto) {
+           
+            setNewData();
+        }
 
-        this.jTable_Generica.setModel(new tableModelGeneric(ColumName, data2));
+        this.jTable_Generica.setModel(new tableModelGeneric(ColumName, data));
         //Crea el ordenador para la tabla generica
         TableRowSorter<TableModel> ordenador = new TableRowSorter<TableModel>(this.jTable_Generica.getModel());
         this.jTable_Generica.setRowSorter(ordenador);
@@ -762,7 +767,7 @@ public class showCustomers extends javax.swing.JDialog {
         /**
          * **
          *///
-        this.jTable_Generica.setModel(new tableModelGeneric(ColumName, data2));
+        this.jTable_Generica.setModel(new tableModelGeneric(ColumName, data));
         //Alinea la primer columna de esta tabla hacia el centro
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 
@@ -773,7 +778,7 @@ public class showCustomers extends javax.swing.JDialog {
     /**
      * Permite mostrar graficamente el numero de paginas que hay
      */
-    private void initPaginacion() {
+    public void initPaginacion() {
 
         this.jLabelPuntos1.setVisible(false);
         if (numeroDePaginas >= 6) {
@@ -829,6 +834,7 @@ public class showCustomers extends javax.swing.JDialog {
      * @param numeroDePaginas the numeroDePaginas to set
      */
     public void setNumeroDePaginas(int numeroDePaginas) {
+
         this.numeroDePaginas = numeroDePaginas;
     }
 
@@ -946,12 +952,13 @@ public class showCustomers extends javax.swing.JDialog {
                 getResource("/com/flexdesktop/user/Images/pagina.png")));
         LbAct.setOpaque(false);
         setPaginalActual(Integer.parseInt(label.getText()));
+        upDateCostumers();
 
     }
 
     void setData(Object[][] dataNew) {
-        data2 = dataNew;
-        upDateCostumers();
+        data = dataNew;
+        //upDateCostumers();
     }
 
     void ocultarBotones(String caso) {
@@ -1030,9 +1037,77 @@ public class showCustomers extends javax.swing.JDialog {
     }
 
     private void calculoPaginacion() {
+
+        //calcular numero paginas
+    }
+
+    /**
+     * @return the clientes
+     */
+    public Object[][] getClientes() {
+        return clientes;
+    }
+
+    /**
+     * @param clientes the clientes to set
+     */
+    public void setClientes(Object[][] clientes) {
+        this.clientes = clientes;
+    }
+
     
-    //calcular numero paginas
-    
-    
+
+    private void setNewData() {
+
+        ArrayList<ArrayList<String>> tmp = new ArrayList<ArrayList<String>>();
+        int inicio = (19 * (paginalActual - 1));
+        if (inicio < clientes.length) {
+            
+            for (int i = inicio; (i < clientes.length & tmp.size() <= 17); i++,inicio++) {
+                
+                ArrayList<String> tmp2 = new ArrayList<String>();
+                for (int j = 0; j < clientes[0].length; j++) {
+                    try {
+                        tmp2.add((String) clientes[i][j]);
+                    } catch (Exception e) {
+                         tmp2.add("Vacio");
+                    }
+                    
+                   
+                }
+               
+                tmp.add(tmp2);
+
+            }
+//             //////////////////////////////////////
+//            for (int i = 0; i < convertToObject(tmp).length; i++) {
+//                for (int j = 0; j < convertToObject(tmp)[0].length; j++) {
+//                    System.out.println(convertToObject(tmp)[i][j]);
+//                    
+//                }
+//                
+//            }
+//            
+//            
+//            ///////////////////////////////////////
+
+            setData(convertToObject(tmp));
+        }
+
+    }
+
+    private Object[][] convertToObject(ArrayList<ArrayList<String>> result) {
+        Object[][] data = new Object[result.size()][result.get(0).size()];
+        int count = 0;
+        for (ArrayList<String> outJson1 : result) {
+            for (int j = 0; j < outJson1.size(); j++) {
+                data[count][j] = outJson1.get(j);
+               
+
+            }
+            count += 1;
+        }
+        return data;
+
     }
 }
