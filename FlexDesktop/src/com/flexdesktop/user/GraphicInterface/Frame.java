@@ -508,24 +508,17 @@ public class Frame extends javax.swing.JFrame {
             Object[][] cierres = getInformation.convertToObject(result);
 
             sC.setClientes(cierres);
-            if (cierres != null) {
-                int numeroPaginas = cierres.length / 19;
 
-                int modulo = cierres.length % 19;
+            int numeroPaginas = cierres.length / 19;
 
-                if (modulo != 0) {
-                    numeroPaginas += 1;
-                }
+            int modulo = cierres.length % 19;
 
-                sC.setNumeroDePaginas(numeroPaginas);
+            if (modulo != 0) {
+                numeroPaginas += 1;
             }
 
-            //**Borra cuando sirva el rest******************/////
-            Object cliente[][] = {{"1", "2011/25/04"}, {"2", "2014/05/08"}};
-            sC.setClientes(cliente);
-            sC.setNumeroDePaginas(1);
+            sC.setNumeroDePaginas(numeroPaginas);
 
-            //*************************************************
             sC.setAccionActual(4);
             sC.upDateCostumers();
             sC.ocultarBotones("VerCierres");

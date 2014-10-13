@@ -1595,7 +1595,8 @@ public class getInformation extends javax.swing.JDialog {
 
     static Object[][]  convertToObject(ArrayList<ArrayList<String>> result) {
         if(result.size()==0){
-            return null;
+           Object[][] a = {{"", ""}};
+            return a;
         }
         Object[][] data = new Object[result.size()][result.get(0).size()];
         int count = 0;
