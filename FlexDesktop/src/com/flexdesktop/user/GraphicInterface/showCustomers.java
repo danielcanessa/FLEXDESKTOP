@@ -483,18 +483,18 @@ public class showCustomers extends javax.swing.JDialog {
 
     private void jLabelModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelModificarMouseClicked
         //datos de prueba
-        String name = "name";
-        String lastName = "latsName";
-        String ced = "ced";
-        List<Object[]> dir = new ArrayList<Object[]>();
-        Object dire[] = {"Por ahi"};
-        Object dire2[] = {"CuatroFilosDeCuchilloMocho"};
-        dir.add(dire);
-        dir.add(dire2);
-        ////--------------------------------------
-        getInformation getInfoPanel = new getInformation(null, true);
-        getInfoPanel.setEditableInfoCostumer(name, lastName, ced, dir);
-        getInfoPanel.showDialog("RegisterClt");
+//        String name = "name";
+//        String lastName = "latsName";
+//        String ced = "ced";
+//        List<Object[]> dir = new ArrayList<Object[]>();
+//        Object dire[] = {"Por ahi"};
+//        Object dire2[] = {"CuatroFilosDeCuchilloMocho"};
+//        dir.add(dire);
+//        dir.add(dire2);
+//        ////--------------------------------------
+//        getInformation getInfoPanel = new getInformation(null, true);
+//        getInfoPanel.setEditableInfoCostumer(name, lastName, ced, dir);
+//        getInfoPanel.showDialog("RegisterClt");
     }//GEN-LAST:event_jLabelModificarMouseClicked
 
     private void jLabelVerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelVerMouseClicked

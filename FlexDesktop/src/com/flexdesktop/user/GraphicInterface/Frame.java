@@ -436,6 +436,7 @@ public class Frame extends javax.swing.JFrame {
             sC.showDialog();
 
         } else if (selection == OPCION3) {
+            System.out.println("entre en oppsin 3");
             getInformation getInfoPanel = new getInformation(null, true);
             getInfoPanel.setActionIcon(1);
             //borrar cliente
@@ -446,7 +447,7 @@ public class Frame extends javax.swing.JFrame {
 
             getInformation getInfoPanel = new getInformation(null, true);
             getInfoPanel.SetTittle("Actualizar Cliente");
-            getInfoPanel.setActionIcon(2);
+            getInfoPanel.setActionIcon(3);
             getInfoPanel.showDialog("ConsultarClt");
 
         }
