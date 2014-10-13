@@ -733,6 +733,9 @@
               <Image iconType="3" name="/com/flexdesktop/Images/Buttons/searchLttBlckBtt.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelBuscaridCliente2MouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton5">
           <Properties>

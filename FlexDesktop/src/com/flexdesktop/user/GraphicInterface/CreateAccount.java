@@ -492,6 +492,11 @@ public class CreateAccount extends javax.swing.JDialog {
 
     jLabelBuscaridCliente2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     jLabelBuscaridCliente2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/Images/Buttons/searchLttBlckBtt.png"))); // NOI18N
+    jLabelBuscaridCliente2.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            jLabelBuscaridCliente2MouseClicked(evt);
+        }
+    });
 
     jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/atras.png"))); // NOI18N
     jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -837,7 +842,7 @@ jLabelBuscaridCliente3.addMouseListener(new java.awt.event.MouseAdapter() {
 
 //            restfulConnection.postRESTful("http://localhost:52003/api/cbcuenta"
 //                    + "/crearCuentaAhorro?CIF=" + CIF + "&idProposito="
-//                    + jComboBoxProposito.getSelectedItem().toString()
+//                    + idProposito
 //                    + "&Periodicidad=" + jFormattedTextFieldPeriodicidad.getText()
 //                    + "&FechaInicio="+fechaIni+"&FechaFinal="+fechaFin+
 //                    "&TiempoAhorro="+0+"&MontoAhorroPeriodico="+
@@ -914,13 +919,22 @@ jLabelBuscaridCliente3.addMouseListener(new java.awt.event.MouseAdapter() {
 
         String CIFSelected = sC.getIdSelect();
         ArrayList<String> rowSelected = sC.getRowSelect();
-//        setCIF(CIFSelected);
         if (!"".equals(CIFSelected)) {
             idProposito = Math.abs(Integer.parseInt(CIFSelected));
             jFormattedTextFieldProposito.setText(rowSelected.get(1));
-//            executeAction();
         }
     }//GEN-LAST:event_jLabelBuscaridCliente3MouseClicked
+
+    private void jLabelBuscaridCliente2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBuscaridCliente2MouseClicked
+        getInformation getInfoPanel = new getInformation(null, true);
+        getInfoPanel.setActionIcon(8);
+        getInfoPanel.SetTittle("Consultar Cliente");
+        getInfoPanel.showDialog("ConsultarClt");
+        String CIF = getInfoPanel.getCIF();
+        if (CIF != "") {
+            jFormattedTextFieldCIFAhorroObjetivo.setText(CIF);
+        }
+    }//GEN-LAST:event_jLabelBuscaridCliente2MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
