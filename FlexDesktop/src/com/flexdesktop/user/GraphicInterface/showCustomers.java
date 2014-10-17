@@ -495,6 +495,9 @@ public class showCustomers extends javax.swing.JDialog {
             if (accionActual == VerListadoClientesFisicos) {
                 getInfoPanel.setActionIcon(3);
             }
+            if (accionActual == VerListadoClientesJuridicos) {
+                getInfoPanel.setActionIcon(4);
+            }
             getInfoPanel.executeAction();
         }
 
