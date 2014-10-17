@@ -478,7 +478,7 @@ public class showCustomers extends javax.swing.JDialog {
                 "Desea eliminar el Cliente", "¡Atención!", 0, 0,
                 null, options, 0);
         if (selection == 0) {
-            this.eliminar(this.jTable_Generica);
+            eliminar();
             dispose();
         }
     }//GEN-LAST:event_jLabelBorrarMouseClicked
@@ -826,11 +826,11 @@ public class showCustomers extends javax.swing.JDialog {
 
     }
 
-    private void eliminar(JTable table) {
+    private void eliminar() {
         setRowSelect();
         getInformation getInfoPanel = new getInformation(null, true);
         getInfoPanel.setRowSelected(rowSelect);
-        int row = table.getSelectedRow();
+        int row = jTable_Generica.getSelectedRow();
         if (row < 0) {
 
             JOptionPane.showMessageDialog(
@@ -840,13 +840,20 @@ public class showCustomers extends javax.swing.JDialog {
             return;
 
         } else {
+            if (accionActual == VerListadoClientesFisicos) {
+                getInfoPanel.verCostumerFisico(getInfoPanel);
+                getInfoPanel.SetTittle("Eliminar Cliente");
+                getInfoPanel.setVisibleDelete();
+                getInfoPanel.showDialog("VerClt");
+            } else {
+                getInfoPanel.verCostumerJuridico(getInfoPanel);
+                getInfoPanel.SetTittle("Eliminar Cliente");
+                getInfoPanel.setVisibleDelete();
+                getInfoPanel.showDialog("VerClt");
 
-            getInfoPanel.verCostumerFisico(getInfoPanel);
-            getInfoPanel.SetTittle("Eliminar Cliente");
-            getInfoPanel.setVisibleDelete();
-            getInfoPanel.showDialog("VerClt");
+            }
         }
-        
+
     }
 
 //    public void fillTableCostumer() {
