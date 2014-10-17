@@ -549,7 +549,6 @@ public class Frame extends javax.swing.JFrame {
             getInformation getInfoPanel = new getInformation(null, true);
             getInfoPanel.setActionIcon(12);
             getInfoPanel.showDialog("ConsultarClt");
-
             getInfoPanel.SetTittle("Consultar Cliente");
 
         } else if (selection == OPCION2) {
@@ -588,10 +587,12 @@ public class Frame extends javax.swing.JFrame {
 
         } else if (selection == OPCION3) {
             getInformation getInfoPanel = new getInformation(null, true);
-            getInfoPanel.setActionIcon(1);
+            getInfoPanel.setActionIcon(2);
             //borrar cliente
             getInfoPanel.SetTittle("Eliminar Cliente");
             getInfoPanel.showDialog("ConsultarClt");
+            
+            
 
         } else if (selection == OPCION4) {
 
@@ -599,7 +600,8 @@ public class Frame extends javax.swing.JFrame {
             getInfoPanel.SetTittle("Actualizar Cliente");
             getInfoPanel.setActionIcon(4);
             getInfoPanel.showDialog("ConsultarClt");
-
+            
+            
         }
     }//GEN-LAST:event_jLabelVerSelected1MouseClicked
 

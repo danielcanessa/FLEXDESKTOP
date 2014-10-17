@@ -1057,6 +1057,26 @@ public class getInformation extends javax.swing.JDialog {
             }
 
         }
+        if (accion == ACTUALIZARCLIENTEJURIDICO) {
+            System.out.println("entro ahi2222");
+//            System.out.println("Actualizar cliente con el CIF :"+getCIF());
+            String[] option = {"Aceptar"};
+            try {
+                restfulConnection.postRESTful("http://localhost:52003/api/cbclient"
+                        + "/actualizarClienteJuridico?nombre=" + nombre + "&cedula="
+                        + cedula + "&telefono=" + telefono + "&direccion=" + direccion
+                        + "&CIF=" + getCIF(), "");
+
+                JOptionPane.showOptionDialog(this,
+                        "El Cliente fue actualizado correctamente", "¡Atención!", 0, 0,
+                        null, option, 0);
+            } catch (Exception e) {
+                JOptionPane.showOptionDialog(this,
+                        "No se puedo actualizar Cliente", "¡Atención!", 0, 0,
+                        null, option, 0);
+            }
+
+        }
 
 //        jListShowPhone.setModel(listTelefono);
         //********************************************
@@ -1232,6 +1252,12 @@ public class getInformation extends javax.swing.JDialog {
 
         }
         if (accion == BORRARCLIENTEJURIDICO) {
+            String[] colums = {"CIF", "Cédula", "Nombre",
+                "Dirreción",
+                "Teléfono"};
+            sC.setColumName(colums);
+
+            result = consultarClienteJuridico();
 
         }
         if (accion == ACTUALIZARCLIENTEFISICO) {
@@ -1471,6 +1497,9 @@ public class getInformation extends javax.swing.JDialog {
             registerClt.setLocation(0, 0);
 
         }
+        if (accion == VerCostumerJuridico) {
+            jRadioButtonApellido.setVisible(false);
+        }
     }
 
     public void removePanels() {
@@ -1565,8 +1594,9 @@ public class getInformation extends javax.swing.JDialog {
             if (accion != RegisterCostumerJuridico) {
                 System.out.println("entro en otro");
                 jLabelShowImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/rostro.jpg")));
-            } else {
-                System.out.println("entro el edifivio");
+            }
+            if (accion == VerCostumerJuridico) {
+
                 jLabelShowImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/company.jpg")));
 
             }
@@ -1605,17 +1635,32 @@ public class getInformation extends javax.swing.JDialog {
         }
         if (accion == VerCostumerJuridico) {
 
-            jLabelApellido.setVisible(false);
+//            jLabelApellido.setVisible(false);
+//            getInfoPanel.SetTittle("Consultar Cliente");
+//            getInfoPanel.setInVisibleDeleteIcon();
+////
+//            getInfoPanel.setInfoClt(getRowSelected().get(1), getRowSelected().get(2),
+//                    "", getRowSelected().get(0), "");
+//            getInfoPanel.showDialog("VerClt");
+            getInfoPanel.setRowSelected(getRowSelected());
+
+            getInfoPanel.verCostumerJuridico(getInfoPanel);
             getInfoPanel.SetTittle("Consultar Cliente");
             getInfoPanel.setInVisibleDeleteIcon();
-//
-            getInfoPanel.setInfoClt(getRowSelected().get(1), getRowSelected().get(2),
-                    "", getRowSelected().get(0), "");
             getInfoPanel.showDialog("VerClt");
+
         }
         if (accion == BORRARCLIENTEFISICO) {
 
             verCostumerFisico(getInfoPanel);
+            getInfoPanel.SetTittle("Eliminar Cliente");
+            getInfoPanel.jLabelBorrarClt.setVisible(true);
+            getInfoPanel.showDialog("VerClt");
+
+        }
+        if (accion == BORRARCLIENTEJURIDICO) {
+
+            verCostumerJuridico(getInfoPanel);
             getInfoPanel.SetTittle("Eliminar Cliente");
             getInfoPanel.jLabelBorrarClt.setVisible(true);
             getInfoPanel.showDialog("VerClt");
@@ -1664,7 +1709,8 @@ public class getInformation extends javax.swing.JDialog {
             getInfoPanel.showDialog("RegisterClt");
         }
         if (accion == ACTUALIZARCLIENTEJURIDICO) {
-
+            getInfoPanel.setActionIcon(4);
+            getInfoPanel.setCIF(getCIF());
             getInfoPanel.SetTittle("Actualizar Cliente");
             setInVisibleDeleteIcon();
 
@@ -1882,10 +1928,13 @@ public class getInformation extends javax.swing.JDialog {
     }
 
     void verCostumerJuridico(getInformation getInfoPanel) {
+
         getInfoPanel.SetTittle("Consultar Cliente");
         getInfoPanel.setInVisibleDeleteIcon();
         getInfoPanel.setInfoClt(getRowSelected().get(1), getRowSelected().get(2),
-                getRowSelected().get(3), getRowSelected().get(0), "");
+                "", getRowSelected().get(0), "");
+        getInfoPanel.jLabelApellid.setVisible(false);
+        getInfoPanel.jLabelApellido.setVisible(false);
 
         ArrayList<String> columnas_tabla = new ArrayList<>();
         columnas_tabla.add("direccion");
@@ -1919,6 +1968,10 @@ public class getInformation extends javax.swing.JDialog {
         getInfoPanel.jLabelShowImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/"
                 + "com/flexdesktop/user/Images/company.jpg")));
 
+    }
+
+    void setVisibleDelete() {
+    jLabelBorrarClt.setVisible(true);
     }
 
 }

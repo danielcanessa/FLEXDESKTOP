@@ -479,7 +479,7 @@ public class showCustomers extends javax.swing.JDialog {
                 null, options, 0);
         if (selection == 0) {
             this.eliminar(this.jTable_Generica);
-            this.fillTableCostumer();
+            dispose();
         }
     }//GEN-LAST:event_jLabelBorrarMouseClicked
 
@@ -492,6 +492,7 @@ public class showCustomers extends javax.swing.JDialog {
         getInfoPanel.setRowSelected(rowSelect);
         if (!"".equals(CIFSelected)) {
             dispose();
+            getInfoPanel.setCIF(CIFSelected);
             if (accionActual == VerListadoClientesFisicos) {
                 getInfoPanel.setActionIcon(3);
             }
@@ -826,7 +827,9 @@ public class showCustomers extends javax.swing.JDialog {
     }
 
     private void eliminar(JTable table) {
-
+        setRowSelect();
+        getInformation getInfoPanel = new getInformation(null, true);
+        getInfoPanel.setRowSelected(rowSelect);
         int row = table.getSelectedRow();
         if (row < 0) {
 
@@ -836,26 +839,29 @@ public class showCustomers extends javax.swing.JDialog {
                     "Alert!", JOptionPane.ERROR_MESSAGE);
             return;
 
+        } else {
+
+            getInfoPanel.verCostumerFisico(getInfoPanel);
+            getInfoPanel.SetTittle("Eliminar Cliente");
+            getInfoPanel.setVisibleDelete();
+            getInfoPanel.showDialog("VerClt");
         }
-        String cedula = table.getValueAt(row, 0).toString();
-
-        //Eliminar el cliente con la cedula 'cedula'
+        
     }
 
-    public void fillTableCostumer() {
-
-        //Realiza la consulta para obtener las los clientes a mostrar
-        /**
-         * **
-         *///
-        this.jTable_Generica.setModel(new tableModelGeneric(ColumName, data));
-        //Alinea la primer columna de esta tabla hacia el centro
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-
-        this.jTable_Generica.getColumnModel().getColumn(0).
-                setCellRenderer(centerRenderer);
-    }
-
+//    public void fillTableCostumer() {
+//
+//        //Realiza la consulta para obtener las los clientes a mostrar
+//        /**
+//         * **
+//         *///
+//        this.jTable_Generica.setModel(new tableModelGeneric(ColumName, data));
+//        //Alinea la primer columna de esta tabla hacia el centro
+//        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+//
+//        this.jTable_Generica.getColumnModel().getColumn(0).
+//                setCellRenderer(centerRenderer);
+//    }
     /**
      * Permite mostrar graficamente el numero de paginas que hay
      */
