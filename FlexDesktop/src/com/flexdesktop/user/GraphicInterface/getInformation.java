@@ -906,7 +906,7 @@ public class getInformation extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         //*********Se obtiene la informacion/*******
-        String nombre = jFormattedTextFieldEnterName.getText(); 
+        String nombre = jFormattedTextFieldEnterName.getText();
         String apellido = jFormattedTextFieldEnterApellido.getText();
         String cedula = jFormattedTextFieldEnterCedula.getText();
         String direccion = "";
@@ -1035,6 +1035,25 @@ public class getInformation extends javax.swing.JDialog {
 
             } catch (Exception e) {
                 System.out.println("debe ingresar los datos Correctamente");
+            }
+
+        }
+        if (accion == ACTUALIZARCLIENTEFISICO) {
+//            System.out.println("Actualizar cliente con el CIF :"+getCIF());
+            String[] option = {"Aceptar"};
+            try {
+                restfulConnection.postRESTful("http://localhost:52003/api/cbclient"
+                        + "/actualizarClienteFisico?nombre=" + nombre + "&cedula="
+                        + cedula + "&telefono=" + telefono + "&direccion=" + direccion
+                        + "&apellido=" + apellido + "&CIF=" + getCIF(), "");
+
+                JOptionPane.showOptionDialog(this,
+                        "El Cliente fue actualizado correctamente", "¡Atención!", 0, 0,
+                        null, option, 0);
+            } catch (Exception e) {
+                JOptionPane.showOptionDialog(this,
+                        "No se puedo actualizar Cliente", "¡Atención!", 0, 0,
+                        null, option, 0);
             }
 
         }
@@ -1187,7 +1206,7 @@ public class getInformation extends javax.swing.JDialog {
         if (accion == VerCostumerJuridico) {
 
             String[] colums = {"CIF", "Cédula", "Nombre",
-                "Teléfono", "DirreciónPrincipal"};
+                "Dirreción", "Teléfono"};
             sC.setColumName(colums);
 
             result = consultarClienteJuridico();
@@ -1196,7 +1215,8 @@ public class getInformation extends javax.swing.JDialog {
         if (accion == VerCustomerFisico) {
 
             String[] colums = {"CIF", "Cédula", "Nombre", "Apellido",
-                "Teléfono", "DirreciónPrincipal"};
+                "Dirreción",
+                "Teléfono"};
             sC.setColumName(colums);
 
             result = consultarClienteFisico();
@@ -1204,7 +1224,8 @@ public class getInformation extends javax.swing.JDialog {
         }
         if (accion == BORRARCLIENTEFISICO) {
             String[] colums = {"CIF", "Cédula", "Nombre", "Apellido",
-                "Teléfono", "DirreciónPrincipal"};
+                "Dirreción",
+                "Teléfono"};
             sC.setColumName(colums);
 
             result = consultarClienteFisico();
@@ -1214,16 +1235,16 @@ public class getInformation extends javax.swing.JDialog {
 
         }
         if (accion == ACTUALIZARCLIENTEFISICO) {
-            String[] colums = {"CIF", "Cédula", "Nombre", "Apellido",
-                "Teléfono", "DirreciónPrincipal"};
+            String[] colums = {"CIF", "Cédula", "Nombre", "Apellido", "Dirreción",
+                "Teléfono"};
             sC.setColumName(colums);
 
             result = consultarClienteFisico();
 
         }
         if (accion == ACTUALIZARCLIENTEJURIDICO) {
-            String[] colums = {"CIF", "Cédula", "Nombre",
-                "Teléfono", "DirreciónPrincipal"};
+            String[] colums = {"CIF", "Cédula", "Nombre", "Dirreción",
+                "Teléfono"};
             sC.setColumName(colums);
 
             result = consultarClienteJuridico();
@@ -1231,7 +1252,8 @@ public class getInformation extends javax.swing.JDialog {
         }
         if (accion == CREARCUENTAAHORROALAVISTA) {
             String[] colums = {"CIF", "Cédula", "Nombre", "Apellido",
-                "Teléfono", "DirreciónPrincipal"};
+                "Dirreción",
+                "Teléfono"};
             sC.setColumName(colums);
 
             result = consultarClienteFisico();
@@ -1272,13 +1294,20 @@ public class getInformation extends javax.swing.JDialog {
         int selection = JOptionPane.showOptionDialog(this,
                 "Desea eliminar el Cliente", "¡Atención!", 0, 0,
                 null, options, 0);
+        String[] options2 = {"Aceptar"};
         if (selection == 0) {
             String CIF = jLabelCIF.getText();
-            restfulConnection.postRESTful("http://localhost:52003/api/cbclient/eliminarCliente?CIF="+CIF, "");
-            String[] options2 = {"Aceptar"};
-            JOptionPane.showOptionDialog(this,
-                "El Cliente ha sido eliminado", "¡Atención!", 0, 0,
-                null, options2, 0);
+            try {
+                restfulConnection.postRESTful("http://localhost:52003/api/cbclient/eliminarCliente?CIF=" + CIF, "");
+
+                JOptionPane.showOptionDialog(this,
+                        "El Cliente ha sido eliminado", "¡Atención!", 0, 0,
+                        null, options2, 0);
+            } catch (Exception e) {
+                JOptionPane.showOptionDialog(this,
+                        "No se puedo eliminar el cliente", "¡Atención!", 0, 0,
+                        null, options2, 0);
+            }
 
         }
         dispose();
@@ -1593,6 +1622,8 @@ public class getInformation extends javax.swing.JDialog {
 
         }
         if (accion == ACTUALIZARCLIENTEFISICO) {
+            getInfoPanel.setActionIcon(3);
+            getInfoPanel.setCIF(getCIF());
             getInfoPanel.SetTittle("Actualizar Cliente");
             setInVisibleDeleteIcon();
 
