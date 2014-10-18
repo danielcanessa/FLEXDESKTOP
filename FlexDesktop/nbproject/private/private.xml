@@ -5,9 +5,10 @@
         <group>
             <file>file:/C:/Users/Jason/Documents/GitHub/FLEXDESKTOP/FlexDesktop/src/com/flexdesktop/user/GraphicInterface/showCustomers.java</file>
             <file>file:/C:/Users/Jason/Documents/GitHub/FLEXDESKTOP/FlexDesktop/src/com/flexdesktop/user/GraphicInterface/getInformation.java</file>
+            <file>file:/C:/Users/Jason/Documents/GitHub/FLEXDESKTOP/FlexDesktop/src/com/flexdesktop/user/GraphicInterface/HacerPago.java</file>
             <file>file:/C:/Users/Jason/Documents/GitHub/FLEXDESKTOP/FlexDesktop/src/com/flexdesktop/user/GraphicInterface/Frame.java</file>
-            <file>file:/C:/Users/Jason/Documents/GitHub/FLEXDESKTOP/FlexDesktop/src/com/flexdesktop/user/GraphicInterface/TipoDeCuenta.java</file>
             <file>file:/C:/Users/Jason/Documents/GitHub/FLEXDESKTOP/FlexDesktop/src/com/flexdesktop/user/GraphicInterface/CreateAccount.java</file>
+            <file>file:/C:/Users/Jason/Documents/GitHub/FLEXDESKTOP/FlexDesktop/src/com/flexdesktop/user/Error/InfError.java</file>
         </group>
     </open-files>
 </project-private>

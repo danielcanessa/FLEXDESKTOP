@@ -122,7 +122,7 @@ public class Frame extends javax.swing.JFrame {
             jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelClienteLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
                 .addGap(40, 40, 40)
                 .addComponent(jLabelVerSelected)
                 .addGap(32, 32, 32))
@@ -182,7 +182,7 @@ public class Frame extends javax.swing.JFrame {
             jPanelCltJuridicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCltJuridicoLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
                 .addGap(44, 44, 44)
                 .addComponent(jLabelVerSelected1)
                 .addGap(29, 29, 29))
@@ -243,7 +243,7 @@ public class Frame extends javax.swing.JFrame {
             jPanelCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCuentasLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
                 .addGap(31, 31, 31)
                 .addComponent(jLabelSelectRowCuenta)
                 .addGap(23, 23, 23))
@@ -254,7 +254,7 @@ public class Frame extends javax.swing.JFrame {
         jTable3.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {""},
+                {"   Hacer Pago"},
                 {"   Afiliar Un Cliente A Un Módulo De Pago"},
                 {""}
             },
@@ -299,7 +299,7 @@ public class Frame extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
                 .addGap(37, 37, 37)
                 .addComponent(jLabel16)
                 .addGap(30, 30, 30))
@@ -315,12 +315,22 @@ public class Frame extends javax.swing.JFrame {
                 {"   Cierres Realizados"},
                 {"   Lista De Cuentas Por Campos"},
                 {"   Bitacora De Errores FlexCore"},
-                {"   Lista De Intereses Pagados A Una Cuenta De Ahorro Automático  "}
+                {"   Lista De Intereses Pagados A Una Cuenta De Ahorro Automático  "},
+                {"   Ver Transacciones en vuelo"},
+                {"   Ver historico"}
             },
             new String [] {
                 "Reporte"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable4.setGridColor(new java.awt.Color(255, 255, 255));
         jTable4.setRowHeight(41);
         jScrollPane4.setViewportView(jTable4);
@@ -347,7 +357,7 @@ public class Frame extends javax.swing.JFrame {
             .addGroup(jPanelReportesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
                     .addGroup(jPanelReportesLayout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -359,7 +369,7 @@ public class Frame extends javax.swing.JFrame {
                 .addGap(4, 4, 4)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel17)
                 .addGap(29, 29, 29))
@@ -422,7 +432,7 @@ public class Frame extends javax.swing.JFrame {
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
                 .addComponent(jLabel18)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("      Cierres     ", jPanelCierres);
@@ -527,6 +537,12 @@ public class Frame extends javax.swing.JFrame {
             ModuloPagoD.showDialog("CuentaAhorro");
 
         }
+        if (selection == 0) {
+
+            HacerPago pago = new HacerPago(this, true);
+            pago.setVisible(true);
+
+        }
 
     }//GEN-LAST:event_jLabel16MouseClicked
 
@@ -584,48 +600,46 @@ public class Frame extends javax.swing.JFrame {
 //            sC.showDialog();
 
         } else if (selection == OPCION3) {
-            
 
             TipoDeCuenta selectTipoCuenta = new TipoDeCuenta(this, true);
             selectTipoCuenta.setVisible(true);
             int tipoDeCuenta = selectTipoCuenta.getTipo();
             if (tipoDeCuenta == 0) {
-  
-                
+
                 ArrayList<String> columnas_tabla = new ArrayList<>();
-            String[] colums = {"CIF Cliente","Número Cuenta", "Estado",
-                "Desripcion","Saldo Flotante","Saldo Real"};
-            columnas_tabla.add("idCliente");
-            columnas_tabla.add("numeroCuenta");
-            columnas_tabla.add("Estado");
-            columnas_tabla.add("Desripcion");
-            columnas_tabla.add("SaldoFlotante");
-            columnas_tabla.add("SaldoReal");
-            mostrarInfoTablaGenerica("http://localhost:52003/api/cbcuenta/"
-                    + "obtenerCuentasDebito", columnas_tabla, colums);
+                String[] colums = {"CIF Cliente", "Número Cuenta", "Estado",
+                    "Desripcion", "Saldo Flotante", "Saldo Real"};
+                columnas_tabla.add("idCliente");
+                columnas_tabla.add("numeroCuenta");
+                columnas_tabla.add("Estado");
+                columnas_tabla.add("Desripcion");
+                columnas_tabla.add("SaldoFlotante");
+                columnas_tabla.add("SaldoReal");
+                mostrarInfoTablaGenerica("http://localhost:52003/api/cbcuenta/"
+                        + "obtenerCuentasDebito", columnas_tabla, colums);
 
             }
             if (tipoDeCuenta == 1) {
-                
-                 ArrayList<String> columnas_tabla = new ArrayList<>();
-            String[] colums = {"CIF Cliente","Número Cuenta",
-                "Monto Ahorro Deseado","Monto Ahorro Actual","Monto Ahorro",
-                "Fecha Inicio","Fecha Final","Duración Ahorro"};
-            columnas_tabla.add("CIF");
-            columnas_tabla.add("numeroCuenta");
-                 
-            columnas_tabla.add("MontoAhorroDeseado");
-            columnas_tabla.add("MontoAhorroActual");
-            columnas_tabla.add("MontoAhorro");
-            columnas_tabla.add("FechaInicio");
-            columnas_tabla.add("FechaFinal");
-            columnas_tabla.add("DuracionAhorro");
-            mostrarInfoTablaGenerica("http://localhost:52003/api/cbcuenta/"
-                    + "obtenerCuentasAhorro", columnas_tabla, colums);
+
+                ArrayList<String> columnas_tabla = new ArrayList<>();
+                String[] colums = {"CIF Cliente", "Número Cuenta",
+                    "Monto Ahorro Deseado", "Monto Ahorro Actual", "Monto Ahorro",
+                    "Fecha Inicio", "Fecha Final", "Fecha Próximo Pago"};
+                columnas_tabla.add("CIF");
+                columnas_tabla.add("numeroCuenta");
+
+                columnas_tabla.add("MontoAhorroDeseado");
+                columnas_tabla.add("MontoAhorroActual");
+                columnas_tabla.add("MontoAhorro");
+                columnas_tabla.add("FechaInicio");
+                columnas_tabla.add("FechaFinal");
+                columnas_tabla.add("FechaProximoPago");
+                mostrarInfoTablaGenerica("http://localhost:52003/api/cbcuenta/"
+                        + "obtenerCuentasAhorro", columnas_tabla, colums);
             }
 
         } else if (selection == OPCION4) {
-            System.out.println("bitacores erroe flex");
+
             String[] colums = {"Fecha", "Número de error", "Mensaje"};
             ArrayList<String> columnas_tabla = new ArrayList<>();
             columnas_tabla.add("Fecha");
@@ -635,8 +649,6 @@ public class Frame extends javax.swing.JFrame {
                     + "obtenerBitacoraErrores", columnas_tabla, colums);
         } else if (selection == OPCION5) {
 
-            System.out.println("lista de intereses pagados a una cuenta de ahorro automatic"
-                    + "o");
             String[] colums = {"Fecha", "Número de cuenta", "Interes obtenidos", "Monto cobrado"};
             ArrayList<String> columnas_tabla = new ArrayList<>();
             columnas_tabla.add("Fecha");
@@ -646,6 +658,31 @@ public class Frame extends javax.swing.JFrame {
             mostrarInfoTablaGenerica("http://localhost:52003/api/cbInteresesObtenidos/obtenerInteres"
                     + "esObtenenidos", columnas_tabla, colums);
 
+        } else if (selection == 6) {
+
+            String[] colums = {"Fecha", "Número Cuenta", "Monto Transferido", "Tipo Transsacion"};
+            ArrayList<String> columnas_tabla = new ArrayList<>();
+            columnas_tabla.add("Fecha");
+            columnas_tabla.add("NumeroCuenta");
+            columnas_tabla.add("MontoTransferido");
+            columnas_tabla.add("TipoTranssacion");
+
+            mostrarInfoTablaGenerica("http://localhost:52003/api/cbtranssacione"
+                    + "svuelo/consultarTransaccionesVuelo", columnas_tabla,
+                    colums);
+
+        } else if (selection == 7) {
+
+            String[] colums = {"Fecha", "Número Cuenta", "Monto Transferido", "Tipo Transsacion"};
+            ArrayList<String> columnas_tabla = new ArrayList<>();
+            columnas_tabla.add("Fecha");
+            columnas_tabla.add("NumeroCuenta");
+            columnas_tabla.add("MontoTransferido");
+            columnas_tabla.add("TipoTranssacion");
+
+            mostrarInfoTablaGenerica("http://localhost:52003/api/cbh"
+                    + "istorico/verHistorico", columnas_tabla,
+                    colums);
         }
     }//GEN-LAST:event_jLabel17MouseClicked
     private void mostrarInfoTablaGenerica(String url, ArrayList<String> columnas_tabla, String[] colums) {

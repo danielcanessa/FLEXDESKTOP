@@ -7,6 +7,8 @@ package com.flexdesktop.user.GraphicInterface;
 
 import com.flexdesktop.connections.restfulConnection;
 import com.flexdesktop.user.Error.InfError;
+import static com.flexdesktop.user.Error.InfError.showInformation;
+import java.awt.Component;
 
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -739,6 +741,7 @@ public class CreateAccount extends javax.swing.JDialog {
                             "");
                 }
             }
+            showInformation(this, "El nuevo número de cuenta es: "+cuenta);
 
             dispose();
 
@@ -844,13 +847,13 @@ public class CreateAccount extends javax.swing.JDialog {
             String fechaIni = format.format(
                     dateChooserComboInit.getSelectedDate().getTime());
 
-            
-            restfulConnection.postRESTful("http://localhost:52003/api/cbcuenta/crearCuentaAhorro?CIF=" + CIF
+            String cuentaNew = restfulConnection.postRESTful("http://localhost:52003/api/cbcuenta/crearCuentaAhorro?CIF=" + CIF
                     + "&idProposito=" + idProposito + "&Periodicidad=" + jFormattedTextFieldPeriodicidad.getText()
                     + "&FechaInicio=" + fechaIni + "&TiempoAhorro=" + jFormattedTextField1.getText() + "&Mon"
                     + "toAhorroPeriodico=" + jFormattedTextField2.getText() + "&NumeroCuentaOrigen="
                     + jTextFieldCuentaDebito.getText() + "&Moneda=" + moneda + "&dominioPeriodicidad="
                     + jComboBox3.getSelectedItem().toString() + "&MontoAhorroDeseado=" + jFormattedTextFieldMontoAhorro.getText(), "");
+            showInformation(this, "El nuevo número de cuenta es: "+cuentaNew);
             dispose();
 
         } else {
