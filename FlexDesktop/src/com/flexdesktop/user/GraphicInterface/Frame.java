@@ -584,7 +584,7 @@ public class Frame extends javax.swing.JFrame {
 //            sC.showDialog();
 
         } else if (selection == OPCION3) {
-            System.out.println("Lista de cuentas x campos");
+            
 
             TipoDeCuenta selectTipoCuenta = new TipoDeCuenta(this, true);
             selectTipoCuenta.setVisible(true);
@@ -606,7 +606,7 @@ public class Frame extends javax.swing.JFrame {
 
             }
             if (tipoDeCuenta == 1) {
-                System.out.println("ahorro");
+                
                  ArrayList<String> columnas_tabla = new ArrayList<>();
             String[] colums = {"CIF Cliente","Número Cuenta",
                 "Monto Ahorro Deseado","Monto Ahorro Actual","Monto Ahorro",
@@ -672,7 +672,7 @@ public class Frame extends javax.swing.JFrame {
 
         sC.setAccionActual(4);
         sC.upDateCostumers();
-        sC.ocultarBotones("VerCierres");
+        sC.ocultarBotones("VerCuentas");
         sC.initPaginacion();
         sC.showDialog();
 

@@ -1068,8 +1068,17 @@ public class showCustomers extends javax.swing.JDialog {
             this.jLabelModificar.setVisible(false);
             this.jLabelVer.setVisible(false);
             this.jLabelBorrar.setVisible(false);
-            this.jLabel3.setVisible(false);
+            this.jLabel3.setText("");
             this.jLabelTitlle.setText("Lista de Cierres");
+        }
+        if ("VerCuentas".equals(caso)) {
+            
+            this.jLabelTitlle.setText("Lista de Cuentas");
+            this.jLabelSelect.setVisible(false);
+            this.jLabelModificar.setVisible(false);
+            this.jLabelVer.setVisible(false);
+            this.jLabelBorrar.setVisible(false);
+            this.jLabel3.setText("");
         }
 
     }
