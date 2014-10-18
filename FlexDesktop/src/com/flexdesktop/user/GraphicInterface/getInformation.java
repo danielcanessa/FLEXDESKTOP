@@ -66,6 +66,8 @@ public class getInformation extends javax.swing.JDialog {
     private final int RegisterCostumerFisico = 10;
     private final int RegisterCostumerJuridico = 11;
     private final int VerCostumerJuridico = 12;
+    private final int TransCltJur = 13;
+    private final int TransCltFis = 14;
 
     private final int CREARCUENTAAHORROALAVISTA = 8;
     private String CIF = "";
@@ -1223,7 +1225,7 @@ public class getInformation extends javax.swing.JDialog {
 
         ArrayList<ArrayList<String>> result = null;
 
-        if (accion == VerCostumerJuridico) {
+        if (accion == VerCostumerJuridico || accion == TransCltJur) {
 
             String[] colums = {"CIF", "Cédula", "Nombre",
                 "Dirreción", "Teléfono"};
@@ -1232,7 +1234,7 @@ public class getInformation extends javax.swing.JDialog {
             result = consultarClienteJuridico();
 
         }
-        if (accion == VerCustomerFisico) {
+        if (accion == VerCustomerFisico || accion == TransCltFis) {
 
             String[] colums = {"CIF", "Cédula", "Nombre", "Apellido",
                 "Dirreción",
@@ -1750,16 +1752,46 @@ public class getInformation extends javax.swing.JDialog {
                     "", getRowSelected().get(1));
             getInfoPanel.showDialog("RegisterClt");
         }
-        if (accion == Beneficiario) {
-            //establer id obtenido
-            System.out.println("Obtner bediciario");
-        }
-        if (accion == getIdCliente) {
-            System.out.println("retun idcostumer");
+//        if (accion == Beneficiario) {
+//            //establer id obtenido
+//            System.out.println("id: "+this.getCIF());
+//        }
+//        if (accion == getIdCliente) {
+//            System.out.println("retun idcostumer");
+//
+//        }
+//        if (accion == RegisterCostumerJuridico) {
+//
+//        }
+        if (accion == TransCltJur || accion == TransCltFis) {
 
-        }
-        if (accion == RegisterCostumerJuridico) {
+            showCustomers sC = new showCustomers(null, true);
+            sC.setAccionActual(2);
+            sC.ocultarBotones("VerListado");
+            String[] colums = {"NumeroCuenta",
+                "MontoTransferido",
+                "TipoTranssacion",
+                "Fecha"};
+            sC.setColumName(colums);
 
+            ArrayList<ArrayList<String>> result = consultarTransCliente();
+            cliente = convertToObject(result);
+
+            sC.setClientes(cliente);
+            sC.setInformation(getCIF());
+            int numeroPaginas = cliente.length / 19;
+
+            int modulo = cliente.length % 19;
+
+            if (modulo != 0) {
+                numeroPaginas += 1;
+            }
+
+            sC.setNumeroDePaginas(numeroPaginas);
+            sC.upDateCostumers();
+
+            sC.initPaginacion();
+            sC.showDialog();
         }
 
     }
@@ -1771,7 +1803,6 @@ public class getInformation extends javax.swing.JDialog {
 
     String getCIF() {
         return CIF;
-
     }
 
     void setCIF(String cedNew) {
@@ -1855,6 +1886,19 @@ public class getInformation extends javax.swing.JDialog {
         return restfulConnection.getRESTful("http://localhost:52003/api/"
                 + "cbclient/getClienteJuridicoPorConcepto?concepto="
                 + concepto + "&dato=" + datoPorBuscar, columnas_tabla);
+    }
+
+    private ArrayList<ArrayList<String>> consultarTransCliente() {
+
+        ArrayList<String> columnas_tabla = new ArrayList<>();
+        columnas_tabla.add("NumeroCuenta");
+        columnas_tabla.add("MontoTransferido");
+        columnas_tabla.add("TipoTranssacion");
+        columnas_tabla.add("Fecha");
+
+        return restfulConnection.getRESTful("http://localhost:52003/api/"
+                + "cbtranssacionesvuelo/consultarCuentaAhorroCliente?CIF="
+                + getCIF(), columnas_tabla);
     }
 
     private ArrayList<ArrayList<String>> consultarClienteFisico() {
@@ -1971,7 +2015,7 @@ public class getInformation extends javax.swing.JDialog {
     }
 
     void setVisibleDelete() {
-    jLabelBorrarClt.setVisible(true);
+        jLabelBorrarClt.setVisible(true);
     }
 
 }

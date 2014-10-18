@@ -63,15 +63,7 @@ public class showCustomers extends javax.swing.JDialog {
 //    {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"},
 //    {"245784", "Melvin", "Guitierrez"}, {"503890620", "Jason", "Salazar"},
 //    {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"}};
-//    Object pagina2[][] = {{"78749495", "Jose", "Perez"},
-//    {"3564874", "Juan", "Villegas"}, {"45454", "Andres", "Umana"},
-//    {"44445757", "Jose", "Lemus"}, {"503890620", "Pepe", "Redriguez"},
-//    {"3564874", "Sofia", "Vergara"}, {"2548745", "Andreina", "De los Angeles"},
-//    {"245784", "Saddam", "Husseim"}, {"4545454", "Pedro", "Prado"},
-//    {"3564874", "Laura", "Chinchilla"}, {"2548745", "Carlos", "Tylor"},
-//    {"42457857", "Obama", "Barak"}, {"503890620", "Osama", "Bin-Laden"},
-//    {"7857575", "Leonor", "Aguilar"}, {"7587857544", "Edwar", "Umana"},
-//    {"7575757", "Luis", "Guillermo"}};
+
     private int numeroDePaginas = 0;
     private int paginalActual = 1;
     private String idSelect = "";
@@ -135,7 +127,7 @@ public class showCustomers extends javax.swing.JDialog {
         ListadoClt = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        jLabelTitlle = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_Generica = new javax.swing.JTable();
@@ -188,9 +180,9 @@ public class showCustomers extends javax.swing.JDialog {
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("Datos De Cliente");
 
-        jLabel8.setFont(new java.awt.Font("Khmer UI", 0, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel8.setText("Lista de Clientes");
+        jLabelTitlle.setFont(new java.awt.Font("Khmer UI", 0, 18)); // NOI18N
+        jLabelTitlle.setForeground(new java.awt.Color(102, 102, 102));
+        jLabelTitlle.setText("Lista de Clientes");
 
         jButton6.setBackground(new java.awt.Color(255, 255, 255));
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/close2.png"))); // NOI18N
@@ -358,7 +350,7 @@ public class showCustomers extends javax.swing.JDialog {
                 .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(ListadoCltLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel8)
+                        .addComponent(jLabelTitlle)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -413,7 +405,7 @@ public class showCustomers extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(ListadoCltLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(ListadoCltLayout.createSequentialGroup()
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelTitlle, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addComponent(jLabel3))
                     .addGroup(ListadoCltLayout.createSequentialGroup()
@@ -704,7 +696,6 @@ public class showCustomers extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabelBorrar;
     private javax.swing.JLabel jLabelModificar;
     private javax.swing.JLabel jLabelPag1;
@@ -715,6 +706,7 @@ public class showCustomers extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelPuntos;
     private javax.swing.JLabel jLabelPuntos1;
     private javax.swing.JLabel jLabelSelect;
+    private javax.swing.JLabel jLabelTitlle;
     private javax.swing.JLabel jLabelUltimoPag;
     private javax.swing.JLabel jLabelVer;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1077,7 +1069,7 @@ public class showCustomers extends javax.swing.JDialog {
             this.jLabelVer.setVisible(false);
             this.jLabelBorrar.setVisible(false);
             this.jLabel3.setVisible(false);
-            this.jLabel8.setText("Lista de Cierres");
+            this.jLabelTitlle.setText("Lista de Cierres");
         }
 
     }
@@ -1202,5 +1194,11 @@ public class showCustomers extends javax.swing.JDialog {
         }
         return data;
 
+    }
+
+    void setInformation(String CIF) {
+    this.jLabelTitlle.setText("Transacciones");
+    this.jLabel3.setText("CIF Cliente: "+CIF);
+    
     }
 }

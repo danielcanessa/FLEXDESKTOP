@@ -20,7 +20,7 @@ public class Frame extends javax.swing.JFrame {
     private static final int OPCION3 = 3;
     private static final int OPCION4 = 4;
     private static final int OPCION5 = 5;
-    private static final int OPCION6 = 6;
+
     private final int ABRIRCUENTAAHORROALAVISTA = 1;
     private final int ABRIRCUENTAPOROBJETIVO = 3;
 
@@ -308,7 +308,6 @@ public class Frame extends javax.swing.JFrame {
                 {"   Transaciones Clientes Jurídicos"},
                 {"   Transaciones Clientes Físicos"},
                 {"   Cierres Realizados"},
-                {"   Lista De Clientes Por Campos"},
                 {"   Lista De Cuentas Por Campos"},
                 {"   Bitacora De Errores FlexCore"},
                 {"   Lista De Intereses Pagados A Una Cuenta De Ahorro Automático  "}
@@ -316,15 +315,7 @@ public class Frame extends javax.swing.JFrame {
             new String [] {
                 "Reporte"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jTable4.setGridColor(new java.awt.Color(255, 255, 255));
         jTable4.setRowHeight(41);
         jScrollPane4.setViewportView(jTable4);
@@ -407,7 +398,7 @@ public class Frame extends javax.swing.JFrame {
             showCustomers sC = new showCustomers(null, true);
             sC.ocultarBotones("VerListadoAcciones");
             String[] columsNames = {"CIF", "Cédula", "Nombre", "Apellido",
-                "Teléfono", "DirecciónPrincipal"};
+                "DirecciónPrincipal", "Teléfono"};
 
             ArrayList<String> columnas_tabla = new ArrayList<>();
             columnas_tabla.add("cantClientes");
@@ -435,7 +426,7 @@ public class Frame extends javax.swing.JFrame {
             sC.showDialog();
 
         } else if (selection == OPCION3) {
-            
+
             getInformation getInfoPanel = new getInformation(null, true);
             getInfoPanel.setActionIcon(1);
             //borrar cliente
@@ -467,8 +458,7 @@ public class Frame extends javax.swing.JFrame {
     private void jLabel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseClicked
         int selection = jTable3.getSelectedRow();
         ModuloPago ModuloPagoD = new ModuloPago(null, true);
-        if (selection == 2) {//Abrir cuenta ahorro a la vista
-
+        if (selection == 1) {//Abrir cuenta ahorro a la vista
             ModuloPagoD.showDialog("CuentaAhorro");
 
         }
@@ -481,14 +471,14 @@ public class Frame extends javax.swing.JFrame {
         if (selection == OPCION0) {
             System.out.println("transacciones clt juridica");
             getInformation getInfoPanel = getInformation.getSelf();
-            getInfoPanel.setActionIcon(7);
+            getInfoPanel.setActionIcon(13);
             getInfoPanel.showDialog("ConsultarClt");
             getInfoPanel.SetTittle("Indicar Cliente");
 
         } else if (selection == OPCION1) {
             System.out.println("transaciones clt fisico");
             getInformation getInfoPanel = getInformation.getSelf();
-            getInfoPanel.setActionIcon(7);
+            getInfoPanel.setActionIcon(14);
             getInfoPanel.showDialog("ConsultarClt");
             getInfoPanel.SetTittle("Indicar Cliente");
         } else if (selection == OPCION2) {
@@ -526,12 +516,10 @@ public class Frame extends javax.swing.JFrame {
             sC.showDialog();
 
         } else if (selection == OPCION3) {
-            System.out.println("Lista de Clientes x campos");
-        } else if (selection == OPCION4) {
             System.out.println("Lista de cuentas x campos");
-        } else if (selection == OPCION5) {
+        } else if (selection == OPCION4) {
             System.out.println("bitacores erroe flex");
-        } else if (selection == OPCION6) {
+        } else if (selection == OPCION5) {
             System.out.println("lista de intereses pagados a una cuenta de ahorro automatic"
                     + "o");
         }
@@ -553,7 +541,6 @@ public class Frame extends javax.swing.JFrame {
 
         } else if (selection == OPCION2) {
 
-            
             showCustomers sC = new showCustomers(null, true);
             sC.ocultarBotones("VerListadoAcciones");
             String[] columsNames = {"CIF", "Cédula", "Nombre",
@@ -591,8 +578,6 @@ public class Frame extends javax.swing.JFrame {
             //borrar cliente
             getInfoPanel.SetTittle("Eliminar Cliente");
             getInfoPanel.showDialog("ConsultarClt");
-            
-            
 
         } else if (selection == OPCION4) {
 
@@ -600,11 +585,9 @@ public class Frame extends javax.swing.JFrame {
             getInfoPanel.SetTittle("Actualizar Cliente");
             getInfoPanel.setActionIcon(4);
             getInfoPanel.showDialog("ConsultarClt");
-            
-            
+
         }
     }//GEN-LAST:event_jLabelVerSelected1MouseClicked
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

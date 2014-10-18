@@ -5,6 +5,7 @@
  */
 package com.flexdesktop.user.GraphicInterface;
 
+import com.flexdesktop.connections.restfulConnection;
 import com.flexdesktop.user.Error.InfError;
 
 import java.awt.Point;
@@ -50,7 +51,6 @@ public class ModuloPago extends javax.swing.JDialog {
         setLocationRelativeTo(parent);
         configureTableLook();//no hace nada
 
-        
     }
 
     public void showDialog(String panel) {
@@ -92,9 +92,6 @@ public class ModuloPago extends javax.swing.JDialog {
         jFormattedTextFieldEnterName = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabelBuscaridCliente = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
         jFormattedTextField3 = new javax.swing.JFormattedTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -151,25 +148,6 @@ public class ModuloPago extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel4.setText("idDispositivo:");
 
-        jLabelBuscaridCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/Images/Buttons/searchLttBlckBtt.png"))); // NOI18N
-        jLabelBuscaridCliente.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelBuscaridClienteMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabelBuscaridClienteMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabelBuscaridClienteMouseExited(evt);
-            }
-        });
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel3.setText("Estado:");
-
-        jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Activa", "Inactiva" }));
-
         jFormattedTextField3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/atras.png"))); // NOI18N
@@ -204,19 +182,10 @@ public class ModuloPago extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jFormattedTextFieldEnterName, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanelCearCuentaAhorroVistaLayout.createSequentialGroup()
-                                .addGroup(jPanelCearCuentaAhorroVistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCearCuentaAhorroVistaLayout.createSequentialGroup()
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                                    .addGroup(jPanelCearCuentaAhorroVistaLayout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(99, 99, 99)))
-                                .addGroup(jPanelCearCuentaAhorroVistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelBuscaridCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 54, Short.MAX_VALUE))
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 91, Short.MAX_VALUE))
                     .addGroup(jPanelCearCuentaAhorroVistaLayout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -230,21 +199,15 @@ public class ModuloPago extends javax.swing.JDialog {
                 .addGroup(jPanelCearCuentaAhorroVistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton3)
                     .addComponent(jLabel2))
-                .addGap(51, 51, 51)
-                .addGroup(jPanelCearCuentaAhorroVistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCearCuentaAhorroVistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jFormattedTextFieldEnterName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabelBuscaridCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(86, 86, 86)
+                .addGroup(jPanelCearCuentaAhorroVistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextFieldEnterName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(jPanelCearCuentaAhorroVistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jFormattedTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
-                .addGap(35, 35, 35)
-                .addGroup(jPanelCearCuentaAhorroVistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(105, 105, 105)
+                    .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(136, 136, 136)
                 .addGroup(jPanelCearCuentaAhorroVistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -271,18 +234,15 @@ public class ModuloPago extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        if (validateUI()) {
-//            for (int i = 0; i < table.getRowCount(); i++) {// Se crean las rutas por hoja en excel
-//                boolean isSelected = (boolean) table.getValueAt(i, 1);
-//                if (isSelected) {
-//                    String Tabla = table.getValueAt(i, 0).toString();
-//                    data.add(Tabla);
-//                }
-//            }
+        if (!"".equals(jFormattedTextField3.getText().trim()) && !"".equals(jFormattedTextFieldEnterName.getText().trim())) {
+
+            restfulConnection.postRESTful("http://localhost:52003/api/cbcuenta/agregarMetodoPago?idDisp"
+                    + "ositivo=" + jFormattedTextField3.getText() + "&idNumeroCuentaDebito=" + jFormattedTextFieldEnterName.getText(), "");
+
             dispose();
 
         } else {
-            InfError.showMessage(this, "Debe seleccionar al menos una tabla");
+            InfError.showMessage(this, "Faltan Algunos Espacio Por Rellenar");
         }
 
 
@@ -310,39 +270,16 @@ public class ModuloPago extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextFieldEnterNameActionPerformed
 
-    private void jLabelBuscaridClienteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBuscaridClienteMouseEntered
-        jLabelBuscaridCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/searchLttBtt.png")));
-    }//GEN-LAST:event_jLabelBuscaridClienteMouseEntered
-
-    private void jLabelBuscaridClienteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBuscaridClienteMouseExited
-        jLabelBuscaridCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System/Images/Buttons/searchLttBlckBtt.png")));
-    }//GEN-LAST:event_jLabelBuscaridClienteMouseExited
-
-    private void jLabelBuscaridClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBuscaridClienteMouseClicked
-//        getInformation getInfoPanel = new getInformation(null, true);
-//        getInfoPanel.setActionIcon(8);
-//        getInfoPanel.SetTittle("Consultar Cliente");
-//        getInfoPanel.showDialog("ConsultarClt");
-//        String ced = getInfoPanel.getCed();
-//        if (ced != "") {
-//            jFormattedTextFieldEnterName.setText(ced);
-//        }
-
-    }//GEN-LAST:event_jLabelBuscaridClienteMouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JFormattedTextField jFormattedTextField3;
     private javax.swing.JFormattedTextField jFormattedTextFieldEnterName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabelBuscaridCliente;
     private javax.swing.JPanel jPanelCearCuentaAhorroVista;
     // End of variables declaration//GEN-END:variables
 
@@ -365,17 +302,14 @@ public class ModuloPago extends javax.swing.JDialog {
 //        table.getTableHeader().setForeground(new Color(102, 102, 102));
     }
 
-    private boolean validateUI() {
-
-//        for (int i = 0; i < table.getRowCount() - 1; i++) {
-//            boolean parseBoolean = Boolean.parseBoolean(table.getValueAt(i, 1).toString());
-//            if (parseBoolean) {
-//                return true;
-//            }
+//    private boolean validateUI() {
+//
+//        if (jFormattedTextField3.getText() == ""
+//                || jFormattedTextFieldEnterName.getText() == "") {
+//            return false;
 //        }
-        return true;
-    }
-
+//        return true;
+//    }
     private void showPanelOnDialog(javax.swing.JPanel pPanel, javax.swing.JDialog pDialog) {
         pDialog.add(pPanel);
         pPanel.setVisible(true);
@@ -383,7 +317,7 @@ public class ModuloPago extends javax.swing.JDialog {
     }
 
     private void setVisiblePanel(String panel) {
-     //   removePanels();
+        //   removePanels();
 //        switch (panel) {
 //            case "CuentaAhorro":
 //                add(jPanelCearCuentaAhorroVista);
