@@ -7,6 +7,7 @@ package com.flexdesktop.user.GraphicInterface;
 
 import com.flexdesktop.connections.restfulConnection;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -62,6 +63,10 @@ public class Frame extends javax.swing.JFrame {
         jTable4 = new javax.swing.JTable();
         jLabel17 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jPanelCierres = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTableCierres = new javax.swing.JTable();
+        jLabel18 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -342,7 +347,7 @@ public class Frame extends javax.swing.JFrame {
             .addGroup(jPanelReportesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
                     .addGroup(jPanelReportesLayout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -354,13 +359,73 @@ public class Frame extends javax.swing.JFrame {
                 .addGap(4, 4, 4)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel17)
                 .addGap(29, 29, 29))
         );
 
         jTabbedPane1.addTab("     Reportes     ", jPanelReportes);
+
+        jTableCierres.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        jTableCierres.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {""},
+                {""},
+                {"   Hacer Cierre"},
+                {""},
+                {""},
+                {""}
+            },
+            new String [] {
+                "Cierre"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableCierres.setGridColor(new java.awt.Color(255, 255, 255));
+        jTableCierres.setRowHeight(41);
+        jScrollPane7.setViewportView(jTableCierres);
+
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/Images/Buttons/listBtt.png"))); // NOI18N
+        jLabel18.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel18.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel18MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelCierresLayout = new javax.swing.GroupLayout(jPanelCierres);
+        jPanelCierres.setLayout(jPanelCierresLayout);
+        jPanelCierresLayout.setHorizontalGroup(
+            jPanelCierresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCierresLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelCierresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 793, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCierresLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel18)
+                        .addGap(25, 25, 25)))
+                .addGap(18, 18, 18))
+        );
+        jPanelCierresLayout.setVerticalGroup(
+            jPanelCierresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelCierresLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
+                .addComponent(jLabel18)
+                .addContainerGap(48, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("      Cierres     ", jPanelCierres);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -482,49 +547,85 @@ public class Frame extends javax.swing.JFrame {
             getInfoPanel.showDialog("ConsultarClt");
             getInfoPanel.SetTittle("Indicar Cliente");
         } else if (selection == OPCION2) {
-
-            showCustomers sC = new showCustomers(null, true);
             ArrayList<String> columnas_tabla = new ArrayList<>();
             columnas_tabla.add("idCierre");
             columnas_tabla.add("FechaFinal");
-
-            ArrayList<ArrayList<String>> result = restfulConnection.
-                    getRESTful("http://localhost:52003/api/cbcierres/"
-                            + "consultarCierresBancarios", columnas_tabla);
-
-            String[] colums = {"Número de cierre", "Fecha"};
-            sC.setColumName(colums);
-
-            Object[][] cierres = getInformation.convertToObject(result);
-
-            sC.setClientes(cierres);
-
-            int numeroPaginas = cierres.length / 19;
-
-            int modulo = cierres.length % 19;
-
-            if (modulo != 0) {
-                numeroPaginas += 1;
-            }
-
-            sC.setNumeroDePaginas(numeroPaginas);
-
-            sC.setAccionActual(4);
-            sC.upDateCostumers();
-            sC.ocultarBotones("VerCierres");
-            sC.initPaginacion();
-            sC.showDialog();
+            mostrarInfoTablaGenerica("http://localhost:52003/api/cbcierres/"
+                    + "consultarCierresBancarios", columnas_tabla);
+//            showCustomers sC = new showCustomers(null, true);
+//          ;
+//
+//            ArrayList<ArrayList<String>> result = restfulConnection.
+//                    getRESTful("http://localhost:52003/api/cbcierres/"
+//                            + "consultarCierresBancarios", columnas_tabla);
+//
+//            String[] colums = {"Número de cierre", "Fecha"};
+//            sC.setColumName(colums);
+//
+//            Object[][] cierres = getInformation.convertToObject(result);
+//
+//            sC.setClientes(cierres);
+//
+//            int numeroPaginas = cierres.length / 19;
+//
+//            int modulo = cierres.length % 19;
+//
+//            if (modulo != 0) {
+//                numeroPaginas += 1;
+//            }
+//
+//            sC.setNumeroDePaginas(numeroPaginas);
+//
+//            sC.setAccionActual(4);
+//            sC.upDateCostumers();
+//            sC.ocultarBotones("VerCierres");
+//            sC.initPaginacion();
+//            sC.showDialog();
 
         } else if (selection == OPCION3) {
             System.out.println("Lista de cuentas x campos");
         } else if (selection == OPCION4) {
             System.out.println("bitacores erroe flex");
+            ArrayList<String> columnas_tabla = new ArrayList<>();
+            columnas_tabla.add("idCierre");
+            columnas_tabla.add("FechaFinal");
+            mostrarInfoTablaGenerica("http://localhost:52003/api/cbhistorico/"
+                    + "obtenerBitacoraErrores", columnas_tabla);
         } else if (selection == OPCION5) {
             System.out.println("lista de intereses pagados a una cuenta de ahorro automatic"
                     + "o");
         }
     }//GEN-LAST:event_jLabel17MouseClicked
+    private void mostrarInfoTablaGenerica(String url, ArrayList<String> columnas_tabla) {
+        showCustomers sC = new showCustomers(null, true);
 
+        ArrayList<ArrayList<String>> result = restfulConnection.
+                getRESTful(url, columnas_tabla);
+
+        String[] colums = {"Número de cierre", "Fecha"};
+        sC.setColumName(colums);
+
+        Object[][] cierres = getInformation.convertToObject(result);
+
+        sC.setClientes(cierres);
+
+        int numeroPaginas = cierres.length / 19;
+
+        int modulo = cierres.length % 19;
+
+        if (modulo != 0) {
+            numeroPaginas += 1;
+        }
+
+        sC.setNumeroDePaginas(numeroPaginas);
+
+        sC.setAccionActual(4);
+        sC.upDateCostumers();
+        sC.ocultarBotones("VerCierres");
+        sC.initPaginacion();
+        sC.showDialog();
+
+    }
     private void jLabelVerSelected1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelVerSelected1MouseClicked
         int selection = jTable5.getSelectedRow();
 
@@ -589,15 +690,31 @@ public class Frame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabelVerSelected1MouseClicked
 
+    private void jLabel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseClicked
+        int selection = jTableCierres.getSelectedRow();
+
+        if (selection == 2) {
+            
+            restfulConnection.postRESTful("http://localhost:52003/api/cbcierres/crearCierreBancario", "");
+
+            String[] option = {"Aceptar",};
+            JOptionPane.showOptionDialog(this,
+                    "El Cierre se hizo correctamente", "¡Atención!", 0, 0,
+                    null, option, 0);
+        }
+    }//GEN-LAST:event_jLabel18MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabelSelectRowCuenta;
     private javax.swing.JLabel jLabelVerSelected;
     private javax.swing.JLabel jLabelVerSelected1;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanelCierres;
     private javax.swing.JPanel jPanelCliente;
     private javax.swing.JPanel jPanelCltJuridico;
     private javax.swing.JPanel jPanelCuentas;
@@ -607,11 +724,13 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
+    private javax.swing.JTable jTableCierres;
     private javax.swing.JTable jTableModuloCltFisico;
     // End of variables declaration//GEN-END:variables
 }
