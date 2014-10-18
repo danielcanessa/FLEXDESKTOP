@@ -548,10 +548,11 @@ public class Frame extends javax.swing.JFrame {
             getInfoPanel.SetTittle("Indicar Cliente");
         } else if (selection == OPCION2) {
             ArrayList<String> columnas_tabla = new ArrayList<>();
+            String[] colums = {"Número de cierre", "Fecha"};
             columnas_tabla.add("idCierre");
             columnas_tabla.add("FechaFinal");
             mostrarInfoTablaGenerica("http://localhost:52003/api/cbcierres/"
-                    + "consultarCierresBancarios", columnas_tabla);
+                    + "consultarCierresBancarios", columnas_tabla, colums);
 //            showCustomers sC = new showCustomers(null, true);
 //          ;
 //
@@ -584,25 +585,75 @@ public class Frame extends javax.swing.JFrame {
 
         } else if (selection == OPCION3) {
             System.out.println("Lista de cuentas x campos");
+
+            TipoDeCuenta selectTipoCuenta = new TipoDeCuenta(this, true);
+            selectTipoCuenta.setVisible(true);
+            int tipoDeCuenta = selectTipoCuenta.getTipo();
+            if (tipoDeCuenta == 0) {
+  
+                
+                ArrayList<String> columnas_tabla = new ArrayList<>();
+            String[] colums = {"CIF Cliente","Número Cuenta", "Estado",
+                "Desripcion","Saldo Flotante","Saldo Real"};
+            columnas_tabla.add("idCliente");
+            columnas_tabla.add("numeroCuenta");
+            columnas_tabla.add("Estado");
+            columnas_tabla.add("Desripcion");
+            columnas_tabla.add("SaldoFlotante");
+            columnas_tabla.add("SaldoReal");
+            mostrarInfoTablaGenerica("http://localhost:52003/api/cbcuenta/"
+                    + "obtenerCuentasDebito", columnas_tabla, colums);
+
+            }
+            if (tipoDeCuenta == 1) {
+                System.out.println("ahorro");
+                 ArrayList<String> columnas_tabla = new ArrayList<>();
+            String[] colums = {"CIF Cliente","Número Cuenta",
+                "Monto Ahorro Deseado","Monto Ahorro Actual","Monto Ahorro",
+                "Fecha Inicio","Fecha Final","Duración Ahorro"};
+            columnas_tabla.add("CIF");
+            columnas_tabla.add("numeroCuenta");
+                 
+            columnas_tabla.add("MontoAhorroDeseado");
+            columnas_tabla.add("MontoAhorroActual");
+            columnas_tabla.add("MontoAhorro");
+            columnas_tabla.add("FechaInicio");
+            columnas_tabla.add("FechaFinal");
+            columnas_tabla.add("DuracionAhorro");
+            mostrarInfoTablaGenerica("http://localhost:52003/api/cbcuenta/"
+                    + "obtenerCuentasAhorro", columnas_tabla, colums);
+            }
+
         } else if (selection == OPCION4) {
             System.out.println("bitacores erroe flex");
+            String[] colums = {"Fecha", "Número de error", "Mensaje"};
             ArrayList<String> columnas_tabla = new ArrayList<>();
-            columnas_tabla.add("idCierre");
-            columnas_tabla.add("FechaFinal");
+            columnas_tabla.add("Fecha");
+            columnas_tabla.add("numeroError");
+            columnas_tabla.add("Mensaje");
             mostrarInfoTablaGenerica("http://localhost:52003/api/cbhistorico/"
-                    + "obtenerBitacoraErrores", columnas_tabla);
+                    + "obtenerBitacoraErrores", columnas_tabla, colums);
         } else if (selection == OPCION5) {
+
             System.out.println("lista de intereses pagados a una cuenta de ahorro automatic"
                     + "o");
+            String[] colums = {"Fecha", "Número de cuenta", "Interes obtenidos", "Monto cobrado"};
+            ArrayList<String> columnas_tabla = new ArrayList<>();
+            columnas_tabla.add("Fecha");
+            columnas_tabla.add("idCuentaAhorro");
+            columnas_tabla.add("interesCobrado");
+            columnas_tabla.add("montoCobrado");
+            mostrarInfoTablaGenerica("http://localhost:52003/api/cbInteresesObtenidos/obtenerInteres"
+                    + "esObtenenidos", columnas_tabla, colums);
+
         }
     }//GEN-LAST:event_jLabel17MouseClicked
-    private void mostrarInfoTablaGenerica(String url, ArrayList<String> columnas_tabla) {
+    private void mostrarInfoTablaGenerica(String url, ArrayList<String> columnas_tabla, String[] colums) {
         showCustomers sC = new showCustomers(null, true);
 
         ArrayList<ArrayList<String>> result = restfulConnection.
                 getRESTful(url, columnas_tabla);
 
-        String[] colums = {"Número de cierre", "Fecha"};
         sC.setColumName(colums);
 
         Object[][] cierres = getInformation.convertToObject(result);
@@ -694,10 +745,10 @@ public class Frame extends javax.swing.JFrame {
         int selection = jTableCierres.getSelectedRow();
 
         if (selection == 2) {
-            
+
             restfulConnection.postRESTful("http://localhost:52003/api/cbcierres/crearCierreBancario", "");
 
-            String[] option = {"Aceptar",};
+            String[] option = {"Aceptar"};
             JOptionPane.showOptionDialog(this,
                     "El Cierre se hizo correctamente", "¡Atención!", 0, 0,
                     null, option, 0);
