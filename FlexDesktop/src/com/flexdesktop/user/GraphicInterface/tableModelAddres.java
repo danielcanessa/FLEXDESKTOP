@@ -72,11 +72,7 @@ class tableModelAddres extends AbstractTableModel {
      * Les agrega el tipo de clase a cada columna
      */
     public Class getColumnClass(int c) {
-                
-            /**if(c==3){
-              return Double.class;
-            }**/
-            //System.out.println(getValueAt(0, c).getClass());
+
             return getValueAt(0, c).getClass();
         }
     @Override
@@ -117,8 +113,7 @@ class tableModelAddres extends AbstractTableModel {
     }
     @Override
     public boolean isCellEditable(int row, int col) {
-        //Note that the data/cell address is constant,
-        //no matter where the cell appears onscreen.
+
         if(facturas){
           if(col==3){
               return false;

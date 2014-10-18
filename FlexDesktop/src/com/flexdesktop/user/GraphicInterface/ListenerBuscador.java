@@ -14,7 +14,7 @@ import javax.swing.table.TableRowSorter;
 
 /**
  *
- * @author Oscar Montes
+ * @author Jason
  * Esta clase genera el Buscador que se implementa en un JtextField
  */
 public class ListenerBuscador implements DocumentListener {

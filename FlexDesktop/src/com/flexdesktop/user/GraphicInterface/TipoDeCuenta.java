@@ -11,10 +11,14 @@ package com.flexdesktop.user.GraphicInterface;
  */
 public class TipoDeCuenta extends javax.swing.JDialog {
 
+    //Tipo 0 es ver cuenta debito
+    //Tipo 1 es ver cuenta ahorro
     private int tipo = 0;
 
     /**
      * Creates new form TipoDeCuenta
+     * @param parent
+     * @param modal
      */
     public TipoDeCuenta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);

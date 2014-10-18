@@ -110,12 +110,14 @@ public class HacerPago extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String r = restfulConnection.postRESTful("http://localhost:52003/api/cbcuenta/realizarPago?cuentaPago="+
+        //Permite realizar un pago a una cuenta
+        String resultPago = restfulConnection.postRESTful("http://localhost:52003/"
+                + "api/cbcuenta/realizarPago?cuentaPago="+
                 jFormattedTextFieldCuntOrigen.getText()+
                 "&cuentaDestino="+jFormattedTextFieldCuentaDestino.getText()+
                 "&monto="+jFormattedTextFieldMonto.getText(), "");
-        System.out.println(r.substring(1, 2));
-        if(r.substring(1, 2)=="1"){
+        System.out.println(resultPago.substring(1, 2));
+        if(resultPago.substring(1, 2)=="1"){//Si el pago es correctos se muestra
             String[] option = {"Aceptar"};
             JOptionPane.showOptionDialog(this,
                     "El pago se hizo correctamente", "¡Atención!", 0, 0,

@@ -11,14 +11,8 @@ import com.flexdesktop.user.Error.InfError;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import static java.lang.Math.abs;
-
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.Timer;
 
 /**
@@ -35,21 +29,13 @@ public class ModuloPago extends javax.swing.JDialog {
      */
     private final Point point = new Point(0, 0);
 
-    private String[] columName = {"Beneficiarios"};
-
     public List<Object[]> beneciarios = new ArrayList<Object[]>();
-
-    private int accion = 0;
-    private final int BORRAR = 1;
-    private final int Ver = 0;
-    private final int Actualizar = 2;
 
     public ModuloPago(java.awt.Frame parent, boolean modal) {
 
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(parent);
-        configureTableLook();//no hace nada
 
     }
 
@@ -71,8 +57,6 @@ public class ModuloPago extends javax.swing.JDialog {
         });
         setOpacity(0);
         timer.start();
-
-        setVisiblePanel(panel);
         setVisible(true);
 
     }
@@ -233,11 +217,15 @@ public class ModuloPago extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        //Permite agregar metodo de pago a un cliente
+        if (!"".equals(jFormattedTextField3.getText().trim()) && !"".
+                equals(jFormattedTextFieldEnterName.getText().trim())) {
 
-        if (!"".equals(jFormattedTextField3.getText().trim()) && !"".equals(jFormattedTextFieldEnterName.getText().trim())) {
-
-            restfulConnection.postRESTful("http://localhost:52003/api/cbcuenta/agregarMetodoPago?idDisp"
-                    + "ositivo=" + jFormattedTextField3.getText() + "&idNumeroCuentaDebito=" + jFormattedTextFieldEnterName.getText(), "");
+            restfulConnection.postRESTful("http://localhost:52003/api/"
+                    + "cbcuenta/agregarMetodoPago?idDisp"
+                    + "ositivo=" + jFormattedTextField3.getText()
+                    + "&idNumeroCuentaDebito="
+                    + jFormattedTextFieldEnterName.getText(), "");
 
             dispose();
 
@@ -283,113 +271,9 @@ public class ModuloPago extends javax.swing.JDialog {
     private javax.swing.JPanel jPanelCearCuentaAhorroVista;
     // End of variables declaration//GEN-END:variables
 
-    private void configureTableLook() {
-//        DefaultTableCellRenderer centerRender = new DefaultTableCellRenderer();
-//        centerRender.setHorizontalAlignment(JLabel.LEFT);
-//
-//        table.setRowHeight(25);
-//        table.getColumnModel().getColumn(0).setPreferredWidth(60);
-//
-//        table.getColumnModel().getColumn(1).setPreferredWidth(10);
-//        table.getColumnModel().getColumn(0).setCellRenderer(centerRender);
-//        //  table.getColumnModel().getColumn(1).setCellRenderer(centerRender);
-//
-//        TableCellRenderer rendererFromHeader = table.getTableHeader().getDefaultRenderer();
-//        JLabel headerLabel = (JLabel) rendererFromHeader;
-//        headerLabel.setHorizontalAlignment(JLabel.LEFT);
-//
-//        table.getTableHeader().setFont(new Font("Khmer UI", Font.PLAIN, 14));
-//        table.getTableHeader().setForeground(new Color(102, 102, 102));
-    }
 
-//    private boolean validateUI() {
-//
-//        if (jFormattedTextField3.getText() == ""
-//                || jFormattedTextFieldEnterName.getText() == "") {
-//            return false;
-//        }
-//        return true;
-//    }
-    private void showPanelOnDialog(javax.swing.JPanel pPanel, javax.swing.JDialog pDialog) {
-        pDialog.add(pPanel);
-        pPanel.setVisible(true);
-        pDialog.setVisible(true);
-    }
 
-    private void setVisiblePanel(String panel) {
-        //   removePanels();
-//        switch (panel) {
-//            case "CuentaAhorro":
-//                add(jPanelCearCuentaAhorroVista);
-//                jPanelCearCuentaAhorroVista.setVisible(true);
-//            case "CuentaPorObjetivo":
-//                add(jPanelCrearCuentaObjetivo);
-//                jPanelCrearCuentaObjetivo.setVisible(true);
-//        }
-
-    }
-
-    public void removePanels() {
-//        jPanelCearCuentaAhorroVista.setVisible(false);
-//        jPanelCrearCuentaObjetivo.setVisible(false);
-//////        ConsultarClt.setVisible(false);
-//////        VerClt.setVisible(false);
-//        remove(jPanelCearCuentaAhorroVista);
-//        remove(jPanelCrearCuentaObjetivo);
-//////        remove(VerClt);
-//////        remove(ConsultarClt);
-    }
-
-    private void eliminarFila(JTable table) {
-        try {
-            tableModelAddres model = (tableModelAddres) table.getModel();
-            int row = table.getSelectedRow();
-            ///Si se esta escribiendo en la celda para el editor y luego elimina la
-            // fila
-            if (!model.data.isEmpty()) {
-                if (table.isEditing()) {
-                    table.getCellEditor().cancelCellEditing();
-                    table.revalidate();
-                    table.repaint();
-                    table.requestFocus();
-
-                }
-
-                model.removeRow(row);
-                table.changeSelection(row - 1, 0, false, false);
-                table.revalidate();
-                table.repaint();
-                table.requestFocus();
-            }
-
-        } catch (Exception e) {
-        }
-
-    }
-
-    private void addRow(JTable table) {
-        try {
-            tableModelAddres model = (tableModelAddres) table.getModel();
-
-            ///Si se esta escribiendo en la celda para el editor 
-            //y luego elimina la fila
-            if (!model.data.isEmpty()) {
-                if (table.isEditing()) {
-                    table.getCellEditor().cancelCellEditing();
-                    table.revalidate();
-                    table.repaint();
-                    table.requestFocus();
-
-                }
-            }
-            model.addRow(1);
-            table.revalidate();
-            table.repaint();
-            table.requestFocus();
-        } catch (Exception e) {
-        }
-
-    }
+    
 
     ArrayList<String> getAddres() {
         ArrayList<String> result = new ArrayList<>();
@@ -405,10 +289,5 @@ public class ModuloPago extends javax.swing.JDialog {
         return result;
     }
 
-    void setActionIcon(int action) {
-
-        accion = action;
-
-    }
 
 }

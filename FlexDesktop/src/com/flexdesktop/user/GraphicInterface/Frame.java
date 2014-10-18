@@ -479,7 +479,8 @@ public class Frame extends javax.swing.JFrame {
             columnas_tabla.add("cantClientes");
 
             ArrayList<ArrayList<String>> cCF = restfulConnection.
-                    getRESTful("http://localhost:52003/api/cbclient/cantidadClientesFisicos",
+                    getRESTful("http://localhost:52003/api/cbclient"
+                            + "/cantidadClientesFisicos",
                             columnas_tabla);
 
             int numeroPaginas = 0;
@@ -550,14 +551,12 @@ public class Frame extends javax.swing.JFrame {
         int selection = jTable4.getSelectedRow();
 
         if (selection == OPCION0) {
-            System.out.println("transacciones clt juridica");
             getInformation getInfoPanel = getInformation.getSelf();
             getInfoPanel.setActionIcon(13);
             getInfoPanel.showDialog("ConsultarClt");
             getInfoPanel.SetTittle("Indicar Cliente");
 
         } else if (selection == OPCION1) {
-            System.out.println("transaciones clt fisico");
             getInformation getInfoPanel = getInformation.getSelf();
             getInfoPanel.setActionIcon(14);
             getInfoPanel.showDialog("ConsultarClt");
@@ -569,38 +568,9 @@ public class Frame extends javax.swing.JFrame {
             columnas_tabla.add("FechaFinal");
             mostrarInfoTablaGenerica("http://localhost:52003/api/cbcierres/"
                     + "consultarCierresBancarios", columnas_tabla, colums);
-//            showCustomers sC = new showCustomers(null, true);
-//          ;
-//
-//            ArrayList<ArrayList<String>> result = restfulConnection.
-//                    getRESTful("http://localhost:52003/api/cbcierres/"
-//                            + "consultarCierresBancarios", columnas_tabla);
-//
-//            String[] colums = {"Número de cierre", "Fecha"};
-//            sC.setColumName(colums);
-//
-//            Object[][] cierres = getInformation.convertToObject(result);
-//
-//            sC.setClientes(cierres);
-//
-//            int numeroPaginas = cierres.length / 19;
-//
-//            int modulo = cierres.length % 19;
-//
-//            if (modulo != 0) {
-//                numeroPaginas += 1;
-//            }
-//
-//            sC.setNumeroDePaginas(numeroPaginas);
-//
-//            sC.setAccionActual(4);
-//            sC.upDateCostumers();
-//            sC.ocultarBotones("VerCierres");
-//            sC.initPaginacion();
-//            sC.showDialog();
 
         } else if (selection == OPCION3) {
-
+            //Ver cuentas por campos(debito/ahorro)
             TipoDeCuenta selectTipoCuenta = new TipoDeCuenta(this, true);
             selectTipoCuenta.setVisible(true);
             int tipoDeCuenta = selectTipoCuenta.getTipo();
@@ -623,7 +593,8 @@ public class Frame extends javax.swing.JFrame {
 
                 ArrayList<String> columnas_tabla = new ArrayList<>();
                 String[] colums = {"CIF Cliente", "Número Cuenta",
-                    "Monto Ahorro Deseado", "Monto Ahorro Actual", "Monto Ahorro",
+                    "Monto Ahorro Deseado", "Monto Ahorro Actual",
+                    "Monto Ahorro",
                     "Fecha Inicio", "Fecha Final", "Fecha Próximo Pago"};
                 columnas_tabla.add("CIF");
                 columnas_tabla.add("numeroCuenta");
@@ -649,18 +620,21 @@ public class Frame extends javax.swing.JFrame {
                     + "obtenerBitacoraErrores", columnas_tabla, colums);
         } else if (selection == OPCION5) {
 
-            String[] colums = {"Fecha", "Número de cuenta", "Interes obtenidos", "Monto cobrado"};
+            String[] colums = {"Fecha", "Número de cuenta", "Interes obtenidos",
+                "Monto cobrado"};
             ArrayList<String> columnas_tabla = new ArrayList<>();
             columnas_tabla.add("Fecha");
             columnas_tabla.add("idCuentaAhorro");
             columnas_tabla.add("interesCobrado");
             columnas_tabla.add("montoCobrado");
-            mostrarInfoTablaGenerica("http://localhost:52003/api/cbInteresesObtenidos/obtenerInteres"
+            mostrarInfoTablaGenerica("http://localhost:52003/api/cbInterese"
+                    + "sObtenidos/obtenerInteres"
                     + "esObtenenidos", columnas_tabla, colums);
 
         } else if (selection == 6) {
 
-            String[] colums = {"Fecha", "Número Cuenta", "Monto Transferido", "Tipo Transsacion"};
+            String[] colums = {"Fecha", "Número Cuenta", "Monto Transferido",
+                "Tipo Transsacion"};
             ArrayList<String> columnas_tabla = new ArrayList<>();
             columnas_tabla.add("Fecha");
             columnas_tabla.add("NumeroCuenta");
@@ -673,7 +647,8 @@ public class Frame extends javax.swing.JFrame {
 
         } else if (selection == 7) {
 
-            String[] colums = {"Fecha", "Número Cuenta", "Monto Transferido", "Tipo Transsacion"};
+            String[] colums = {"Fecha", "Número Cuenta", "Monto Transferido",
+                "Tipo Transsacion"};
             ArrayList<String> columnas_tabla = new ArrayList<>();
             columnas_tabla.add("Fecha");
             columnas_tabla.add("NumeroCuenta");
@@ -685,9 +660,13 @@ public class Frame extends javax.swing.JFrame {
                     colums);
         }
     }//GEN-LAST:event_jLabel17MouseClicked
-    private void mostrarInfoTablaGenerica(String url, ArrayList<String> columnas_tabla, String[] colums) {
+    //Metodo Generico para mostrar datos en una tabla
+
+    private void mostrarInfoTablaGenerica(String url,
+            ArrayList<String> columnas_tabla, String[] colums) {
         showCustomers sC = new showCustomers(null, true);
 
+        //Se hace la consulta de los datos
         ArrayList<ArrayList<String>> result = restfulConnection.
                 getRESTful(url, columnas_tabla);
 
@@ -783,7 +762,8 @@ public class Frame extends javax.swing.JFrame {
 
         if (selection == 2) {
 
-            restfulConnection.postRESTful("http://localhost:52003/api/cbcierres/crearCierreBancario", "");
+            restfulConnection.postRESTful("http://localhost:52003/api/"
+                    + "cbcierres/crearCierreBancario", "");
 
             String[] option = {"Aceptar"};
             JOptionPane.showOptionDialog(this,

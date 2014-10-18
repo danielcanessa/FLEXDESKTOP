@@ -4,24 +4,14 @@
  */
 package com.flexdesktop.user.GraphicInterface;
 
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
-import javax.swing.table.TableModel;
 
 /**
  *
- * @author Jason Esta clase crea un Listener Personalizado para la Tabla de
- * Factura
+ * @author Jason 
  */
 public class tableModelListenerAddres implements TableModelListener {
 
@@ -40,7 +30,6 @@ public class tableModelListenerAddres implements TableModelListener {
      * Este metodo detecta un cambio en la tabla y ejecuta varias condiciones.
      */
     public void tableChanged(TableModelEvent e) {
-        System.out.println("jnjdxnfvd");
         int row = e.getFirstRow();//row
         int lastRow = e.getLastRow();
         int column = e.getColumn();//column

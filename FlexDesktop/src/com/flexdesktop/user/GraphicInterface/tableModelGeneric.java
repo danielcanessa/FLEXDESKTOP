@@ -5,13 +5,12 @@
 package com.flexdesktop.user.GraphicInterface;
 
 
-import java.util.Date;
 import javax.swing.table.AbstractTableModel;
 
 
 /**
  *
- * @author Oscar Montes
+ * @author Jason
  */
 public class tableModelGeneric extends AbstractTableModel {
     private String[] columnNames;

@@ -6,24 +6,15 @@
 package com.flexdesktop.user.GraphicInterface;
 
 import com.flexdesktop.connections.restfulConnection;
-import com.flexdesktop.user.Error.InfError;
-
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Vector;
-import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.Timer;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -42,6 +33,7 @@ public class showCustomers extends javax.swing.JDialog {
      */
     private String[] ColumName = {"Cedula", "Nombre", "Apellido"};
 
+    
     Object[][] data = {{"503890620", "Jason", "Salazar"},
     {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"},
     {"245784", "Melvin", "Guitierrez"}, {"503890620", "Jason", "Salazar"},
@@ -53,21 +45,12 @@ public class showCustomers extends javax.swing.JDialog {
     {"245784", "Melvin", "Guitierrez"}, {"503890620", "Jason", "Salazar"},
     {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"}};
     private Object[][] clientes = {{}};
-//    Object paginaAnterior[][] = {{"503890620", "Jason", "Salazar"},
-//    {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"},
-//    {"245784", "Melvin", "Guitierrez"}, {"503890620", "Jason", "Salazar"},
-//    {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"},
-//    {"245784", "Melvin", "Guitierrez"}, {"503890620", "Jason", "Salazar"},
-//    {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"},
-//    {"245784", "Melvin", "Guitierrez"}, {"503890620", "Jason", "Salazar"},
-//    {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"},
-//    {"245784", "Melvin", "Guitierrez"}, {"503890620", "Jason", "Salazar"},
-//    {"3564874", "Daniel", "Canessa"}, {"2548745", "Edwar", "Umana"}};
 
     private int numeroDePaginas = 0;
     private int paginalActual = 1;
     private String idSelect = "";
     private int accionActual = 0;
+    //Acciones posibles
     private final int VerListadoClientesFisicos = 0;
     private final int VerListadoClientesJuridicos = 1;
     private final int VerListadoClientesPorConcepto = 2;
@@ -81,14 +64,6 @@ public class showCustomers extends javax.swing.JDialog {
         this.rowSelect = new ArrayList<>();
         initComponents();
         setLocationRelativeTo(parent);
-
-        // upDateCostumers();
-        //****************
-//        setNumeroDePaginas();
-//        initPaginacion();
-        //*****************
-        calculoPaginacion();
-
     }
 
     public void showDialog() {
@@ -110,7 +85,6 @@ public class showCustomers extends javax.swing.JDialog {
         setOpacity(0);
         timer.start();
 
-        //setVisiblePanel(panel);
         setVisible(true);
 
     }
@@ -528,12 +502,11 @@ public class showCustomers extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabelVerMouseClicked
 
     private void TextField_BuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_BuscadorActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_TextField_BuscadorActionPerformed
 
     private void jTable_GenericaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_GenericaMouseClicked
         if (evt.getClickCount() == 2) {
-            //            this.jButton_AceptarBusqueda.doClick();
         }
     }//GEN-LAST:event_jTable_GenericaMouseClicked
 
@@ -546,7 +519,8 @@ public class showCustomers extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jLabel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseEntered
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/nextShadow.png")));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().
+                getResource("/com/flexdesktop/user/Images/nextShadow.png")));
     }//GEN-LAST:event_jLabel7MouseEntered
 
     private void jLabel7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseExited
@@ -556,11 +530,13 @@ public class showCustomers extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel7MouseExited
 
     private void jLabel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseEntered
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/backShadow.png")));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().
+                getResource("/com/flexdesktop/user/Images/backShadow.png")));
     }//GEN-LAST:event_jLabel2MouseEntered
 
     private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/flexdesktop/user/Images/back.png")));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().
+                getResource("/com/flexdesktop/user/Images/back.png")));
     }//GEN-LAST:event_jLabel2MouseExited
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
@@ -571,22 +547,27 @@ public class showCustomers extends javax.swing.JDialog {
         setPaginalActual(Integer.parseInt(getNextLabel().getText()));
 
         if (getPaginalActual() <= getNumeroDePaginas()) {
-            System.out.println("actul " + getPaginalActual() + " ,anter " + LbAct.getText());
+//            System.out.println("actul " + getPaginalActual()
+//                    + " ,anter " + LbAct.getText());
 
             //Si se va para el label5
-            if (!nextLabel.isFocusable() && getPaginalActual() < getNumeroDePaginas()) {
-                System.out.println("voy pal 5");
+            if (!nextLabel.isFocusable() && getPaginalActual()
+                    < getNumeroDePaginas()) {
+//                System.out.println("voy pal 5");
                 jLabelPag4.setIcon(new javax.swing.ImageIcon(getClass().
-                        getResource("/com/flexdesktop/user/Images/paginaSelected.png")));
+                        getResource("/com/flexdesktop/user/Images/"
+                                + "paginaSelected.png")));
                 jLabelPag4.setOpaque(true);
 
                 draw();
 
             } else {
                 nextLabel.setIcon(new javax.swing.ImageIcon(getClass().
-                        getResource("/com/flexdesktop/user/Images/paginaSelected.png")));
+                        getResource("/com/flexdesktop/user/Images/"
+                                + "paginaSelected.png")));
                 LbAct.setIcon(new javax.swing.ImageIcon(getClass().
-                        getResource("/com/flexdesktop/user/Images/pagina.png")));
+                        getResource("/com/flexdesktop/user/"
+                                + "Images/pagina.png")));
 
                 nextLabel.setOpaque(true);
 
@@ -595,15 +576,9 @@ public class showCustomers extends javax.swing.JDialog {
             }
 
             comprobaciones();
-            //******
-            //Mostrar graficamente la pagina siguiente****************
-            String paginaAnterior = LbAct.getText();//Cosultar la siguiente pag
 
-            //   data = pagina2;
             upDateCostumers();
 
-            // System.out.println("El anterior es: " + paginaAnterior);
-            //******************************************************
         }
     }//GEN-LAST:event_jLabel7MouseClicked
 
@@ -618,26 +593,22 @@ public class showCustomers extends javax.swing.JDialog {
                 draw2();
                 setPaginalActual(paginalActual - 1);
             } else {
-                System.out.println("anterior " + antLabel.getText());
-                System.out.println("actual " + LbAct.getText());
+//                System.out.println("anterior " + antLabel.getText());
+//                System.out.println("actual " + LbAct.getText());
                 setPaginalActual(paginalActual - 1);
                 antLabel.setIcon(new javax.swing.ImageIcon(getClass().
-                        getResource("/com/flexdesktop/user/Images/paginaSelected.png")));
+                        getResource("/com/flexdesktop/user/Images/"
+                                + "paginaSelected.png")));
                 antLabel.setOpaque(true);
                 LbAct.setIcon(new javax.swing.ImageIcon(getClass().
-                        getResource("/com/flexdesktop/user/Images/pagina.png")));
+                        getResource("/com/flexdesktop/user/"
+                                + "Images/pagina.png")));
                 LbAct.setOpaque(false);
 
             }
         }
 
         comprobaciones();
-        //System.out.println("actual pa : " + paginalActual);
-        //Mostrar graficamente la pagina siguiente****************
-//        String paginaAnterior = LbAct.getText();//Cosultar la siguiente pag
-//        System.out.println("El actual es: " + paginaAnterior);
-        //******************************************************
-
         upDateCostumers();
 
     }//GEN-LAST:event_jLabel2MouseClicked
@@ -672,9 +643,12 @@ public class showCustomers extends javax.swing.JDialog {
 
     private void jLabelUltimoPagMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUltimoPagMouseClicked
         jLabelPag5.setText(jLabelUltimoPag.getText());
-        jLabelPag4.setText("" + (Integer.parseInt(jLabelUltimoPag.getText()) - 1));
-        jLabelPag3.setText("" + (Integer.parseInt(jLabelUltimoPag.getText()) - 2));
-        jLabelPag2.setText("" + (Integer.parseInt(jLabelUltimoPag.getText()) - 3));
+        jLabelPag4.setText(""
+                + (Integer.parseInt(jLabelUltimoPag.getText()) - 1));
+        jLabelPag3.setText(""
+                + (Integer.parseInt(jLabelUltimoPag.getText()) - 2));
+        jLabelPag2.setText(""
+                + (Integer.parseInt(jLabelUltimoPag.getText()) - 3));
         setFocusPanel(jLabelPag5);
         comprobaciones();
     }//GEN-LAST:event_jLabelUltimoPagMouseClicked
@@ -713,28 +687,9 @@ public class showCustomers extends javax.swing.JDialog {
     private javax.swing.JTable jTable_Generica;
     // End of variables declaration//GEN-END:variables
 
-    private boolean validateUI() {
-
-//        for (int i = 0; i < table.getRowCount() - 1; i++) {
-//            boolean parseBoolean = Boolean.parseBoolean(table.getValueAt(i, 1).toString());
-//            if (parseBoolean) {
-//                return true;
-//            }
-//        }
-        return true;
-    }
-
-    private void showPanelOnDialog(javax.swing.JPanel pPanel, javax.swing.JDialog pDialog) {
-        pDialog.add(pPanel);
-        pPanel.setVisible(true);
-        pDialog.setVisible(true);
-    }
-
+    //Permite Mostrar datos mas actuales en las tablas generica
     public void upDateCostumers() {
 
-//        AdminBD.consultarClientes();
-//        data = AdminBD.getData();
-//        String[] columnNames = AdminBD.getColumnNames();
         if (accionActual == VerListadoClientesPorConcepto) {
 
             setNewData();
@@ -812,12 +767,13 @@ public class showCustomers extends javax.swing.JDialog {
         jTable_Generica.requestFocus();
         jTable_Generica.changeSelection(0, 0, false, false);
         /**
-         * Agrega el listener al JtextField del buscador *
+         * Agrega el listener al JtextField del buscador
          */
         this.TextField_Buscador.getDocument().addDocumentListener(new ListenerBuscador(this.TextField_Buscador, ordenador));
 
     }
 
+    //Permite eliminar una fila
     private void eliminar() {
         setRowSelect();
         getInformation getInfoPanel = new getInformation(null, true);
@@ -848,19 +804,6 @@ public class showCustomers extends javax.swing.JDialog {
 
     }
 
-//    public void fillTableCostumer() {
-//
-//        //Realiza la consulta para obtener las los clientes a mostrar
-//        /**
-//         * **
-//         *///
-//        this.jTable_Generica.setModel(new tableModelGeneric(ColumName, data));
-//        //Alinea la primer columna de esta tabla hacia el centro
-//        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-//
-//        this.jTable_Generica.getColumnModel().getColumn(0).
-//                setCellRenderer(centerRenderer);
-//    }
     /**
      * Permite mostrar graficamente el numero de paginas que hay
      */
@@ -1013,8 +956,6 @@ public class showCustomers extends javax.swing.JDialog {
         if (Integer.parseInt(jLabelPag2.getText()) == 2) {
             jLabelPuntos1.setVisible(false);
         }
-        //***********
-
         ///***comprobar si necesita puntos suspen al final
         if (Integer.parseInt(jLabelPag5.getText()) >= getNumeroDePaginas()) {
 
@@ -1032,7 +973,8 @@ public class showCustomers extends javax.swing.JDialog {
         JLabel LbAct = getLabelActual();
 
         label.setIcon(new javax.swing.ImageIcon(getClass().
-                getResource("/com/flexdesktop/user/Images/paginaSelected.png")));
+                getResource("/com/flexdesktop/user/Images/"
+                        + "paginaSelected.png")));
         label.setOpaque(true);
         LbAct.setIcon(new javax.swing.ImageIcon(getClass().
                 getResource("/com/flexdesktop/user/Images/pagina.png")));
@@ -1042,11 +984,12 @@ public class showCustomers extends javax.swing.JDialog {
 
     }
 
+    //Establecer los datos a mostrar en la tabla generica
     void setData(Object[][] dataNew) {
         data = dataNew;
-        //upDateCostumers();
     }
 
+    //Se ocultan algunos botones, dependiendo de lo que se muestre
     void ocultarBotones(String caso) {
 
         if ("VerListadoAcciones".equals(caso)) {
@@ -1072,7 +1015,7 @@ public class showCustomers extends javax.swing.JDialog {
             this.jLabelTitlle.setText("Lista de Cierres");
         }
         if ("VerCuentas".equals(caso)) {
-            
+
             this.jLabelTitlle.setText("Lista de Cuentas");
             this.jLabelSelect.setVisible(false);
             this.jLabelModificar.setVisible(false);
@@ -1104,9 +1047,11 @@ public class showCustomers extends javax.swing.JDialog {
         this.ColumName = ColumName;
     }
 
+    //Establecer la fila escogida
     private void setRowSelect() {
         if (jTable_Generica.getValueAt(
-                jTable_Generica.getSelectedRow(), 0).toString().replace(" ", "") != "") {
+                jTable_Generica.getSelectedRow(), 0).toString().
+                replace(" ", "") != "") {
             for (int i = 0; i < jTable_Generica.getColumnCount(); i++) {
                 rowSelect.add(jTable_Generica.getValueAt(
                         jTable_Generica.getSelectedRow(), i).toString());
@@ -1134,11 +1079,6 @@ public class showCustomers extends javax.swing.JDialog {
         this.accionActual = accionActual;
     }
 
-    private void calculoPaginacion() {
-
-        //calcular numero paginas
-    }
-
     /**
      * @return the clientes
      */
@@ -1153,13 +1093,16 @@ public class showCustomers extends javax.swing.JDialog {
         this.clientes = clientes;
     }
 
+    /**
+     * Permite establecer los datos de las nueva pagina(si se cambia de pagina)
+     */
     private void setNewData() {
-
         ArrayList<ArrayList<String>> tmp = new ArrayList<ArrayList<String>>();
         int inicio = (19 * (paginalActual - 1));
         if (inicio < clientes.length) {
 
-            for (int i = inicio; (i < clientes.length & tmp.size() <= 17); i++, inicio++) {
+            for (int i = inicio; (i < clientes.length & tmp.size() <= 17);
+                    i++, inicio++) {
 
                 ArrayList<String> tmp2 = new ArrayList<String>();
                 for (int j = 0; j < clientes[0].length; j++) {
@@ -1174,23 +1117,17 @@ public class showCustomers extends javax.swing.JDialog {
                 tmp.add(tmp2);
 
             }
-//             //////////////////////////////////////
-//            for (int i = 0; i < convertToObject(tmp).length; i++) {
-//                for (int j = 0; j < convertToObject(tmp)[0].length; j++) {
-//                    System.out.println(convertToObject(tmp)[i][j]);
-//                    
-//                }
-//                
-//            }
-//            
-//            
-//            ///////////////////////////////////////
 
             setData(convertToObject(tmp));
         }
 
     }
 
+    /**
+     * Permite convertir un matriz de dinamica a una matriz no estatica
+     * @param result
+     * @return 
+     */
     private Object[][] convertToObject(ArrayList<ArrayList<String>> result) {
         Object[][] data = new Object[result.size()][result.get(0).size()];
         int count = 0;
@@ -1206,8 +1143,8 @@ public class showCustomers extends javax.swing.JDialog {
     }
 
     void setInformation(String CIF) {
-    this.jLabelTitlle.setText("Transacciones");
-    this.jLabel3.setText("CIF Cliente: "+CIF);
-    
+        this.jLabelTitlle.setText("Transacciones");
+        this.jLabel3.setText("CIF Cliente: " + CIF);
+
     }
 }

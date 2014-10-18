@@ -8,14 +8,11 @@ package com.flexdesktop.user.GraphicInterface;
 import com.flexdesktop.connections.restfulConnection;
 import com.flexdesktop.user.Error.InfError;
 import static com.flexdesktop.user.Error.InfError.showInformation;
-import java.awt.Component;
-
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
-
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTable;
@@ -35,14 +32,8 @@ public class CreateAccount extends javax.swing.JDialog {
      */
     private final Point point = new Point(0, 0);
 
-    private String[] columName = {"Beneficiarios"};
-
-    public List<Object[]> beneciarios = new ArrayList<Object[]>();
-
-    private int accion = 0;
-    private final int BORRAR = 1;
-    private final int Ver = 0;
-    private final int Actualizar = 2;
+    private final String[] columName = {"Beneficiarios"};
+    public List<Object[]> beneciarios = new ArrayList<>();
     private int idProposito;
 
     public CreateAccount(java.awt.Frame parent, boolean modal) {
@@ -50,26 +41,9 @@ public class CreateAccount extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(parent);
-        configureTableLook();//no hace nada
 
         this.jTable_Dirreciones.setModel(new tableModelAddres(columName,
                 beneciarios, true));
-
-        //      DefaultTableModel model = (DefaultTableModel) table.getModel();
-//        try {
-//            ResultSet resultRoutes = MyDb.getRoutes();
-//
-//            while (resultRoutes.next()) {
-//                String nombre_ruta = resultRoutes.getString("nombre_ruta");
-//                String numero_ruta = resultRoutes.getString("idRuta");
-//                Object[] datos = {nombre_ruta + " " + numero_ruta, false, numero_ruta};
-//                model.addRow(datos);
-//            }
-//
-//        } catch (SQLException ex) {
-//            System.out.println("Error al cargar rutas");
-//        }
-        //completarTablaFacturacion();
     }
 
     public void showDialog(String panel) {
@@ -724,24 +698,28 @@ public class CreateAccount extends javax.swing.JDialog {
             if (jComboBox1.selectWithKeyChar('$')) {
                 moneda = 2;
             }
-
-            String cuenta = restfulConnection.postRESTful("http://localhost:52003/api/cbcuenta"
+            //Se crea la cuenta nueva
+            String cuenta = restfulConnection.postRESTful("http://localhost:"
+                    + "52003/api/cbcuenta"
                     + "/crearCuentaDebito?CIF=" + CIF + "&descripcion="
                     + jFormattedTextFieldEnterCedula.getText() + "&moneda="
                     + moneda,
                     "");
             cuenta = cuenta.substring(1, cuenta.length() - 2);
 
-            if (!beneciarios.isEmpty()) {
+            if (!beneciarios.isEmpty()) {//Agregar beneficiarios a esa cuenta
 
                 for (int i = 0; i < beneciarios.size(); i++) {
 
-                    restfulConnection.postRESTful("http://localhost:52003/api/CBBeneficiario/agregarBeneficia"
-                            + "rosCuentaDebito?CIF=" + beneciarios.get(i)[0].toString() + "&numCuenta=" + cuenta,
+                    restfulConnection.postRESTful("http://localhost:52003/api"
+                            + "/CBBeneficiario/agregarBeneficia"
+                            + "rosCuentaDebito?CIF="
+                            + beneciarios.get(i)[0].toString() + "&numCuenta="
+                            + cuenta,
                             "");
                 }
             }
-            showInformation(this, "El nuevo número de cuenta es: "+cuenta);
+            showInformation(this, "El nuevo número de cuenta es: " + cuenta);
 
             dispose();
 
@@ -788,12 +766,6 @@ public class CreateAccount extends javax.swing.JDialog {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
 
-//        getInformation getInfoPanel = new getInformation(null, true);
-//        getInfoPanel.setActionIcon(8);
-//        getInfoPanel.SetTittle("Consultar Beneficiario");
-//        getInfoPanel.showDialog("CreateBneficiario");
-//        String CIF = getInfoPanel.getCIF();
-//        String[] benefi = {CIF};
         String[] benefi = {jFormattedTextFieldCIFBenefi.getText()};
 
         beneciarios.add(benefi);
@@ -808,9 +780,8 @@ public class CreateAccount extends javax.swing.JDialog {
     private void jTable_DirrecionesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable_DirrecionesKeyPressed
         int tecla = evt.getKeyCode();
         if (tecla == KeyEvent.VK_F9) {
-            //   this.eliminarFila();
         } else {
-            // hotKeyPressEvt(evt);
+
         }
     }//GEN-LAST:event_jTable_DirrecionesKeyPressed
 
@@ -828,7 +799,7 @@ public class CreateAccount extends javax.swing.JDialog {
         getInfoPanel.SetTittle("Consultar Cliente");
         getInfoPanel.showDialog("ConsultarClt");
         String ced = getInfoPanel.getCIF();
-        if (ced != "") {
+        if (!"".equals(ced)) {
             jFormattedTextFieldEnterName.setText(ced);
         }
 
@@ -846,14 +817,21 @@ public class CreateAccount extends javax.swing.JDialog {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             String fechaIni = format.format(
                     dateChooserComboInit.getSelectedDate().getTime());
-
-            String cuentaNew = restfulConnection.postRESTful("http://localhost:52003/api/cbcuenta/crearCuentaAhorro?CIF=" + CIF
-                    + "&idProposito=" + idProposito + "&Periodicidad=" + jFormattedTextFieldPeriodicidad.getText()
-                    + "&FechaInicio=" + fechaIni + "&TiempoAhorro=" + jFormattedTextField1.getText() + "&Mon"
-                    + "toAhorroPeriodico=" + jFormattedTextField2.getText() + "&NumeroCuentaOrigen="
-                    + jTextFieldCuentaDebito.getText() + "&Moneda=" + moneda + "&dominioPeriodicidad="
-                    + jComboBox3.getSelectedItem().toString() + "&MontoAhorroDeseado=" + jFormattedTextFieldMontoAhorro.getText(), "");
-            showInformation(this, "El nuevo número de cuenta es: "+cuentaNew);
+            //Crear Cuenta nueva
+            String cuentaNew = restfulConnection.postRESTful("http://localhost:"
+                    + "52003/api/cbcuenta/crearCuentaAhorro?CIF=" + CIF
+                    + "&idProposito=" + idProposito + "&Periodicidad="
+                    + jFormattedTextFieldPeriodicidad.getText()
+                    + "&FechaInicio=" + fechaIni + "&TiempoAhorro="
+                    + jFormattedTextField1.getText() + "&Mon"
+                    + "toAhorroPeriodico=" + jFormattedTextField2.getText()
+                    + "&NumeroCuentaOrigen="
+                    + jTextFieldCuentaDebito.getText() + "&Moneda=" + moneda
+                    + "&dominioPeriodicidad="
+                    + jComboBox3.getSelectedItem().toString()
+                    + "&MontoAhorroDeseado="
+                    + jFormattedTextFieldMontoAhorro.getText(), "");
+            showInformation(this, "El nuevo número de cuenta es: " + cuentaNew);
             dispose();
 
         } else {
@@ -935,14 +913,15 @@ public class CreateAccount extends javax.swing.JDialog {
         getInfoPanel.SetTittle("Consultar Cliente");
         getInfoPanel.showDialog("ConsultarClt");
         String CIF = getInfoPanel.getCIF();
-        if (CIF != "") {
+        if (!"".equals(CIF)) {
             jFormattedTextFieldCIFAhorroObjetivo.setText(CIF);
         }
     }//GEN-LAST:event_jLabelBuscaridCliente2MouseClicked
 
     private void jFormattedTextFieldPeriodicidadFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFormattedTextFieldPeriodicidadFocusLost
         try {
-            if (Integer.parseInt(jFormattedTextFieldPeriodicidad.getText()) >= 60
+            if (Integer.parseInt(
+                    jFormattedTextFieldPeriodicidad.getText()) >= 60
                     && (jComboBox3.getSelectedItem().toString() == "segundos"
                     || jComboBox3.getSelectedItem().toString() == "minutos")) {
                 jFormattedTextFieldPeriodicidad.setText("");
@@ -1006,25 +985,7 @@ public class CreateAccount extends javax.swing.JDialog {
     private javax.swing.JTextField jTextFieldCuentaDebito;
     // End of variables declaration//GEN-END:variables
 
-    private void configureTableLook() {
-//        DefaultTableCellRenderer centerRender = new DefaultTableCellRenderer();
-//        centerRender.setHorizontalAlignment(JLabel.LEFT);
-//
-//        table.setRowHeight(25);
-//        table.getColumnModel().getColumn(0).setPreferredWidth(60);
-//
-//        table.getColumnModel().getColumn(1).setPreferredWidth(10);
-//        table.getColumnModel().getColumn(0).setCellRenderer(centerRender);
-//        //  table.getColumnModel().getColumn(1).setCellRenderer(centerRender);
-//
-//        TableCellRenderer rendererFromHeader = table.getTableHeader().getDefaultRenderer();
-//        JLabel headerLabel = (JLabel) rendererFromHeader;
-//        headerLabel.setHorizontalAlignment(JLabel.LEFT);
-//
-//        table.getTableHeader().setFont(new Font("Khmer UI", Font.PLAIN, 14));
-//        table.getTableHeader().setForeground(new Color(102, 102, 102));
-    }
-
+    //Validar que se han llenado todos los campos
     private boolean validateUI() {
 
         if ("".equals(jFormattedTextFieldEnterName.getText().
@@ -1032,17 +993,8 @@ public class CreateAccount extends javax.swing.JDialog {
 
             return false;
         }
-//        if (beneciarios.isEmpty()) {
-//
-//            return false;
-//        }
-        return true;
-    }
 
-    private void showPanelOnDialog(javax.swing.JPanel pPanel, javax.swing.JDialog pDialog) {
-        pDialog.add(pPanel);
-        pPanel.setVisible(true);
-        pDialog.setVisible(true);
+        return true;
     }
 
     private void setVisiblePanel(String panel) {
@@ -1074,8 +1026,8 @@ public class CreateAccount extends javax.swing.JDialog {
         try {
             tableModelAddres model = (tableModelAddres) table.getModel();
             int row = table.getSelectedRow();
-            ///Si se esta escribiendo en la celda para el editor y luego elimina la
-            // fila
+            ///Si se esta escribiendo en la celda para el editor y luego elimina 
+            // la fila
             if (!model.data.isEmpty()) {
                 if (table.isEditing()) {
                     table.getCellEditor().cancelCellEditing();
@@ -1097,30 +1049,6 @@ public class CreateAccount extends javax.swing.JDialog {
 
     }
 
-    private void addRow(JTable table) {
-        try {
-            tableModelAddres model = (tableModelAddres) table.getModel();
-
-            ///Si se esta escribiendo en la celda para el editor 
-            //y luego elimina la fila
-            if (!model.data.isEmpty()) {
-                if (table.isEditing()) {
-                    table.getCellEditor().cancelCellEditing();
-                    table.revalidate();
-                    table.repaint();
-                    table.requestFocus();
-
-                }
-            }
-            model.addRow(1);
-            table.revalidate();
-            table.repaint();
-            table.requestFocus();
-        } catch (Exception e) {
-        }
-
-    }
-
     ArrayList<String> getAddres() {
         ArrayList<String> result = new ArrayList<>();
         for (int i = 0; i < beneciarios.size(); i++) {
@@ -1131,12 +1059,6 @@ public class CreateAccount extends javax.swing.JDialog {
             }
         }
         return result;
-    }
-
-    void setActionIcon(int action) {
-
-        accion = action;
-
     }
 
     private boolean validateUI2() {
@@ -1165,13 +1087,16 @@ public class CreateAccount extends javax.swing.JDialog {
 
     }
 
+    //Consultar Propositos
+
     private ArrayList<ArrayList<String>> cargarPropositos() {
         ArrayList<String> columnas_tabla = new ArrayList<>();
         columnas_tabla.add("idProposito");
         columnas_tabla.add("Proposito");
         columnas_tabla.add("TasaInteres");
         try {
-            return restfulConnection.getRESTful("http://localhost:52003/api/cbcuenta/getObtenerPropositos", columnas_tabla);
+            return restfulConnection.getRESTful("http://localhost:52003/"
+                    + "api/cbcuenta/getObtenerPropositos", columnas_tabla);
         } catch (Exception e) {
             System.out.println("No se pudo cargar propositos");
         }
