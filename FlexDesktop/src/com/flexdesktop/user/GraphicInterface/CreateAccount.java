@@ -571,7 +571,7 @@ public class CreateAccount extends javax.swing.JDialog {
                             .addComponent(jLabel16)
                             .addGap(18, 18, 18)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
                     .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -602,7 +602,6 @@ public class CreateAccount extends javax.swing.JDialog {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(7, 7, 7)))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE))
                 .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
@@ -627,7 +626,7 @@ public class CreateAccount extends javax.swing.JDialog {
                                     .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jFormattedTextFieldMontoAhorro, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
                                         .addComponent(jTextFieldCuentaDebito))))
-                            .addGap(0, 0, Short.MAX_VALUE)))))
+                            .addGap(0, 161, Short.MAX_VALUE)))))
             .addContainerGap())
     );
     jPanelCrearCuentaObjetivoLayout.setVerticalGroup(
@@ -667,11 +666,9 @@ public class CreateAccount extends javax.swing.JDialog {
             .addGap(18, 18, 18)
             .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(dateChooserComboInit, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanelCrearCuentaObjetivoLayout.createSequentialGroup()
-                    .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3))
-                    .addGap(9, 9, 9)))
+                .addGroup(jPanelCrearCuentaObjetivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)))
             .addGap(19, 19, 19)
             .addComponent(jLabel17)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -838,39 +835,22 @@ public class CreateAccount extends javax.swing.JDialog {
 
         if (validateUI2()) {
             String CIF = jFormattedTextFieldCIFAhorroObjetivo.getText();
-//            int moneda = 0;
-//            if (jComboBox1.selectWithKeyChar('$')) {
-//                moneda = 1;
-//            }
+            int moneda = 1;
+            if (jComboBox2.selectWithKeyChar('$')) {
+                moneda = 2;
+            }
 
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             String fechaIni = format.format(
                     dateChooserComboInit.getSelectedDate().getTime());
 
-//            String fechaFin = format.format(
-//                    dateChooserComboFin.getSelectedDate().getTime());
-//            restfulConnection.postRESTful("http://localhost:52003/api/cbcuenta"
-//                    + "/crearCuentaAhorro?CIF=" + CIF + "&idProposito="
-//                    + idProposito
-//                    + "&Periodicidad=" + jFormattedTextFieldPeriodicidad.getText()
-//                    + "&FechaInicio="+fechaIni+"&FechaFinal="+fechaFin+
-//                    "&TiempoAhorro="+0+"&MontoAhorroPeriodico="+
-//                    jFormattedTextFieldMontoAhorro.getText()+
-//                    "&NumeroCuentaOrigen="+jTextFieldCuentaDebito.getText()+
-//                    "&Moneda="+1+"& dominioPeriodicidad = & MontoAhorroDeseado",
-//                    "");
-//            
-//            EXEC crearCuentaAhorro
-//@ClienteCIF = N'1000000000',
-//@idProposito = 1,
-//@Periodicidad = 2,
-//@FechaInicio = N'10-10-2010',
-//@TiempoAhorro = 4,
-//@MontoAhorroPeriodico = 4,
-//@NumeroCuentaOrigen = 900000000,
-//@Moneda = N'1',
-//@dominioPeriodicidad = N'dias',
-//@MontoAhorroDeseado = 5
+            
+            restfulConnection.postRESTful("http://localhost:52003/api/cbcuenta/crearCuentaAhorro?CIF=" + CIF
+                    + "&idProposito=" + idProposito + "&Periodicidad=" + jFormattedTextFieldPeriodicidad.getText()
+                    + "&FechaInicio=" + fechaIni + "&TiempoAhorro=" + jFormattedTextField1.getText() + "&Mon"
+                    + "toAhorroPeriodico=" + jFormattedTextField2.getText() + "&NumeroCuentaOrigen="
+                    + jTextFieldCuentaDebito.getText() + "&Moneda=" + moneda + "&dominioPeriodicidad="
+                    + jComboBox3.getSelectedItem().toString() + "&MontoAhorroDeseado=" + jFormattedTextFieldMontoAhorro.getText(), "");
             dispose();
 
         } else {
@@ -960,12 +940,12 @@ public class CreateAccount extends javax.swing.JDialog {
     private void jFormattedTextFieldPeriodicidadFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFormattedTextFieldPeriodicidadFocusLost
         try {
             if (Integer.parseInt(jFormattedTextFieldPeriodicidad.getText()) >= 60
-                && (jComboBox3.getSelectedItem().toString() == "segundos"
-                || jComboBox3.getSelectedItem().toString() == "minutos")) {
-            jFormattedTextFieldPeriodicidad.setText("");
-        }
+                    && (jComboBox3.getSelectedItem().toString() == "segundos"
+                    || jComboBox3.getSelectedItem().toString() == "minutos")) {
+                jFormattedTextFieldPeriodicidad.setText("");
+            }
         } catch (Exception e) {
-             jFormattedTextFieldPeriodicidad.setText("");
+            jFormattedTextFieldPeriodicidad.setText("");
         }
 
     }//GEN-LAST:event_jFormattedTextFieldPeriodicidadFocusLost
@@ -1184,7 +1164,7 @@ public class CreateAccount extends javax.swing.JDialog {
 
     private ArrayList<ArrayList<String>> cargarPropositos() {
         ArrayList<String> columnas_tabla = new ArrayList<>();
-        columnas_tabla.add("CIF");
+        columnas_tabla.add("idProposito");
         columnas_tabla.add("Proposito");
         columnas_tabla.add("TasaInteres");
         try {
